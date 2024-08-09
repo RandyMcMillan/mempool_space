@@ -117,6 +117,7 @@ impl Args {
         // GENERAL
         opts.optflag("", "difficulty_adjustment", "difficulty_adjustment api call");
         opts.optflag("", "prices", "prices api call");
+        opts.optflag("", "historical_prices", "historical_prices api call");
         opts.optopt("", "timestamp", "timestamp api call", "TIMESTAMP");
         opts.optopt("", "currency", "currency api call", "CURRENCY");
 
@@ -154,6 +155,10 @@ impl Args {
         }
         if matches.opt_present("prices") {
             generic_sys_call("prices", &"v9999");
+            std::process::exit(0);
+        }
+        if matches.opt_present("historical_prices") {
+            generic_sys_call("historical_prices", &"EUR 1500000000");
             std::process::exit(0);
         }
 
