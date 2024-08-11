@@ -84,14 +84,14 @@ dependencies = [
 
 [[package]]
 name = "async_usage"
-version = "0.0.12"
+version = "0.0.13"
 dependencies = [
  "mempool_space",
 ]
 
 [[package]]
 name = "async_usage_custom_target"
-version = "0.0.12"
+version = "0.0.13"
 dependencies = [
  "mempool_space",
 ]
@@ -1032,7 +1032,7 @@ dependencies = [
 
 [[package]]
 name = "mempool_space"
-version = "0.0.12"
+version = "0.0.13"
 dependencies = [
  "anyhow",
  "ascii",
@@ -2257,7 +2257,7 @@ dependencies = [
 
 [[package]]
 name = "usage"
-version = "0.0.12"
+version = "0.0.13"
 dependencies = [
  "mempool_space",
 ]
