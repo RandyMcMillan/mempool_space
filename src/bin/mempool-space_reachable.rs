@@ -1,7 +1,7 @@
 use std::io::Read;
 use std::time::{Instant, SystemTime};
 
-use mempool_space::blocking;
+use mempool_space::blocking::blocking;
 use reqwest::Url;
 
 // use ureq::get;

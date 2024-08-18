@@ -14,6 +14,12 @@ homepage = "https://github.com/randymcmillan/mempool_space"
 keywords = ["bitcoin", "mempool"]
 categories = ["network-programming"]
 
+## mempool-space
+[[bin]]
+name = "mempool-space"
+path = "src/bin/mempool-space.rs"
+doc = true
+
 [package.metadata.wix]
 upgrade-guid = "5D3A3DB4-15D1-47AF-BE84-D3A6F541BB8B"
 path-guid = "60912461-41F2-4FD0-BD2E-29E3D03F2AE9"

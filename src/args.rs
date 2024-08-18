@@ -4,40 +4,9 @@ use std::io::IsTerminal;
 use std::path::PathBuf;
 use std::process;
 
-use crate::blocking;
-
-/// mempool-space --option_str sub_string
-///
-/// mempool-space_option_str sub_string
-///
-pub fn api(option: &str, sub_string: &str) -> String {
-    use std::process::Command;
-
-    //if sub_string == "v1" {
-    //    print!("TODO: support --version v1 api versioning.");
-    //} else if sub_string == "v2" {
-    //    print!("TODO: support --version v2 api versioning.");
-    //} else {
-    let output = if cfg!(target_os = "windows") {
-        Command::new(format!("mempool-space_{}", option))
-            .args(["/C", sub_string])
-            .output()
-            .expect("failed to execute process")
-    } else {
-        Command::new(format!("mempool-space_{}", option))
-            .arg(sub_string)
-            //.arg("echo hello")
-            .output()
-            .expect("failed to execute process")
-    };
-
-    let result = String::from_utf8(output.stdout)
-        .map_err(|non_utf8| String::from_utf8_lossy(non_utf8.as_bytes()).into_owned())
-        .unwrap();
-    print!("{}", result);
-    result
-    //}
-}
+use crate::api;
+use crate::api::api;
+use crate::blocking::blocking;
 
 /// GET /api/v1/historical-price?currency=CURRENCY&timestamp=TIMESTAMP
 ///
@@ -82,8 +51,7 @@ pub fn block_txs(block_hash: &str, start_index: &str) {
 /// GET /api/v1/blocks[/:startHeight]
 /// <https://mempool.space/docs/api/rest#get-blocks>
 pub fn blocks(start_height: &str) {
-    //TODO blocks_tip_height
-    let blocks_tip_height = api("blocks_tip_height", &"extraneous_arg");
+    let blocks_tip_height = api::api("blocks_tip_height", &"extraneous_arg");
     let blocks_tip_height_int = blocks_tip_height.parse::<i32>().unwrap_or(0);
     let start_height_int = start_height.parse::<i32>().unwrap_or(0);
     if start_height_int >= 0 && start_height_int <= blocks_tip_height_int {
@@ -95,17 +63,17 @@ pub fn blocks(start_height: &str) {
 /// GET /api/v1/blocks-bulk/:minHeight[/:maxHeight]
 /// <https://mempool.space/docs/api/rest#get-blocks-bulk>
 pub fn blocks_bulk(min_height: &str, max_height: &str) {
-    //TODO blocks_tip_height
     let min_height_int = min_height.parse::<i32>().unwrap_or(0);
     let max_height_int = max_height.parse::<i32>().unwrap_or(0);
-    if min_height_int >= 0 && max_height_int >= 0 && min_height_int <= max_height_int {
+    if min_height_int >= 0 && max_height_int >= 0 && min_height_int < max_height_int {
         let _res = blocking(&format!("v1/blocks-bulk/{}/{}", min_height, max_height));
     } else if min_height_int >= 0 && max_height_int >= 0 && min_height_int >= max_height_int {
         let _res = blocking(&format!("v1/blocks-bulk/{}/{}", max_height, min_height));
     } else {
-        let blocks_tip_height = api("blocks_tip_height", &"extraneous_arg");
+        let blocks_tip_height = api::api("blocks_tip_height", &"extraneous_arg");
         let _res = blocking(&format!("v1/blocks-bulk/{}/{}", min_height, blocks_tip_height));
     }
+    print!("This API is disabled. Set config.MEMPOOL.MAX_BLOCKS_BULK_QUERY to a positive number to enable it.");
 }
 
 /// <https://mempool.space/docs/api/rest>
@@ -236,7 +204,7 @@ pub struct Args {
     /// `https://mempool.space/address/<ADDRESS>/txs/mempool`
     pub address_txs_mempool: Option<String>,
     /// `https://mempool.space/api/address/<ADDRESS>/utxo`
-    pub address_utxos: Option<String>,
+    pub address_utxo: Option<String>,
     /// `https://mempool.space/api/validate-address/<ADDRESS>`
     pub validate_address: Option<String>,
 
@@ -286,16 +254,18 @@ pub struct Args {
     /// - BLOCK <BLOCK_HASH> <TXS>
     /// `https://mempool.space/api/block/<BLOCK_HASH>/txs`
     pub block_txs: Option<String>,
-    /// mempool-space --block_txs <BLOCK_HASH> --block_start_index <BLOCK_INDEX>
-    pub block_start_index: Option<String>,
+    /// mempool-space --block_txs <BLOCK_HASH> --start_index <START_INDEX>
+    pub start_index: Option<String>,
 
     /// - V1 BLOCKS <BLOCK_HEIGHT>
     /// `https://mempool.space/api/v1/blocks/<BLOCKS_START_HEIGHT>`
     pub blocks: Option<String>,
 
-    /// - V1 BLOCKS_BULK <BLOCK_HEIGHT_START> <BLOCK_HEIGHT_STOP>
-    /// `https://mempool.space/api/v1/blocks-bulk/<BLOCK_HEIGHT_START>/<BLOCK_HEIGHT_STOP>`
+    /// - V1 BLOCKS_BULK <MAX_HEIGHT> <MIN_HEIGHT>
+    /// `https://mempool.space/api/v1/blocks-bulk/<MIN_HEIGHT>/<MAX_HEIGHT>`
     pub blocks_bulk: Option<String>,
+    pub min_height: Option<String>,
+    pub max_height: Option<String>,
 
     /// Configuration file.
     pub config: Option<PathBuf>,
@@ -365,7 +335,7 @@ impl Args {
             "address_txs_mempool api call",
             "ADDRESS_TXS_MEMPOOL",
         );
-        opts.optopt("", "address_utxos", "address_utxos api call", "ADDRESS_UTXOS");
+        opts.optopt("", "address_utxo", "address_utxos api call", "ADDRESS_UTXO");
         opts.optopt("", "validate_address", "validate an address", "VALIDATE_ADDRESS");
 
         // BLOCK/S
@@ -384,10 +354,13 @@ impl Args {
         opts.optopt("", "block_txids", "block txids api call", "BLOCK_TXIDS");
 
         opts.optopt("", "block_txs", "block txs api call", "BLOCK_TXS");
-        opts.optopt("", "block_start_index", "block txs api call", "BLOCK_START_INDEX");
+        opts.optopt("", "start_index", "block txs api call", "START_INDEX");
 
         opts.optopt("", "blocks", "block txids api call", "BLOCKS_START_HEIGHT");
-        opts.optopt("", "blocks_bulk", "block txids api call", "BLOCKS_BULK");
+
+        opts.optflag("", "blocks_bulk", "block txids api call");
+        opts.optopt("", "min_height", "block txids api call", "MIN_HEIGHT");
+        opts.optopt("", "max_height", "block txids api call", "MAX_HEIGHT");
 
         //OPTOPT
         opts.optopt("c", "config", "sets the configuration file", "CONFIG");
@@ -460,6 +433,11 @@ impl Args {
             api("address_txs_mempool", &address.unwrap());
             std::process::exit(0);
         }
+        if matches.opt_present("address_utxo") {
+            let address = matches.opt_str("address_utxo");
+            api("address_utxo", &address.unwrap());
+            std::process::exit(0);
+        }
         if matches.opt_present("validate_address") {
             let validate_address = matches.opt_str("validate_address");
             api("validate_address", &validate_address.unwrap());
@@ -518,13 +496,19 @@ impl Args {
         }
         if matches.opt_present("block_txs") {
             let arg_block_txs = matches.opt_str("block_txs"); //expect a block_hash
-            let arg_block_start_index = matches.opt_str("block_start_index");
-            block_txs(&arg_block_txs.unwrap(), &arg_block_start_index.unwrap());
+            let arg_start_index = matches.opt_str("start_index");
+            block_txs(&arg_block_txs.unwrap(), &arg_start_index.unwrap());
             std::process::exit(0);
         }
         if matches.opt_present("blocks") {
             let arg_blocks = matches.opt_str("blocks"); //expect a integer as string
             blocks(&arg_blocks.unwrap());
+            std::process::exit(0);
+        }
+        if matches.opt_present("blocks_bulk") {
+            let arg_min_height = matches.opt_str("min_height"); //expect a integer as string
+            let arg_max_height = matches.opt_str("max_height"); //expect a integer as string
+            blocks_bulk(&arg_min_height.unwrap(), &arg_max_height.unwrap());
             std::process::exit(0);
         }
 
@@ -581,7 +565,7 @@ impl Args {
             address_txs: matches.opt_str("address_txs"),
             address_txs_chain: matches.opt_str("address_txs_chain"),
             address_txs_mempool: matches.opt_str("address_txs_mempool"),
-            address_utxos: matches.opt_str("address_utxos"),
+            address_utxo: matches.opt_str("address_utxo"),
             validate_address: matches.opt_str("validate_address"),
 
             // BLOCK/S
@@ -624,7 +608,7 @@ impl Args {
             // BLOCK BLOCK_HASH TXS
             // https://mempool.space/api/block/<block_hash>/<txs>
             block_txs: matches.opt_str("block_txs"),
-            block_start_index: matches.opt_str("block_start_index"),
+            start_index: matches.opt_str("start_index"),
 
             // V1 BLOCKS
             // https://mempool.space/api/v1/blocks/<BLOCK_HEIGHT>"
@@ -633,6 +617,8 @@ impl Args {
             // V1 BLOCKS_BULK
             // https://mempool.space/api/v1/blocks-bulk/<BLOCK_HEIGHT_START>/<BLOCK_HEIGHT_STOP>"
             blocks_bulk: matches.opt_str("blocks_bulk"),
+            min_height: matches.opt_str("min_height"),
+            max_height: matches.opt_str("max_height"),
 
             server: matches.opt_str("s"),
             auth: matches.opt_str("a"),

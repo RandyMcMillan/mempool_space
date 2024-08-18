@@ -1,91 +1,210 @@
-// Originally based on the reachable repo.
+//! # mempool-space (command line utility)
+//!
+//! cargo install \--git <https://github.com/RandyMcMillan/mempool_space.git>
+//!
+//! cargo add \--git <https://github.com/RandyMcMillan/mempool_space.git>
 //
-// This Source Code Form is subject to the terms of the Mozilla Public
-// License, v. 2.0. If a copy of the MPL was not distributed with this
-// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//! # CLI: [mempool-space](https://docs.rs/mempool_space/latest/mempool_space) \--option arg<sub>1</sub> ... \--option arg<sub>n</sub>
+//!
+//!	mempool-space  \--option
+//!
+//!	mempool-space  \--option arg
+//!
+//!	mempool-space  \--option arg --option arg
+//!
+//! # BIN: mempool-space_option arg<sub>1</sub> ... arg<sub>n</sub>
+//!
+//!	mempool-space_option
+//!
+//!	mempool-space_option arg
+//!
+//!	mempool-space_option arg arg
+//!
 //
-// Author: Simon Brummer (simon.brummer@posteo.de)
+//! ## [GENERAL](https://mempool.space/docs/api/rest#get-difficulty-adjustment)
+//
+//! #### [GET /api/v1/difficulty-adjustment](https://mempool.space/api/v1/difficulty-adjustment)
+//!
+//!	mempool-space \--difficulty_adjustment
+//!
+//!	mempool-space_difficulty_adjustment
+//!
+//! #### [GET /api/v1/prices](https://mempool.space/api/v1/prices)
+//!
+//!	mempool-space \--prices
+//!
+//!	mempool-space_prices
+//!
+//! #### [GET /api/v1/historical-price?currency=EUR&timestamp=1500000000](https://mempool.space/api/v1/historical-price?currency=EUR&timestamp=1500000000)
+//!
+//!	mempool-space \--historical_price \--currency [USD, CAD, GBP, CHF, AUD, JPY] \--timestamp utc_sec
+//!
+//!	mempool-space \--historical_price \--currency EUR \--timestamp 1500000000
+//!
+//!	mempool-space \--historical_price \--currency USD \--timestamp $(date +%s)
+//!
+//
+//! ## [ADDRESSES](https://mempool.space/docs/api/rest#get-address)
+//
+//!
+//! #### [GET /api/address:address](https://mempool.space/api/address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv)
+//!
+//!	mempool-space \--address 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+//!
+//!	mempool-space_address 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+//!
+//! #### [GET /api/address:address/txs](https://mempool.space/api/address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv/txs)
+//!
+//!	mempool-space \--address_txs 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+//!
+//!	mempool-space_address_txs 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+//!
+//! #### [GET /api/address:address/txs/chain](https://mempool.space/api/address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv/txs/chain)
+//!
+//!	mempool-space \--address_txs_chain 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+//!
+//!	mempool-space_address_txs_chain 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+//!
+//! #### [GET /api/address:address/txs/mempool](https://mempool.space/api/address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv/txs/mempool) (may be empty for test address)
+//!
+//!	mempool-space \--address_txs_mempool 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+//!
+//!	mempool-space_address_txs_mempool 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+//!
+//! #### [GET /api/address:address/utxo](https://mempool.space/api/address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv/utxo)
+//!
+//!	mempool-space \--address_utxo 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+//!
+//!	mempool-space_address_utxo 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+//!
+//! #### [GET /api/v1/validate-address/:address](https://mempool.space/api/v1/validate-address/1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY)
+//!
+//!	mempool-space \--validate_address 1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY
+//!
+//!	mempool-space_validate_address 1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY
+//
+//! ## [BLOCKS](https://mempool.space/docs/api/rest#get-block)
+//
+//!
+//! #### [GET /api/block/:hash](https://mempool.space/api/block/000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce)
+//!
+//!	mempool-space \--block 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce
+//!
+//!	mempool-space_block 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce
+//!
+//! #### [GET /api/block/:hash/header](https://mempool.space/api/block/0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2/header)
+//!
+//!	mempool-space \--block_header 0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2
+//!
+//!	mempool-space_block_header 0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2
+//!
+//! #### [GET /api/block-height:height](https://mempool.space/api/block-height/615615)
+//!
+//!	mempool-space \--block_height 615615
+//!
+//!	mempool-space_block_height 615615
+//!
+//! #### [GET /api/v1/mining/blocks/timestamp/:timestamp](https://mempool.space/api/v1/mining/blocks/timestamp/1672531200)
+//!
+//!	mempool-space \--blocks_timestamp 1672531200
+//!
+//!	mempool-space_blocks_timestamp 1672531200
+//!
+//! #### [GET /api/block/:hash/raw](https://mempool.space/api/block/0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2/raw)
+//!
+//!	mempool-space \--block_raw 0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2
+//!
+//!	mempool-space_block_raw 0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2
+//!
+//! #### [GET /api/block/:hash/status](https://mempool.space/api/block/0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2/status)
+//!
+//!	mempool-space \--block_status 0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2
+//!
+//!	mempool-space_block_status 0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2
+//!
+//! #### [GET /api/blocks/tip/height](https://mempool.space/api/blocks/tip/height)
+//!
+//!	mempool-space \--blocks_tip_height
+//!
+//!	mempool-space_blocks_tip_height
+//!
+//! #### [GET /api/blocks/tip/hash](https://mempool.space/api/blocks/tip/hash)
+//!
+//!	mempool-space \--blocks_tip_hash
+//!
+//!	mempool-space_blocks_tip_hash
+//!
+//! #### [GET /api/block/:hash/txid/:index](https://mempool.space/api/block/000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txid/218)
+//!
+//! mempool-space \--block_txid 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce \--block_txindex 218
+//!
+//!	mempool-space_block_txid 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce 218
+//!
+//! #### [GET /api/block/:hash/txids](https://mempool.space/api/block/000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txids)
+//!
+//! mempool-space \--block_txids 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce
+//!
+//!	mempool-space_block_txids 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce
+//!
+//! #### [GET /api/block/:hash/txs/:start_index](https://mempool.space/api/block/000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txs/0) (start_index % 25 == 0)
+//!
+//! mempool-space \--block_txs 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce \--start_index 0
+//!
+//! mempool-space \--block_txs 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce \--start_index 25
+//!
+//!	mempool-space_block_txs 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce 0
+//!
+//!	mempool-space_block_txs 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce 25
+//!
+//! #### [GET /api/v1/blocks[/:startHeight]](https://mempool.space/api/v1/blocks/730000)
+//!
+//! mempool-space \--blocks 730000
+//!
+//!	mempool-space_blocks 730000
+//!
+//! #### [GET /api/v1/blocks-bulk/:minHeight[/:maxHeight]](https://mempool.space/api/v1/blocks-bulk/100000/100000)
+//!
+//! mempool-space \--blocks_bulk \--min_height 730000 \--max_height 840000
+//!
+//!	mempool-space_blocks_bulk 730000 840000
 
 #![warn(missing_docs, clippy::unwrap_used)]
-//! mempool_space, a mempool.space API lib.
-//!
-//! Author: @RandyMcMillan (randy.lee.mcmillan@gmail.com)
-//!
-//! <https://github.com/RandyMcMillan/mempool_space.git>
 
-//!
-//! USAGE:
-//! - mempool-space \--difficulty_adjustment (flagged)
-//! - mempool-space_difficulty_adjustment (executable)
-//!   1. Flags follow the mempool.space api/rest (replace dashes with underscores)
-//!   2. Flags invoke the executable
+///
+/// A CLI tool for [`mempool_space`].
+///
+/// [`mempool_space`]: https://github.com/randymcmillan/mempool_space
 
-use std::io::Read;
+/// TESTING
+///
+/// TESTING 2
+///
+/// TESTING 2
+///
+/// TESTING 2
+///
+/// TESTING 2
 
-//const API_VERSION: &str = "v1";
-//
-const URL: &str = "https://mempool.space/api";
-
-///  `pub fn blocking(api: &String) -> Result<&str>`
-pub fn blocking(api: &String) -> Result<&str> {
-    //print!("api={}", api);
-    let call = format!("{}/{}", URL, api);
-    let mut body = ureq::get(&call)
-        .call()
-        .expect("calls to blocking(api: &String) needs to include /v1/<api_endpoint> in some cases.")
-        .into_reader();
-    let mut buf = Vec::new();
-    body.read_to_end(&mut buf).unwrap();
-    if !api.ends_with("raw") {
-        //print!("!api.ends_with raw");
-        let text = match std::str::from_utf8(&buf) {
-            Ok(s) => s,
-            Err(_) => panic!("Invalid ASCII data"),
-        };
-        print!("{}", text);
-    } else {
-        if api.ends_with("raw") {
-            //print!("api.ends_with raw");
-            print!("{:?}", &buf);
-        }
-        if api.ends_with("something_else") {
-            //print!("api.ends_with something_else");
-            print!("{:?}", &buf);
-        }
-    }
-    Ok(api)
-}
-
-/// `pub mod blockheight`
+#[warn(missing_docs, clippy::unwrap_used)]
+pub mod api;
 pub mod blockheight;
-/// `pub mod error`
+pub mod blocking;
 pub mod error;
-/// `pub mod resolve_policy`
 pub mod resolve_policy;
-/// `pub mod target`
 pub mod target;
 
-#[cfg(feature = "async")]
-/// `pub mod async_target`
-pub mod async_target;
-
-// Re-exports
-/// `pub use error`
 pub use error::{CheckTargetError, ParseTargetError, ResolveTargetError};
-/// `pub use resolve_policy`
 pub use resolve_policy::ResolvePolicy;
-/// `pub use target`
 pub use target::{Fqhn, IcmpTarget, Port, Status, Target, TcpTarget};
 
 #[cfg(feature = "async")]
 pub use async_target::{AsyncTarget, AsyncTargetExecutor, BoxedHandler, BoxedTarget, OldStatus};
 
-/// A CLI tool for [`mempool_space`].
-///
-/// [`mempool_space`]: https://github.com/randymcmillan/mempool_space
-
 /// Command-line argument parser.
 pub mod args;
+#[cfg(feature = "async")]
+pub mod async_target;
+
 /// Configuration file parser.
 pub mod config;
 /// Custom error implementation.
@@ -98,11 +217,60 @@ use crate::config::Config;
 use crate::this_error::{Error, Result};
 use crate::upload::Uploader;
 // use colored::Colorize;
+use crossterm::style::Stylize;
 use std::fs;
 use std::io::IsTerminal;
+use std::io::Read;
 use std::io::{self}; //, Read};
 
-use crossterm::style::Stylize;
+use crate::blocking::blocking;
+
+const URL: &str = "https://mempool.space/api";
+
+// BOOM
+//
+/// mempool_space - a mempool.space API lib
+///
+/// Author: @RandyMcMillan (randy.lee.mcmillan@gmail.com)
+///
+/// <https://github.com/RandyMcMillan/mempool_space.git>
+
+///
+/// USAGE:
+/// - mempool-space \--difficulty_adjustment (flagged)
+/// - mempool-space_difficulty_adjustment (executable)
+///   1. Flags follow the mempool.space api/rest (replace dashes with underscores)
+///   2. Flags invoke the executable
+
+///
+
+/// mempool_space - a mempool.space API lib
+///
+/// Author: @RandyMcMillan (randy.lee.mcmillan@gmail.com)
+///
+/// <https://github.com/RandyMcMillan/mempool_space.git>
+
+///
+/// USAGE:
+/// - mempool-space \--difficulty_adjustment (flagged)
+/// - mempool-space_difficulty_adjustment (executable)
+///   1. Flags follow the mempool.space api/rest (replace dashes with underscores)
+///   2. Flags invoke the executable
+
+/// mempool-space \--option_str
+///
+/// mempool-space \--blocks_tip_height
+///
+/// mempool-space \--blocks_tip_hash
+///
+/// mempool-space \--option_str arg
+///
+/// mempool-space \--block 00000000000000000002d5c6e3451f94af29a3606e42b3c8f1db3cdfdc2bc934
+///
+/// mempool-space \--block $(mempool-space \--blocks_tip_hash)
+///
+/// mempool-space_block $(mempool-space_blocks_tip_hash)
+///
 
 /// Default name of the configuration file.
 const CONFIG_FILE: &str = "config.toml";
@@ -217,11 +385,12 @@ pub fn wait(sleep: &str) {
     // }
 }
 
+/// TESTS
 #[cfg(test)]
 mod tests {
     // Note this useful idiom: importing names from outer (for mod tests) scope.
     use super::*;
-    use crate::args::api;
+    use crate::api::api;
 
     /// General
     /// https://mempool.space/docs/api/rest
@@ -440,8 +609,13 @@ mod tests {
         let blocks_tip_height = api("blocks_tip_height", "extraneous_arg");
         use crate::args::blocks;
         blocks(&"");
+        wait("1");
         blocks(&"0");
+        wait("1");
+        blocks(&"25");
+        wait("1");
         blocks(&"730000");
+        wait("1");
         blocks(&blocks_tip_height);
         wait("1");
     }
@@ -459,6 +633,7 @@ mod tests {
         blocks_bulk(&"0", &"0");
         blocks_bulk(&"0", &"1");
         blocks_bulk(&"730000", &"840000");
+        blocks_bulk(&"730000", &blocks_tip_height);
         wait("1");
     }
     #[test]

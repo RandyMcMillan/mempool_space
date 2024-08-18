@@ -47,6 +47,7 @@ cargo-check:### 	cargo-check
 cargo-d:cargo-doc
 cargo-doc:### 	cargo-check
 	@. $(HOME)/.cargo/env
+	@cargo test --doc
 	@cargo doc --no-deps --all-features
 cargo-t:cargo-test
 cargo-test:cargo-install### 	cargo-test

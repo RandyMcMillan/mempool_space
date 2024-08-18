@@ -1,4 +1,4 @@
-use mempool_space::blocking;
+use mempool_space::blocking::blocking;
 
 fn main() {
     {
