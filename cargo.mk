@@ -49,6 +49,12 @@ cargo-doc:### 	cargo-check
 	@. $(HOME)/.cargo/env
 	@cargo test --doc
 	@cargo doc --no-deps --all-features
+	@cat src/lib.rs | sed 's/\/\/! //g' | sed 's/\/\/!//g' | sed 's/\/\/\//### /g' | sed 's/\/\///g' > README.temp
+	@cat README.temp | sed 's/\\-/-/g' > README.temp2
+#cat LIB.temp2
+	@cat README.temp2 | sed 's/unwrap_used/unwrap\\_used/g' > README.md
+	git diff README.md
+
 cargo-t:cargo-test
 cargo-test:cargo-install### 	cargo-test
 	@. $(HOME)/.cargo/env
