@@ -173,10 +173,6 @@ cargo add --git <https:github.com/RandyMcMillan/mempool_space.git>
 #[warn(missing_docs, clippy::unwrap\_used)]
 ### 	pub mod api
 pub mod api;
-### 	pub mod blockheight
-pub mod blockheight;
-### 	pub mod blocking
-pub mod blocking;
 ### 	pub mod error
 pub mod error;
 ### 	pub mod resolve_policy
@@ -242,16 +238,16 @@ const CONFIG_FILE: &str = "config.toml";
 ### 	pub fn run(args: Args) -> Result<()>
 
 pub fn run(args: Args) -> Result<()> {
-
+    
     let mut config = Config::default();
-
+    
 
     if let Some(ref config_path) = args.config {
-
+        
         config = toml::from_str(&fs::read_to_string(config_path)?)?
-
+    
     } else {
-
+        
         for path in [
             dirs_next::home_dir().map(|p| p.join(".mempool").join(CONFIG_FILE)),
             dirs_next::config_dir().map(|p| p.join("rustypaste").join(CONFIG_FILE)),
@@ -344,7 +340,7 @@ pub fn run(args: Args) -> Result<()> {
 ###  pub fn wait(sleep: &str)
 
 pub fn wait(sleep: &str) {
-
+    
     use std::process::Command;
 
     let sleep_cmd = Command::new("sleep").arg(sleep).output().expect("wait:sleep failed");
@@ -363,7 +359,7 @@ mod tests {
 
     use super::*;
 
-    use crate::api::api;
+    use crate::api::{api, blocking};
 
     ###  cargo test -- --nocapture
 
@@ -438,7 +434,7 @@ mod tests {
     fn test_validate_address() {
          GET /api/v1/validate-address/:address
         let binding = format!("v1/validate-address/1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY").clone();
-        let prices: &str = blocking(&binding).expect("valid address needed");
+        let valid: &str = blocking(&binding).expect("valid address needed");
         wait("1");
     }
 
@@ -602,12 +598,6 @@ mod tests {
         blocks_bulk(&"0", &"1");
         blocks_bulk(&"730000", &"840000");
         blocks_bulk(&"730000", &blocks_tip_height);
-        wait("1");
-    }
-    #[test]
-    fn test_blockheight() {
-        let blockheight = blockheight::blockheight();
-        assert_ne!(0 as f64, blockheight.unwrap());
         wait("1");
     }
 
