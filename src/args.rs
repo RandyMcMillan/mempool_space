@@ -5,8 +5,7 @@ use std::path::PathBuf;
 use std::process;
 
 use crate::api;
-use crate::api::api;
-use crate::blocking::blocking;
+use crate::api::{api, blocking};
 
 /// GET /api/v1/historical-price?currency=CURRENCY&timestamp=TIMESTAMP
 ///
@@ -239,22 +238,22 @@ pub struct Args {
 
     /// `https://mempool.space/api/block/<BLOCK_HASH>/<TXINDEX>`
     ///
-    /// mempool-space --block_txid <BLOCK_HASH> --block_txindex <INT>
+    /// mempool-space --block_txid \<BLOCK_HASH\> --block_txindex \<INT\>
     ///
-    /// mempool-space_block_txid <BLOCK_HASH> <TXINDEX>
+    /// mempool-space_block_txid \<BLOCK_HASH\> \<TXINDEX\>
     ///
     pub block_txid: Option<String>,
     ///
     pub block_txindex: Option<String>,
 
-    /// - BLOCK <BLOCK_HASH> <TXIDS>
+    /// - BLOCK \<BLOCK_HASH\> \<TXIDS\>
     /// `https://mempool.space/api/block/<TXID>`
     pub block_txids: Option<String>,
 
-    /// - BLOCK <BLOCK_HASH> <TXS>
+    /// - BLOCK \<BLOCK_HASH\> \<TXS\>
     /// `https://mempool.space/api/block/<BLOCK_HASH>/txs`
     pub block_txs: Option<String>,
-    /// mempool-space --block_txs <BLOCK_HASH> --start_index <START_INDEX>
+    /// mempool-space --block_txs \<BLOCK_HASH\> --start_index \<START_INDEX\>
     pub start_index: Option<String>,
 
     /// - V1 BLOCKS <BLOCK_HEIGHT>
@@ -264,7 +263,9 @@ pub struct Args {
     /// - V1 BLOCKS_BULK <MAX_HEIGHT> <MIN_HEIGHT>
     /// `https://mempool.space/api/v1/blocks-bulk/<MIN_HEIGHT>/<MAX_HEIGHT>`
     pub blocks_bulk: Option<String>,
+    /// `https://mempool.space/api/v1/blocks-bulk/<MIN_HEIGHT>/<MAX_HEIGHT>`
     pub min_height: Option<String>,
+    /// `https://mempool.space/api/v1/blocks-bulk/<MIN_HEIGHT>/<MAX_HEIGHT>`
     pub max_height: Option<String>,
 
     /// Configuration file.
