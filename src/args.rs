@@ -271,8 +271,8 @@ pub struct Args {
     /// - V1 BLOCKS_AUDIT_SCORE \<BLOCK_HASH\>
     /// `https://mempool.space/api/v1/mining/blocks/audit/score/<BLOCK_HASH>`
     pub blocks_audit_score: Option<String>,
-    /// block_hash
-    pub block_hash: Option<String>,
+    /// blockhash
+    pub blockhash: Option<String>,
 
     /// - V1 BLOCKS_AUDIT_SCORES \<BLOCKHEIGHT\>
     /// `https://mempool.space/api/v1/mining/blocks/audit/scores/<BLOCKHEIGHT>`
@@ -280,7 +280,11 @@ pub struct Args {
     /// blockheight
     pub blockheight: Option<String>,
 
-
+    /// - V1 BLOCK_AUDIT_SUMMARY \<BLOCKHASH\>
+    /// `https://mempool.space/api/v1/mining/block/<BLOCKHASH>/audit-summary`
+    pub block_audit_summary: Option<String>,
+    // /// blockhash
+    // pub blockhash: Option<String>,
 
     /// OPTOPT
     ///
@@ -389,11 +393,10 @@ impl Args {
         opts.optopt("", "block_hash", "blocks_audit_score api call", "BLOCK_HASH");
 
         opts.optflag("", "blocks_audit_scores", "blocks_audit_scores api call");
-        opts.optopt("", "blockheight", "blocks_audit_scores api call", "BLOCKHEIGHT");
+        //opts.optopt("", "blockheight", "blocks_audit_scores api call", "BLOCKHEIGHT");
 
-
-
-
+        opts.optflag("", "block_audit_summary", "block_audit_summary api call");
+        opts.optopt("", "blockhash", "block_audit_summary api call", "BLOCKHASH");
 
         //OPTOPT
         opts.optopt("c", "config", "sets the configuration file", "CONFIG");
@@ -476,7 +479,6 @@ impl Args {
             api("validate_address", &validate_address.unwrap());
             std::process::exit(0);
         }
-
         if matches.opt_present("block") {
             let block = matches.opt_str("block");
             api("block", &block.unwrap());
@@ -492,7 +494,6 @@ impl Args {
             api("block_height", &block_height.unwrap());
             std::process::exit(0);
         }
-        //blocks_timestamp
         if matches.opt_present("blocks_timestamp") {
             let blocks_timestamp = matches.opt_str("blocks_timestamp");
             api("blocks_timestamp", &blocks_timestamp.unwrap());
@@ -517,48 +518,48 @@ impl Args {
             std::process::exit(0);
         }
         if matches.opt_present("block_txid") {
-            let arg_block_txid = matches.opt_str("block_txid"); //expect a block_hash
+            let arg_block_txid = matches.opt_str("block_txid");
             let arg_block_txindex = matches.opt_str("block_txindex");
             block_txid(&arg_block_txid.unwrap(), &arg_block_txindex.unwrap());
             std::process::exit(0);
         }
         if matches.opt_present("block_txids") {
-            let arg_block_txids = matches.opt_str("block_txids"); //expect a block_hash
+            let arg_block_txids = matches.opt_str("block_txids");
             block_txids(&arg_block_txids.unwrap());
             std::process::exit(0);
         }
         if matches.opt_present("block_txs") {
-            let arg_block_txs = matches.opt_str("block_txs"); //expect a block_hash
+            let arg_block_txs = matches.opt_str("block_txs");
             let arg_start_index = matches.opt_str("start_index");
             block_txs(&arg_block_txs.unwrap(), &arg_start_index.unwrap());
             std::process::exit(0);
         }
         if matches.opt_present("blocks") {
-            let arg_blocks = matches.opt_str("blocks"); //expect a integer as string
+            let arg_blocks = matches.opt_str("blocks");
             blocks(&arg_blocks.unwrap());
             std::process::exit(0);
         }
         if matches.opt_present("blocks_bulk") {
-            let arg_min_height = matches.opt_str("min_height"); //expect a integer as string
-            let arg_max_height = matches.opt_str("max_height"); //expect a integer as string
+            let arg_min_height = matches.opt_str("min_height");
+            let arg_max_height = matches.opt_str("max_height");
             blocks_bulk(&arg_min_height.unwrap(), &arg_max_height.unwrap());
             std::process::exit(0);
         }
         if matches.opt_present("blocks_audit_score") {
-            let arg_block_hash = matches.opt_str("block_hash"); //expect a integer as string
+            let arg_block_hash = matches.opt_str("block_hash");
             api("blocks_audit_score", &arg_block_hash.unwrap());
             std::process::exit(0);
         }
         if matches.opt_present("blocks_audit_scores") {
-            let arg_blockheight = matches.opt_str("blockheight"); //expect a integer as string
+            let arg_blockheight = matches.opt_str("blockheight");
             api("blocks_audit_scores", &arg_blockheight.unwrap());
             std::process::exit(0);
         }
-
-
-
-
-
+        if matches.opt_present("block_audit_summary") {
+            let arg_blockhash = matches.opt_str("blockhash");
+            api("block_audit_summary", &arg_blockhash.unwrap());
+            std::process::exit(0);
+        }
 
         if matches.opt_present("h")
             || (matches.free.is_empty()
@@ -668,15 +669,18 @@ impl Args {
             min_height: matches.opt_str("min_height"),
             max_height: matches.opt_str("max_height"),
 
-
             // MINING
             // V1 BLOCKS_AUDIT_SCORE BLOCK_HASH
             blocks_audit_score: matches.opt_str("blocks_audit_score"),
-            block_hash: matches.opt_str("block_hash"),
+            // block_hash: matches.opt_str("block_hash"),
 
             // V1 BLOCKS_AUDIT_SCORE BLOCKHEIGHT
             blocks_audit_scores: matches.opt_str("blocks_audit_scores"),
             blockheight: matches.opt_str("blockheight"),
+
+            // V1 BLOCK_AUDIT_SUMMARY BLOCKHEIGHT
+            block_audit_summary: matches.opt_str("block_audit_summary"),
+            blockhash: matches.opt_str("blockhash"),
 
             //OPTOPT
             server: matches.opt_str("s"),

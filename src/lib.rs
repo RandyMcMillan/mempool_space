@@ -183,25 +183,26 @@
 //!
 //!	mempool-space_mining_pool slushpool
 
-
 //! ...
-
-
 
 //!
 //! #### [GET /api/v1/mining/blocks/audit/score[/:blockHash]](https://mempool.space/api/v1/mining/blocks/audit/score/000000000000000000032535698c5b0c48283b792cf86c1c6e36ff84464de785)
 //!
-//! mempool-space \--blocks_audit_score \--block_hash 00000000000000000002352696778fc14532ccb923fde167fc754de26e6adbcd
+//!	mempool-space \--blocks_audit_score \--block_hash 00000000000000000002352696778fc14532ccb923fde167fc754de26e6adbcd
 //!
-//! mempool-space_blocks_audit_score 00000000000000000002352696778fc14532ccb923fde167fc754de26e6adbcd
+//!	mempool-space_blocks_audit_score 00000000000000000002352696778fc14532ccb923fde167fc754de26e6adbcd
 //!
-//! #### [GET /api/v1/mining/blocks/audit/scors[/:blockHeight]](https://mempool.space/api/v1/mining/blocks/audit/scores/820000)
+//! #### [GET /api/v1/mining/blocks/audit/scores[/:blockHeight]](https://mempool.space/api/v1/mining/blocks/audit/scores/820000)
 //!
-//! mempool-space \--blocks_audit_scores \--blockheight 820000
+//!	mempool-space \--blocks_audit_scores \--blockheight 820000
 //!
-//! mempool-space_blocks_audit_scores 820000
-
-
+//!	mempool-space_blocks_audit_scores 820000
+//!
+//! #### [GET /api/v1/block/:blockHash/audit-summary](https://mempool.space/api/v1/block/00000000000000000000f218ceda7a5d9c289040b9c3f05ef9f7c2f4930e0123/audit-summary)
+//!
+//!	mempool-space \--block_audit_summary \--blockhash 00000000000000000000f218ceda7a5d9c289040b9c3f05ef9f7c2f4930e0123
+//!
+//!	mempool-space_block_audit_summary 00000000000000000000f218ceda7a5d9c289040b9c3f05ef9f7c2f4930e0123
 
 #![warn(missing_docs, clippy::unwrap_used)]
 //
@@ -684,35 +685,48 @@ mod tests {
         let block_raw = api("mining_pools", "3y");
         wait("1");
     }
+    #[test]
     fn test_mining_pool() {
-        let binding = format!("v1/mining/pool/slushpool").clone();
+        let binding = format!("v1/mining/pool/antpool").clone();
         let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug");
-        let block_raw = api("mining_pool", "slushpool");
+        let block_raw = api("mining_pool", "antpool");
         wait("1");
     }
-
-
-
-
 
     /// ...
 
-
+    #[test]
     fn test_mining_blocks_audit_score() {
-        let binding = format!("v1/mining/blocks/audit/score/000000000000000000032535698c5b0c48283b792cf86c1c6e36ff84464de785").clone();
-        let blocks_audit_score: &str = blocking(&binding).expect("returns current v1/mining/blocks/audit/score/:blockHash");
-        let block_audit_score = api("mining_blocks_audit_score", "000000000000000000032535698c5b0c48283b792cf86c1c6e36ff84464de785");
+        /// GET /api/v1/mining/blocks/audit/score/:blockHash
+        let blockHash = "000000000000000000032535698c5b0c48283b792cf86c1c6e36ff84464de785";
+        let binding = format!("v1/mining/blocks/audit/score/{blockHash}").clone();
+        let blocks_audit_score: &str =
+            blocking(&binding).expect("returns current v1/mining/blocks/audit/score/:blockHash");
+        let block_audit_score = api(
+            "blocks_audit_score",
+            "000000000000000000032535698c5b0c48283b792cf86c1c6e36ff84464de785",
+        );
         wait("1");
     }
+    #[test]
     fn test_mining_blocks_audit_scores() {
-        let binding = format!("v1/mining/blocks/audit/scores/820000").clone();
-        let blocks_audit_scores: &str = blocking(&binding).expect("returns current v1/mining/blocks/audit/score/:blockHash");
-        let blocks_audit_scores = api("mining_blocks_audit_scores", "820000");
+        /// GET /api/v1/mining/blocks/audit/scores/:startHeight
+        let startHeight = "820000";
+        let binding = format!("v1/mining/blocks/audit/scores/{startHeight}").clone();
+        let blocks_audit_scores: &str =
+            blocking(&binding).expect("returns current v1/mining/blocks/audit/scores/:startHeight");
+        let blocks_audit_scores = api("blocks_audit_scores", "820000");
         wait("1");
     }
-
-
-
+    #[test]
+    fn test_mining_block_audit_summary() {
+        /// GET /api/v1/block/:blockHash/audit-summary
+        let blockHash = "00000000000000000000f218ceda7a5d9c289040b9c3f05ef9f7c2f4930e0123";
+        let binding = format!("v1/block/{blockHash}/audit-summary").clone();
+        let block_audit_summary: &str = blocking(&binding).expect("returns v1/block/{blockHash}/audit-summary");
+        let block_audit_summary = api("block_audit_summary", "820000");
+        wait("1");
+    }
 
     /// Fees
 
