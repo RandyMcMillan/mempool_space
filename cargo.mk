@@ -53,7 +53,7 @@ cargo-doc:### 	cargo-check
 	@cat README.temp | sed 's/\\-/-/g' > README.temp2
 #cat LIB.temp2
 	@cat README.temp2 | sed 's/unwrap_used/unwrap\\_used/g' > README.md
-	git diff README.md
+	git diff doc/README.md
 
 cargo-t:cargo-test
 cargo-test:cargo-install### 	cargo-test
