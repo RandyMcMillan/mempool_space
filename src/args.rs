@@ -210,25 +210,20 @@ pub struct Args {
     /// - BLOCK
     /// `https://mempool.space/api/block/<BLOCK_HASH>`
     pub block: Option<String>,
-
     /// - BLOCK_HEADER
     /// `https://mempool.space/api/block/<BLOCK_HASH>/header`
     pub block_header: Option<String>,
-
     /// - BLOCK_HEIGHT
     /// `https://mempool.space/api/block-height/<BLOCK_HEIGHT>`
     pub block_height: Option<String>,
-
     /// - V1 MINING BLOCKS TIMESTAMP <UTC_SECS>
     /// `https://mempool.space/api/v1/mining/blocks/timestamp/<UTC_SECS>`
     pub blocks_timestamp: Option<String>,
-
-    /// - BLOCK
+    /// - BLOCK RAW
     /// `https://mempool.space/api/block/<BLOCK_HASH>/raw`
     pub block_raw: Option<String>,
     /// `https://mempool.space/api/block/<BLOCK_HASH>/status`
     pub block_status: Option<String>,
-
     /// - BLOCKS TIP HEIGHT
     /// `https://mempool.space/api/blocks/tip/height`
     pub blocks_tip_height: Option<String>,
@@ -245,21 +240,17 @@ pub struct Args {
     pub block_txid: Option<String>,
     ///
     pub block_txindex: Option<String>,
-
     /// - BLOCK \<BLOCK_HASH\> \<TXIDS\>
     /// `https://mempool.space/api/block/<TXID>`
     pub block_txids: Option<String>,
-
     /// - BLOCK \<BLOCK_HASH\> \<TXS\>
     /// `https://mempool.space/api/block/<BLOCK_HASH>/txs`
     pub block_txs: Option<String>,
     /// mempool-space --block_txs \<BLOCK_HASH\> --start_index \<START_INDEX\>
     pub start_index: Option<String>,
-
     /// - V1 BLOCKS \<BLOCK_HEIGHT\>
     /// `https://mempool.space/api/v1/blocks/<BLOCKS_START_HEIGHT>`
     pub blocks: Option<String>,
-
     /// - V1 BLOCKS_BULK \<MAX_HEIGHT\> \<MIN_HEIGHT\>
     /// `https://mempool.space/api/v1/blocks-bulk/<MIN_HEIGHT>/<MAX_HEIGHT>`
     pub blocks_bulk: Option<String>,
@@ -267,6 +258,19 @@ pub struct Args {
     pub min_height: Option<String>,
     /// `https://mempool.space/api/v1/blocks-bulk/<MIN_HEIGHT>/<MAX_HEIGHT>`
     pub max_height: Option<String>,
+
+    /// - MINING
+    /// - V1 MINING POOLS \<TIMEPERIOD\>
+    /// `https://mempool.space/api/v1/mining/pools/:<TIMEPERIOD>`
+    pub mining_pools: Option<String>,
+    /// timeperiod
+    pub timeperiod: Option<String>,
+
+    /// - V1 MINING POOL \<SLUG\>
+    /// `https://mempool.space/api/v1/mining/pool/:<SLUG>`
+    pub mining_pool: Option<String>,
+    /// slug
+    pub slug: Option<String>,
 
     /// - V1 BLOCKS_AUDIT_SCORE \<BLOCK_HASH\>
     /// `https://mempool.space/api/v1/mining/blocks/audit/score/<BLOCK_HASH>`
@@ -285,7 +289,6 @@ pub struct Args {
     pub block_audit_summary: Option<String>,
     // /// blockhash
     // pub blockhash: Option<String>,
-
     /// OPTOPT
     ///
     /// Configuration file.
@@ -389,6 +392,12 @@ impl Args {
 
         //MINING
         //
+        opts.optflag("", "mining_pools", "mining_pools api call");
+        opts.optopt("", "timeperiod", "mining_pools api call", "TIMEPERIOD");
+
+        opts.optflag("", "mining_pool", "mining_pool api call");
+        opts.optopt("", "slug", "mining_pool api call", "SLUG");
+
         opts.optflag("", "blocks_audit_score", "blocks_audit_score api call");
         opts.optopt("", "block_hash", "blocks_audit_score api call", "BLOCK_HASH");
 
@@ -479,6 +488,7 @@ impl Args {
             api("validate_address", &validate_address.unwrap());
             std::process::exit(0);
         }
+        // BLOCKS
         if matches.opt_present("block") {
             let block = matches.opt_str("block");
             api("block", &block.unwrap());
@@ -545,11 +555,18 @@ impl Args {
             blocks_bulk(&arg_min_height.unwrap(), &arg_max_height.unwrap());
             std::process::exit(0);
         }
-        if matches.opt_present("blocks_audit_score") {
-            let arg_block_hash = matches.opt_str("block_hash");
-            api("blocks_audit_score", &arg_block_hash.unwrap());
+        // MINING
+        if matches.opt_present("mining_pools") {
+            let arg_timeperiod = matches.opt_str("timeperiod");
+            api("mining_pools", &arg_timeperiod.unwrap());
             std::process::exit(0);
         }
+        if matches.opt_present("mining_pool") {
+            let arg_slug = matches.opt_str("slug");
+            api("mining_pool", &arg_slug.unwrap());
+            std::process::exit(0);
+        }
+
         if matches.opt_present("blocks_audit_scores") {
             let arg_blockheight = matches.opt_str("blockheight");
             api("blocks_audit_scores", &arg_blockheight.unwrap());
@@ -670,6 +687,14 @@ impl Args {
             max_height: matches.opt_str("max_height"),
 
             // MINING
+            // V1 MINING POOLS TIMEPERIOD
+            mining_pools: matches.opt_str("mining_pools"),
+            timeperiod: matches.opt_str("timeperiod"),
+
+            // V1 MINING POOL SLUG
+            mining_pool: matches.opt_str("mining_pool"),
+            slug: matches.opt_str("slug"),
+
             // V1 BLOCKS_AUDIT_SCORE BLOCK_HASH
             blocks_audit_score: matches.opt_str("blocks_audit_score"),
             // block_hash: matches.opt_str("block_hash"),

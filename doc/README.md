@@ -177,11 +177,11 @@ cargo add --git <https:github.com/RandyMcMillan/mempool_space.git>
 
 	mempool-space_mining_pools [24h 3d 1w 1m 3m 6m 1y 2y 3y]
 
-#### [GET /api/v1/mining/pool[/:slug]](https:mempool.space/api/v1/mining/pool/slushpool)
+#### [GET /api/v1/mining/pool[/:slug]](https:mempool.space/api/v1/mining/pool/unknown)
 
-	mempool-space --mining_pool slushpool
+	mempool-space --mining_pool --slug unknown
 
-	mempool-space_mining_pool slushpool
+	mempool-space_mining_pool unknown
 
 ...
 
@@ -687,9 +687,18 @@ mod tests {
     }
     #[test]
     fn test_mining_pool() {
+        ###  antpool
         let binding = format!("v1/mining/pool/antpool").clone();
         let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug");
         let block_raw = api("mining_pool", "antpool");
+        wait("1");
+
+        ###  ...
+
+        ###  unknown
+        let binding = format!("v1/mining/pool/unknown").clone();
+        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug");
+        let block_raw = api("mining_pool", "unknown");
         wait("1");
     }
 
