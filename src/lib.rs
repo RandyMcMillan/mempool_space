@@ -183,6 +183,20 @@
 //!
 //!	mempool-space_mining_pool slushpool
 
+
+//! ...
+
+
+
+//!
+//! #### [GET /api/v1/mining/blocks/audit/score[/:blockHash]](https://mempool.space/api/v1/mining/blocks/audit/score/000000000000000000032535698c5b0c48283b792cf86c1c6e36ff84464de785)
+//!
+//! mempool-space \--blocks_audit_score \--block_hash 00000000000000000002352696778fc14532ccb923fde167fc754de26e6adbcd
+//!
+//! mempool-space_blocks_audit_score 00000000000000000002352696778fc14532ccb923fde167fc754de26e6adbcd
+
+
+
 #![warn(missing_docs, clippy::unwrap_used)]
 //
 #[warn(missing_docs, clippy::unwrap_used)]

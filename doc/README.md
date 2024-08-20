@@ -168,6 +168,35 @@ cargo add --git <https:github.com/RandyMcMillan/mempool_space.git>
 
 	mempool-space_blocks_bulk 730000 840000
 
+## [MINING](https:mempool.space/docs/api/rest#get-mining-pools)
+
+
+#### [GET /api/v1/mining/pools[/:timePeriod]](https:mempool.space/api/v1/mining/pools/1w)
+
+	mempool-space --mining_pools --timeperiod [24h 3d 1w 1m 3m 6m 1y 2y 3y]
+
+	mempool-space_mining_pools [24h 3d 1w 1m 3m 6m 1y 2y 3y]
+
+#### [GET /api/v1/mining/pool[/:slug]](https:mempool.space/api/v1/mining/pool/slushpool)
+
+	mempool-space --mining_pool slushpool
+
+	mempool-space_mining_pool slushpool
+
+
+...
+
+
+
+
+#### [GET /api/v1/mining/blocks/audit/score[/:blockHash]](https:mempool.space/api/v1/mining/blocks/audit/score/000000000000000000032535698c5b0c48283b792cf86c1c6e36ff84464de785)
+
+mempool-space --blocks_audit_score --block_hash 00000000000000000002352696778fc14532ccb923fde167fc754de26e6adbcd
+
+mempool-space_blocks_audit_score 00000000000000000002352696778fc14532ccb923fde167fc754de26e6adbcd
+
+
+
 #![warn(missing_docs, clippy::unwrap\_used)]
 
 #[warn(missing_docs, clippy::unwrap\_used)]
@@ -354,14 +383,14 @@ pub fn wait(sleep: &str) {
     eprintln!("\nresult={}", result);
 }
 
+###  cargo test -- --nocapture
+
 #[cfg(test)]
 mod tests {
 
     use super::*;
 
     use crate::api::{api, blocking};
-
-    ###  cargo test -- --nocapture
 
     #[test]
     fn test_difficulty_adjustment() {
@@ -595,13 +624,83 @@ mod tests {
         let blocks_tip_height = api("blocks_tip_height", "extraneous_arg");
         use crate::args::blocks_bulk;
         blocks_bulk(&"0", &"0");
+        wait("1");
         blocks_bulk(&"0", &"1");
+        wait("1");
         blocks_bulk(&"730000", &"840000");
+        wait("1");
         blocks_bulk(&"730000", &blocks_tip_height);
         wait("1");
     }
 
     ###  Mining
+    #[test]
+    fn test_mining_pools() {
+        ###  [24h 3d 1w 1m 3m 6m 1y 2y 3y]
+        let binding = format!("v1/mining/pools/24h").clone();
+        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pools/1d");
+        let block_raw = api("mining_pools", "24h");
+        wait("1");
+        let binding = format!("v1/mining/pools/1d").clone();
+        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pools/1d");
+        let block_raw = api("mining_pools", "1d");
+        wait("1");
+        let binding = format!("v1/mining/pools/3d").clone();
+        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pools/3d");
+        let block_raw = api("mining_pools", "3d");
+        wait("1");
+        let binding = format!("v1/mining/pools/1w").clone();
+        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pools/1w");
+        let block_raw = api("mining_pools", "1w");
+        wait("1");
+        let binding = format!("v1/mining/pools/1m").clone();
+        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pools/1m");
+        let block_raw = api("mining_pools", "1m");
+        wait("1");
+        let binding = format!("v1/mining/pools/3m").clone();
+        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pools/3m");
+        let block_raw = api("mining_pools", "3m");
+        wait("1");
+        let binding = format!("v1/mining/pools/6m").clone();
+        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pools/6m");
+        let block_raw = api("mining_pools", "6m");
+        wait("1");
+        let binding = format!("v1/mining/pools/1y").clone();
+        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pools/1y");
+        let block_raw = api("mining_pools", "1y");
+        wait("1");
+        let binding = format!("v1/mining/pools/2y").clone();
+        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pools/2y");
+        let block_raw = api("mining_pools", "2y");
+        wait("1");
+        let binding = format!("v1/mining/pools/3y").clone();
+        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pools/3y");
+        let block_raw = api("mining_pools", "3y");
+        wait("1");
+    }
+    fn test_mining_pool() {
+        let binding = format!("v1/mining/pool/slushpool").clone();
+        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug");
+        let block_raw = api("mining_pool", "slushpool");
+        wait("1");
+    }
+
+
+
+
+
+    ###  ...
+
+
+    fn test_mining_blocks_audit_score() {
+        let binding = format!("v1/mining/blocks/audit/score/000000000000000000032535698c5b0c48283b792cf86c1c6e36ff84464de785").clone();
+        let blocks_audit_score: &str = blocking(&binding).expect("returns current v1/mining/blocks/audit/score/:blockHash");
+        let block_audit_score = api("mining_blocks_audit_score", "000000000000000000032535698c5b0c48283b792cf86c1c6e36ff84464de785");
+        wait("1");
+    }
+
+
+
 
     ###  Fees
 
