@@ -256,17 +256,25 @@ pub struct Args {
     /// mempool-space --block_txs \<BLOCK_HASH\> --start_index \<START_INDEX\>
     pub start_index: Option<String>,
 
-    /// - V1 BLOCKS <BLOCK_HEIGHT>
+    /// - V1 BLOCKS \<BLOCK_HEIGHT\>
     /// `https://mempool.space/api/v1/blocks/<BLOCKS_START_HEIGHT>`
     pub blocks: Option<String>,
 
-    /// - V1 BLOCKS_BULK <MAX_HEIGHT> <MIN_HEIGHT>
+    /// - V1 BLOCKS_BULK \<MAX_HEIGHT\> \<MIN_HEIGHT\>
     /// `https://mempool.space/api/v1/blocks-bulk/<MIN_HEIGHT>/<MAX_HEIGHT>`
     pub blocks_bulk: Option<String>,
     /// `https://mempool.space/api/v1/blocks-bulk/<MIN_HEIGHT>/<MAX_HEIGHT>`
     pub min_height: Option<String>,
     /// `https://mempool.space/api/v1/blocks-bulk/<MIN_HEIGHT>/<MAX_HEIGHT>`
     pub max_height: Option<String>,
+
+    /// - V1 BLOCKS_AUDIT_SCORE \<BLOCK_HASH\>
+    /// `https://mempool.space/api/v1/mining/blocks/audit/score/<BLOCK_HASH>`
+    pub blocks_audit_score: Option<String>,
+    /// block_hash
+    pub block_hash: Option<String>,
+
+
 
     /// Configuration file.
     pub config: Option<PathBuf>,
@@ -362,6 +370,15 @@ impl Args {
         opts.optflag("", "blocks_bulk", "block txids api call");
         opts.optopt("", "min_height", "block txids api call", "MIN_HEIGHT");
         opts.optopt("", "max_height", "block txids api call", "MAX_HEIGHT");
+
+        //MINING
+        //
+        opts.optflag("", "blocks_audit_score", "blocks_audit_score api call");
+        opts.optopt("", "block_hash", "blocks_audit_score api call", "BLOCK_HASH");
+
+
+
+
 
         //OPTOPT
         opts.optopt("c", "config", "sets the configuration file", "CONFIG");
@@ -512,6 +529,16 @@ impl Args {
             blocks_bulk(&arg_min_height.unwrap(), &arg_max_height.unwrap());
             std::process::exit(0);
         }
+        if matches.opt_present("blocks_audit_score") {
+            let arg_block_hash = matches.opt_str("block_hash"); //expect a integer as string
+            api("blocks_audit_score", &arg_block_hash.unwrap());
+            std::process::exit(0);
+        }
+
+
+
+
+
 
         if matches.opt_present("h")
             || (matches.free.is_empty()
@@ -620,6 +647,12 @@ impl Args {
             blocks_bulk: matches.opt_str("blocks_bulk"),
             min_height: matches.opt_str("min_height"),
             max_height: matches.opt_str("max_height"),
+
+
+            // MINING
+            // V1 BLOCKS_AUDIT_SCORE BLOCK_HASH
+            blocks_audit_score: matches.opt_str("blocks_audit_score"),
+            block_hash: matches.opt_str("block_hash"),
 
             server: matches.opt_str("s"),
             auth: matches.opt_str("a"),
