@@ -194,6 +194,12 @@
 //! mempool-space \--blocks_audit_score \--block_hash 00000000000000000002352696778fc14532ccb923fde167fc754de26e6adbcd
 //!
 //! mempool-space_blocks_audit_score 00000000000000000002352696778fc14532ccb923fde167fc754de26e6adbcd
+//!
+//! #### [GET /api/v1/mining/blocks/audit/scors[/:blockHeight]](https://mempool.space/api/v1/mining/blocks/audit/scores/820000)
+//!
+//! mempool-space \--blocks_audit_scores \--blockheight 820000
+//!
+//! mempool-space_blocks_audit_scores 820000
 
 
 
@@ -696,6 +702,12 @@ mod tests {
         let binding = format!("v1/mining/blocks/audit/score/000000000000000000032535698c5b0c48283b792cf86c1c6e36ff84464de785").clone();
         let blocks_audit_score: &str = blocking(&binding).expect("returns current v1/mining/blocks/audit/score/:blockHash");
         let block_audit_score = api("mining_blocks_audit_score", "000000000000000000032535698c5b0c48283b792cf86c1c6e36ff84464de785");
+        wait("1");
+    }
+    fn test_mining_blocks_audit_scores() {
+        let binding = format!("v1/mining/blocks/audit/scores/820000").clone();
+        let blocks_audit_scores: &str = blocking(&binding).expect("returns current v1/mining/blocks/audit/score/:blockHash");
+        let blocks_audit_scores = api("mining_blocks_audit_scores", "820000");
         wait("1");
     }
 

@@ -274,8 +274,16 @@ pub struct Args {
     /// block_hash
     pub block_hash: Option<String>,
 
+    /// - V1 BLOCKS_AUDIT_SCORES \<BLOCKHEIGHT\>
+    /// `https://mempool.space/api/v1/mining/blocks/audit/scores/<BLOCKHEIGHT>`
+    pub blocks_audit_scores: Option<String>,
+    /// blockheight
+    pub blockheight: Option<String>,
 
 
+
+    /// OPTOPT
+    ///
     /// Configuration file.
     pub config: Option<PathBuf>,
     /// Server address.
@@ -350,7 +358,11 @@ impl Args {
         // BLOCK/S
         opts.optopt("", "block", "block api call", "BLOCK");
         opts.optopt("", "block_header", "block-header api call", "BLOCK_HEADER");
+
+        // BLOCK_HEIGHT
+        // REUSED
         opts.optopt("", "block_height", "block-height api call", "BLOCK_HEIGHT");
+        //
         opts.optopt("", "blocks_timestamp", "blocks-timestamp api call", "BLOCKS_TIMESTAMP");
         opts.optopt("", "block_raw", "block-raw api call", "BLOCK_RAW");
         opts.optopt("", "block_status", "block-status api call", "BLOCK_STATUS");
@@ -375,6 +387,9 @@ impl Args {
         //
         opts.optflag("", "blocks_audit_score", "blocks_audit_score api call");
         opts.optopt("", "block_hash", "blocks_audit_score api call", "BLOCK_HASH");
+
+        opts.optflag("", "blocks_audit_scores", "blocks_audit_scores api call");
+        opts.optopt("", "blockheight", "blocks_audit_scores api call", "BLOCKHEIGHT");
 
 
 
@@ -534,6 +549,11 @@ impl Args {
             api("blocks_audit_score", &arg_block_hash.unwrap());
             std::process::exit(0);
         }
+        if matches.opt_present("blocks_audit_scores") {
+            let arg_blockheight = matches.opt_str("blockheight"); //expect a integer as string
+            api("blocks_audit_scores", &arg_blockheight.unwrap());
+            std::process::exit(0);
+        }
 
 
 
@@ -654,6 +674,11 @@ impl Args {
             blocks_audit_score: matches.opt_str("blocks_audit_score"),
             block_hash: matches.opt_str("block_hash"),
 
+            // V1 BLOCKS_AUDIT_SCORE BLOCKHEIGHT
+            blocks_audit_scores: matches.opt_str("blocks_audit_scores"),
+            blockheight: matches.opt_str("blockheight"),
+
+            //OPTOPT
             server: matches.opt_str("s"),
             auth: matches.opt_str("a"),
             url: matches.opt_str("u"),
