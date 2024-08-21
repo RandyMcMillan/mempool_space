@@ -58,9 +58,9 @@ cargo-doc:### 	cargo-check
 cargo-t:cargo-test
 cargo-test:### 	cargo-test
 	@. $(HOME)/.cargo/env
-	FORCE=--force $(MAKE) cargo-install
+	FORCE=--force $(MAKE) cargo-br cargo-install
 	#@cargo test
-	@cargo test -- --nocapture
+	cargo test -- $(NOCAPTURE)
 cargo-test-ignored:### 	cargo-test-ignored
 	@. $(HOME)/.cargo/env
 	#@cargo test -- --ignored
