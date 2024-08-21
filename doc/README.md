@@ -184,7 +184,7 @@ cargo add --git <https:github.com/RandyMcMillan/mempool_space.git>
 	mempool-space_mining_pool unknown
 
 MINING HASHRATE POOLS TIMEPERIOD
-#### [GET /api/v1/mining/hashrate/pools/[:timePeriod]](https:mempool.space/api/v1/mining/hashrate/pools/1m)
+#### [GET /api/v1/mining/hashrate/pools/\[:timePeriod\]](https:mempool.space/api/v1/mining/hashrate/pools/1m)
 
 timePeriod  [1m, 3m, 6m, 1y, 2y, 3y]
 
@@ -198,10 +198,6 @@ MINING POOL HASHRATE SLUG
 	mempool-space --mining_pool_hashrate --slug foundaryusa
 
 	mempool-space_mining_pool_hashrate foundryusa
-
-
-
-
 
 
 
@@ -422,85 +418,85 @@ mod tests {
     fn test_difficulty_adjustment() {
          GET /api/v1/difficulty-adjustment
         let binding = format!("v1/difficulty-adjustment").clone();
-        let difficulty_adjustment: &str = blocking(&binding).expect("REASON");
-        let difficulty_adjustment = api("difficulty_adjustment", "extraneous_arg");
+        let get_difficulty_adjustment: &str = blocking(&binding).expect("REASON");
+        let get_difficulty_adjustment = api("difficulty_adjustment", "extraneous_arg");
         wait("1");
     }
     #[test]
     fn test_price() {
          GET /api/v1/prices
         let binding = format!("v1/prices").clone();
-        let prices: &str = blocking(&binding).expect("REASON");
-        let prices = api("prices", "extraneous_arg");
+        let get_prices: &str = blocking(&binding).expect("REASON");
+        let get_prices = api("prices", "extraneous_arg");
         wait("1");
     }
     #[test]
     fn test_historical_price() {
         use crate::args::historical_price;
          GET /api/v1/historical-price?currency=EUR&timestamp=1500000000
-        let historical_price_json = historical_price(&"EUR", &"1500000000");
-        print!("\n{{\"prices\":[{{\"time\":1499904000,\"EUR\":1964,\"USD\":2254.9}}],\"exchangeRates\":{{\"USDEUR\":0.92,\"USDGBP\":0.78,\"USDCAD\":1.38,\"USDCHF\":0.87,\"USDAUD\":1.53,\"USDJPY\":146.62}}}}\n");
-        let historical_prices = api("historical_price", "USD");
+        let get_historical_price = historical_price(&"EUR", &"1500000000");
+        let get_historical_prices = api("historical_price", "USD");
         wait("1");
     }
 
-    ###  Addresses
+    ###  ADDRESSES TESTS
 
     #[test]
     fn test_address() {
          GET /api/address/:address
         let binding = format!("address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv").clone();
-        let address: &str = blocking(&binding).expect("test_address failed");
-        let address = api("address", "1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv");
+        let get_address: &str = blocking(&binding).expect("test_address failed");
+        let get_address = api("address", "1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv");
         wait("1");
     }
     #[test]
     fn test_address_txs() {
          GET /api/address/:address/txs
         let binding = format!("address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv/txs").clone();
-        let address_txs: &str = blocking(&binding).expect("test_address_txs failed");
-        let address_txs = api("address_txs", "1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv");
+        let get_address_txs: &str = blocking(&binding).expect("test_address_txs failed");
+        let get_address_txs = api("address_txs", "1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv");
         wait("1");
     }
     #[test]
     fn test_address_txs_chain() {
          GET /api/address/:address/txs/chain
         let binding = format!("address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv/txs/chain").clone();
-        let address_txs_chain: &str = blocking(&binding).expect("REASON");
-        let address_txs_chain = api("address_txs_chain", "1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv");
+        let get_address_txs_chain: &str = blocking(&binding).expect("REASON");
+        let get_address_txs_chain = api("address_txs_chain", "1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv");
         wait("1");
     }
     #[test]
     fn test_address_txs_mempool() {
          GET /api/address/:address/txs/mempool
         let binding = format!("address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv/txs/mempool").clone();
-        let address_txs_mempool: &str = blocking(&binding).expect("REASON");
-        let address_txs_mempool = api("address_txs_mempool", "1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv");
+        let get_address_txs_mempool: &str = blocking(&binding).expect("REASON");
+        let get_address_txs_mempool = api("address_txs_mempool", "1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv");
         wait("1");
     }
     #[test]
-    fn test_address_txs_utxo() {
+    fn test_address_utxo() {
          GET /api/address/:address/utxo
         let binding = format!("address/1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY/utxo").clone();
-        let address_utxo: &str = blocking(&binding).expect("existing valid address needed");
+        let get_address_utxo: &str = blocking(&binding).expect("existing valid address needed");
+        let get_address_utxo = api("address_utxo", "1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv");
         wait("1");
     }
     #[test]
     fn test_validate_address() {
          GET /api/v1/validate-address/:address
         let binding = format!("v1/validate-address/1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY").clone();
-        let valid: &str = blocking(&binding).expect("valid address needed");
+        let get_valid_address: &str = blocking(&binding).expect("valid address needed");
         wait("1");
     }
 
-    ###  Blocks
+    ###  BLOCKS TESTS
 
     #[test]
     fn test_block() {
          GET /api/block/:hash
         let binding = format!("block/000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce").clone();
-        let block: &str = blocking(&binding).expect("an existing block hash is needed");
-        let block = api(
+        let get_block: &str = blocking(&binding).expect("an existing block hash is needed");
+        let get_block = api(
             "block",
             "000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce",
         );
@@ -510,8 +506,8 @@ mod tests {
     fn test_block_header() {
          GET /api/block/:hash/header
         let binding = format!("block/000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce").clone();
-        let block_header: &str = blocking(&binding).expect("an existing block hash is needed");
-        let block = api(
+        let get_block_header: &str = blocking(&binding).expect("an existing block hash is needed");
+        let get_block_header = api(
             "block_header",
             "000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce",
         );
@@ -521,24 +517,24 @@ mod tests {
     fn test_block_height() {
          GET /api/block-height:height
         let binding = format!("block-height/615615").clone();
-        let block_height: &str = blocking(&binding).expect("an existing block hash is needed");
-        let block_height = api("block_height", "615615");
+        let get_block_height: &str = blocking(&binding).expect("an existing block hash is needed");
+        let get_block_height = api("block_height", "615615");
         wait("1");
     }
     #[test]
     fn test_blocks_timestamp() {
          GET /api/v1/mining/blocks/timestamp/:timestamp
         let binding = format!("v1/mining/blocks/timestamp/1672531200").clone();
-        let timestamp: &str = blocking(&binding).expect("an existing block hash is needed");
-        let timestamp = api("blocks_timestamp", "1672531200");
+        let get_timestamp: &str = blocking(&binding).expect("an existing block hash is needed");
+        let get_timestamp = api("blocks_timestamp", "1672531200");
         wait("1");
     }
     #[test]
     fn test_block_raw() {
          GET /api/block/:hash/raw
         let binding = format!("block/0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2").clone();
-        let block_raw: &str = blocking(&binding).expect("an existing block hash is needed");
-        let block_raw = api(
+        let get_block_raw: &str = blocking(&binding).expect("an existing block hash is needed");
+        let get_block_raw = api(
             "block_raw",
             "0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2",
         );
@@ -549,8 +545,8 @@ mod tests {
     fn test_block_status() {
          GET /api/block/:hash/status
         let binding = format!("block/0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2").clone();
-        let block_raw: &str = blocking(&binding).expect("an existing block hash is needed");
-        let block_raw = api(
+        let get_block_status: &str = blocking(&binding).expect("an existing block hash is needed");
+        let get_block_status = api(
             "block_status",
             "0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2",
         );
@@ -560,16 +556,16 @@ mod tests {
     fn test_blocks_tip_height() {
          GET /api/blocks/tip/height
         let binding = format!("blocks/tip/height").clone();
-        let block_raw: &str = blocking(&binding).expect("returns current block_height");
-        let block_raw = api("blocks_tip_height", "extraneous_arg");
+        let get_blocks_tip_height: &str = blocking(&binding).expect("returns current block_height");
+        let get_blocks_tip_height = api("blocks_tip_height", "extraneous_arg");
         wait("1");
     }
     #[test]
     fn test_blocks_tip_hash() {
          GET /api/blocks/tip/hash
         let binding = format!("blocks/tip/hash").clone();
-        let block_raw: &str = blocking(&binding).expect("returns current block/tip/hash");
-        let block_raw = api("blocks_tip_hash", "extraneous_arg");
+        let get_blocks_tip_hash: &str = blocking(&binding).expect("returns current block/tip/hash");
+        let get_block_tip_hash = api("blocks_tip_hash", "extraneous_arg");
         wait("1");
     }
     #[test]
@@ -593,7 +589,7 @@ mod tests {
     fn test_block_txids() {
          GET /api/block/:hash/txids
         let binding = format!("block/000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txids").clone();
-        let get_block_txid: &str = blocking(&binding).expect("returns current txids from block");
+        let get_block_txids: &str = blocking(&binding).expect("returns current txids from block");
         let get_block_txids = api(
             "block_txid",
             "000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txids",
@@ -605,7 +601,7 @@ mod tests {
     #[test]
     fn test_block_txs() {
         let binding = format!("block/000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txs").clone();
-        let block_txs: &str = blocking(&binding).expect("returns current txids from block");
+        let get_block_txs: &str = blocking(&binding).expect("returns current txids from block");
         let get_block_txs = api(
             "block_txs",
             "000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txs",
@@ -628,7 +624,7 @@ mod tests {
         let binding = format!("v1/blocks/730000").clone();
         let get_block_txid: &str = blocking(&binding).expect("returns current txid from block index");
         let get_block_txid = api("blocks", "730000");
-        let blocks_tip_height = api("blocks_tip_height", "extraneous_arg");
+        let get_blocks_tip_height = api("blocks_tip_height", "extraneous_arg");
         use crate::args::blocks;
         blocks(&"");
         wait("1");
@@ -638,16 +634,16 @@ mod tests {
         wait("1");
         blocks(&"730000");
         wait("1");
-        blocks(&blocks_tip_height);
+        blocks(&get_blocks_tip_height);
         wait("1");
     }
     #[test]
     #[should_panic]
     fn test_blocks_bulk() {
         let binding = format!("v1/blocks-bulk/730000/840000").clone();
-        let get_block_txid: &str = blocking(&binding).expect("returns current txid from block index");
-        let get_block_txid = api("blocks_bulk", "730000/840000");
-        let blocks_tip_height = api("blocks_tip_height", "extraneous_arg");
+        let get_block_bulk: &str = blocking(&binding).expect("returns current txid from block index");
+        let get_block_bulk = api("blocks_bulk", "730000/840000");
+        let get_blocks_tip_height = api("blocks_tip_height", "extraneous_arg");
         use crate::args::blocks_bulk;
         blocks_bulk(&"0", &"0");
         wait("1");
@@ -655,118 +651,119 @@ mod tests {
         wait("1");
         blocks_bulk(&"730000", &"840000");
         wait("1");
-        blocks_bulk(&"730000", &blocks_tip_height);
+        blocks_bulk(&"730000", &get_blocks_tip_height);
         wait("1");
     }
 
-    ###  Mining
+    ###  MINING TESTS
+
     #[test]
     fn test_mining_pools() {
         ###  [24h 3d 1w 1m 3m 6m 1y 2y 3y]
         let binding = format!("v1/mining/pools/24h").clone();
-        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pools/1d");
-        let block_raw = api("mining_pools", "24h");
+        let get_mining_pools: &str = blocking(&binding).expect("returns current v1/mining/pools/1d");
+        let get_mining_pools = api("mining_pools", "24h");
         wait("1");
         let binding = format!("v1/mining/pools/1d").clone();
-        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pools/1d");
-        let block_raw = api("mining_pools", "1d");
+        let get_mining_pools: &str = blocking(&binding).expect("returns current v1/mining/pools/1d");
+        let get_mining_pools = api("mining_pools", "1d");
         wait("1");
         let binding = format!("v1/mining/pools/3d").clone();
-        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pools/3d");
-        let block_raw = api("mining_pools", "3d");
+        let get_mining_pools: &str = blocking(&binding).expect("returns current v1/mining/pools/3d");
+        let get_mining_pools = api("mining_pools", "3d");
         wait("1");
         let binding = format!("v1/mining/pools/1w").clone();
-        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pools/1w");
-        let block_raw = api("mining_pools", "1w");
+        let get_mining_pools: &str = blocking(&binding).expect("returns current v1/mining/pools/1w");
+        let get_mining_pools = api("mining_pools", "1w");
         wait("1");
         let binding = format!("v1/mining/pools/1m").clone();
-        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pools/1m");
-        let block_raw = api("mining_pools", "1m");
+        let get_mining_pools: &str = blocking(&binding).expect("returns current v1/mining/pools/1m");
+        let get_mining_pools = api("mining_pools", "1m");
         wait("1");
         let binding = format!("v1/mining/pools/3m").clone();
-        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pools/3m");
-        let block_raw = api("mining_pools", "3m");
+        let get_mining_pools: &str = blocking(&binding).expect("returns current v1/mining/pools/3m");
+        let get_mining_pools = api("mining_pools", "3m");
         wait("1");
         let binding = format!("v1/mining/pools/6m").clone();
-        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pools/6m");
-        let block_raw = api("mining_pools", "6m");
+        let get_mining_pools: &str = blocking(&binding).expect("returns current v1/mining/pools/6m");
+        let get_mining_pools = api("mining_pools", "6m");
         wait("1");
         let binding = format!("v1/mining/pools/1y").clone();
-        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pools/1y");
-        let block_raw = api("mining_pools", "1y");
+        let get_mining_pools: &str = blocking(&binding).expect("returns current v1/mining/pools/1y");
+        let get_mining_pools = api("mining_pools", "1y");
         wait("1");
         let binding = format!("v1/mining/pools/2y").clone();
-        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pools/2y");
-        let block_raw = api("mining_pools", "2y");
+        let get_mining_pools: &str = blocking(&binding).expect("returns current v1/mining/pools/2y");
+        let get_mining_pools = api("mining_pools", "2y");
         wait("1");
         let binding = format!("v1/mining/pools/3y").clone();
-        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pools/3y");
-        let block_raw = api("mining_pools", "3y");
+        let get_mining_pools: &str = blocking(&binding).expect("returns current v1/mining/pools/3y");
+        let get_mining_pools = api("mining_pools", "3y");
         wait("1");
     }
     #[test]
     fn test_mining_pool() {
         ###  antpool
         let binding = format!("v1/mining/pool/antpool").clone();
-        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug");
-        let block_raw = api("mining_pool", "antpool");
+        let get_mining_pool: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug");
+        let get_mining_pool = api("mining_pool", "antpool");
         wait("1");
 
         ###  ...
 
         ###  unknown
         let binding = format!("v1/mining/pool/unknown").clone();
-        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug");
-        let block_raw = api("mining_pool", "unknown");
+        let get_mining_pool: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug");
+        let get_mining_pool = api("mining_pool", "unknown");
         wait("1");
     }
     #[test]
     fn test_mining_hashrate_pools() {
          timeperiod unspecified
         let binding = format!("v1/mining/hashrate/pools").clone();
-        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pool/hashrate[:timePeriod]");
-        let block_raw = api("mining_hashrate_pools", "1m");
+        let mining_hashrate_pools: &str = blocking(&binding).expect("returns current v1/mining/pool/hashrate[:timePeriod]");
+        let get_mining_hashrate_pools = api("mining_hashrate_pools", "1m");
         wait("1");
           [1m, 3m, 6m, 1y, 2y, 3y]
         let binding = format!("v1/mining/hashrate/pools/1m").clone();
-        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
-        let block_raw = api("mining_hashrate_pools", "1m");
+        let get_mining_hashrate_pools: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let get_mining_hashrate_pools = api("mining_hashrate_pools", "1m");
         wait("1");
         let binding = format!("v1/mining/hashrate/pools/3m").clone();
-        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
-        let block_raw = api("mining_hashrate_pools", "3m");
+        let get_mining_hashrate_pools: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let get_mining_hashrate_pools = api("mining_hashrate_pools", "3m");
         wait("1");
         let binding = format!("v1/mining/hashrate/pools/6m").clone();
-        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
-        let block_raw = api("mining_hashrate_pools", "6m");
+        let get_mining_hashrate_pools: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let get_mining_hashrate_pools = api("mining_hashrate_pools", "6m");
         wait("1");
         let binding = format!("v1/mining/hashrate/pools/1y").clone();
-        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
-        let block_raw = api("mining_hashrate_pools", "1y");
+        let get_mining_hashrate_pools: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let get_mining_hashrate_pools = api("mining_hashrate_pools", "1y");
         wait("1");
         let binding = format!("v1/mining/hashrate/pools/2y").clone();
-        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
-        let block_raw = api("mining_hashrate_pools", "2y");
+        let get_mining_hashrate_pools: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let get_mining_hashrate_pools = api("mining_hashrate_pools", "2y");
         wait("1");
         let binding = format!("v1/mining/hashrate/pools/3y").clone();
-        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
-        let block_raw = api("mining_hashrate_pools", "3y");
+        let get_mining_hashrate_pools: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let get_mining_hashrate_pools = api("mining_hashrate_pools", "3y");
         wait("1");
     }
     #[test]
     fn test_mining_pool_hashrate() {
         ###  antpool
         let binding = format!("v1/mining/pool/antpool/hashrate").clone();
-        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
-        let block_raw = api("mining_pool_hashrate", "antpool");
+        let get_mining_pool_hashrate: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let get_mining_pool_hashrate = api("mining_pool_hashrate", "antpool");
         wait("1");
 
         ###  ...
 
         ###  foundryusa
         let binding = format!("v1/mining/pool/foundryusa/hashrate").clone();
-        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
-        let block_raw = api("mining_pool_hashrate", "foundryusa");
+        let get_mining_pool_hashrate: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let get_mining_pool_hashrate = api("mining_pool_hashrate", "foundryusa");
         wait("1");
     }
 
@@ -810,6 +807,18 @@ mod tests {
     ###  Mempool
 
     ###  Transactions
+    ###  CPFP
+    ###  CHILDREN_PAY_FOR_PARENT
+    #[test]
+    fn test_children_pay_for_parent() {
+        ###  GET /api/v1/cpfp
+        let txid = "e09d8afb19968715a4492205b8db5fe41da144b0c1e4f7a756c8bf9742d4f1f4";
+        let binding = format!("v1/cpfp/{txid}").clone();
+        ###  AS OF BLOCK_HEIGHT
+        let children_pay_for_parent: &str = blocking(&binding).expect("returns v1/cpfp/:txid");
+        let children_pay_for_parent = api("children_pay_for_parent", "e09d8afb19968715a4492205b8db5fe41da144b0c1e4f7a756c8bf9742d4f1f4");
+        wait("1");
+    }
 
     ###  Lightning
 
