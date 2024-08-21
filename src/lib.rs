@@ -785,7 +785,7 @@ mod tests {
         use crate::args::mining_pool_blocks;
         /// luxor
         let binding = format!("v1/mining/pool/luxor/blocks/730000").clone();
-        let get_mining_pool_blocks: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let get_mining_pool_blocks: &str = blocking(&binding).expect("returns v1/mining/pool/:slug/hashrate");
         let get_mining_pool_blocks = mining_pool_blocks("luxor", "730000");
         wait("1");
 
@@ -793,9 +793,18 @@ mod tests {
 
         /// antpool
         let binding = format!("v1/mining/pool/antpool/blocks/730000").clone();
-        let get_mining_pool_blocks: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let get_mining_pool_blocks: &str = blocking(&binding).expect("returns v1/mining/pool/:slug/hashrate");
         let get_mining_pool_blocks = mining_pool_blocks("antpool", "730000");
         wait("1");
+    }
+    #[test]
+    fn test_mining_hashrate() {
+        /// 1m
+        let binding = format!("v1/mining/hashrate/1m").clone();
+        let get_mining_hashrate: &str = blocking(&binding).expect("returns v1/mining/hashrate/[:timePeriod]");
+        let get_mining_hashrate = api("mining_hashrate", "1m");
+        wait("1");
+
     }
 
     /// ...
