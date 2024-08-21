@@ -74,6 +74,15 @@ pub fn blocks_bulk(min_height: &str, max_height: &str) {
     }
     print!("This API is disabled. Set config.MEMPOOL.MAX_BLOCKS_BULK_QUERY to a positive number to enable it.");
 }
+/// GET /api/v1/mining/pool/:slug/blocks/\[:blockHeight]
+/// <https://mempool.space/docs/api/rest#get-mining-pool-blocks>
+pub fn mining_pool_blocks(slug: &str, blockheight: &str) {
+    let _res = blocking(&format!(
+        "v1/mining/pool/{}/blocks/{}",
+        &format!("{:}", &slug),
+        &format!("{:}", &blockheight)
+    ));
+}
 
 /// <https://mempool.space/docs/api/rest>
 /// - [API/REST](https://mempool.space/docs/api/rest)
@@ -278,8 +287,6 @@ pub struct Args {
     /// interval
     pub interval: Option<String>,
 
-
-
     /// - V1 BLOCKS_AUDIT_SCORE \<BLOCK_HASH\>
     /// `https://mempool.space/api/v1/mining/blocks/audit/score/<BLOCK_HASH>`
     pub blocks_audit_score: Option<String>,
@@ -412,10 +419,13 @@ impl Args {
         opts.optflag("", "mining_pool_hashrate", "mining_pool_hashrate api call");
         opts.optopt("", "slug", "mining_pool_hashrate api call", "SLUG");
 
+        opts.optflag("", "mining_pool_blocks", "mining_pool_hashrate api call");
+        opts.optopt("", "slug", "mining_pool_hashrate api call", "SLUG");
+        opts.optopt("", "blockheight", "mining_pool_hashrate api call", "BLOCKHEIGHT");
 
+        ///
         opts.optflag("", "difficulty_adjustments", "difficulty_adjustments api call");
         opts.optopt("", "interval", "difficulty_adjustments api call", "INTERVAL");
-
 
         opts.optflag("", "blocks_audit_score", "blocks_audit_score api call");
         opts.optopt("", "block_hash", "blocks_audit_score api call", "BLOCK_HASH");
@@ -595,14 +605,18 @@ impl Args {
             api("mining_hashrate_pool", &arg_slug.unwrap());
             std::process::exit(0);
         }
-
+        if matches.opt_present("mining_pool_blocks") {
+            let arg_slug = matches.opt_str("slug");
+            let arg_blockheight = matches.opt_str("blockheight");
+            mining_pool_blocks(&arg_slug.unwrap(), &arg_blockheight.unwrap());
+            std::process::exit(0);
+        }
 
         if matches.opt_present("difficulty_adjustments") {
             let arg_interval = matches.opt_str("interval");
             api("difficulty_adjustments", &arg_interval.unwrap());
             std::process::exit(0);
         }
-
 
         if matches.opt_present("blocks_audit_scores") {
             let arg_blockheight = matches.opt_str("blockheight");
@@ -732,15 +746,9 @@ impl Args {
             mining_pool: matches.opt_str("mining_pool"),
             slug: matches.opt_str("slug"),
 
-
-
             // V1 MINING DIFFICULTY_ADJUSTMENTS INTERVAL
             difficulty_adjustments: matches.opt_str("difficulty_adjustments"),
             interval: matches.opt_str("interval"),
-
-
-
-
 
             // V1 BLOCKS_AUDIT_SCORE BLOCK_HASH
             blocks_audit_score: matches.opt_str("blocks_audit_score"),

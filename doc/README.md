@@ -199,6 +199,13 @@ MINING POOL HASHRATE SLUG
 
 	mempool-space_mining_pool_hashrate foundryusa
 
+MINING POOL BLOCKS SLUG BLOCKHEIGHT
+#### [GET /api/v1/mining/pool/:slug/blocks/\[:blockHeight\]](https:mempool.space/api/v1/mining/pool/luxor/blocks/730000)
+
+	mempool-space --mining_pool_blocks --slug luxor --blockheight 730000
+
+	mempool-space_mining_pool_blocks luxor 730000
+
 
 
 #### [GET /api/v1/mining/blocks/audit/score[/:blockHash]](https:mempool.space/api/v1/mining/blocks/audit/score/000000000000000000032535698c5b0c48283b792cf86c1c6e36ff84464de785)
@@ -721,32 +728,39 @@ mod tests {
     fn test_mining_hashrate_pools() {
          timeperiod unspecified
         let binding = format!("v1/mining/hashrate/pools").clone();
-        let mining_hashrate_pools: &str = blocking(&binding).expect("returns current v1/mining/pool/hashrate[:timePeriod]");
+        let mining_hashrate_pools: &str =
+            blocking(&binding).expect("returns current v1/mining/pool/hashrate[:timePeriod]");
         let get_mining_hashrate_pools = api("mining_hashrate_pools", "1m");
         wait("1");
           [1m, 3m, 6m, 1y, 2y, 3y]
         let binding = format!("v1/mining/hashrate/pools/1m").clone();
-        let get_mining_hashrate_pools: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let get_mining_hashrate_pools: &str =
+            blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
         let get_mining_hashrate_pools = api("mining_hashrate_pools", "1m");
         wait("1");
         let binding = format!("v1/mining/hashrate/pools/3m").clone();
-        let get_mining_hashrate_pools: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let get_mining_hashrate_pools: &str =
+            blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
         let get_mining_hashrate_pools = api("mining_hashrate_pools", "3m");
         wait("1");
         let binding = format!("v1/mining/hashrate/pools/6m").clone();
-        let get_mining_hashrate_pools: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let get_mining_hashrate_pools: &str =
+            blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
         let get_mining_hashrate_pools = api("mining_hashrate_pools", "6m");
         wait("1");
         let binding = format!("v1/mining/hashrate/pools/1y").clone();
-        let get_mining_hashrate_pools: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let get_mining_hashrate_pools: &str =
+            blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
         let get_mining_hashrate_pools = api("mining_hashrate_pools", "1y");
         wait("1");
         let binding = format!("v1/mining/hashrate/pools/2y").clone();
-        let get_mining_hashrate_pools: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let get_mining_hashrate_pools: &str =
+            blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
         let get_mining_hashrate_pools = api("mining_hashrate_pools", "2y");
         wait("1");
         let binding = format!("v1/mining/hashrate/pools/3y").clone();
-        let get_mining_hashrate_pools: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let get_mining_hashrate_pools: &str =
+            blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
         let get_mining_hashrate_pools = api("mining_hashrate_pools", "3y");
         wait("1");
     }
@@ -764,6 +778,23 @@ mod tests {
         let binding = format!("v1/mining/pool/foundryusa/hashrate").clone();
         let get_mining_pool_hashrate: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
         let get_mining_pool_hashrate = api("mining_pool_hashrate", "foundryusa");
+        wait("1");
+    }
+    #[test]
+    fn test_mining_pool_blocks() {
+        use crate::args::mining_pool_blocks;
+        ###  luxor
+        let binding = format!("v1/mining/pool/luxor/blocks/730000").clone();
+        let get_mining_pool_blocks: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let get_mining_pool_blocks = mining_pool_blocks("luxor", "730000");
+        wait("1");
+
+        ###  ...
+
+        ###  antpool
+        let binding = format!("v1/mining/pool/antpool/blocks/730000").clone();
+        let get_mining_pool_blocks: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let get_mining_pool_blocks = mining_pool_blocks("antpool", "730000");
         wait("1");
     }
 
@@ -816,7 +847,10 @@ mod tests {
         let binding = format!("v1/cpfp/{txid}").clone();
         ###  AS OF BLOCK_HEIGHT
         let children_pay_for_parent: &str = blocking(&binding).expect("returns v1/cpfp/:txid");
-        let children_pay_for_parent = api("children_pay_for_parent", "e09d8afb19968715a4492205b8db5fe41da144b0c1e4f7a756c8bf9742d4f1f4");
+        let children_pay_for_parent = api(
+            "children_pay_for_parent",
+            "e09d8afb19968715a4492205b8db5fe41da144b0c1e4f7a756c8bf9742d4f1f4",
+        );
         wait("1");
     }
 
