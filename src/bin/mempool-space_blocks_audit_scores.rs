@@ -7,7 +7,7 @@ fn main() {
         if args.len() > 1 {
             let mut start_height = &String::from("");
             start_height = &args[1];
-            let _res = blocking(&format!("v1/mining/blocks/audit/score/{}", &start_height));
+            let _res = blocking(&format!("v1/mining/blocks/audit/scores/{}", &start_height));
         } else {
             // silence is golden
             std::process::exit(0);
