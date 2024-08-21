@@ -804,7 +804,36 @@ mod tests {
         let get_mining_hashrate: &str = blocking(&binding).expect("returns v1/mining/hashrate/[:timePeriod]");
         let get_mining_hashrate = api("mining_hashrate", "1m");
         wait("1");
-
+        ###  3m
+        let binding = format!("v1/mining/hashrate/3m").clone();
+        let get_mining_hashrate: &str = blocking(&binding).expect("returns v1/mining/hashrate/[:timePeriod]");
+        let get_mining_hashrate = api("mining_hashrate", "3m");
+        wait("1");
+        ###  6m
+        let binding = format!("v1/mining/hashrate/6m").clone();
+        let get_mining_hashrate: &str = blocking(&binding).expect("returns v1/mining/hashrate/[:timePeriod]");
+        let get_mining_hashrate = api("mining_hashrate", "6m");
+        wait("1");
+        ###  1y
+        let binding = format!("v1/mining/hashrate/1y").clone();
+        let get_mining_hashrate: &str = blocking(&binding).expect("returns v1/mining/hashrate/[:timePeriod]");
+        let get_mining_hashrate = api("mining_hashrate", "1y");
+        wait("1");
+        ###  2y
+        let binding = format!("v1/mining/hashrate/2y").clone();
+        let get_mining_hashrate: &str = blocking(&binding).expect("returns v1/mining/hashrate/[:timePeriod]");
+        let get_mining_hashrate = api("mining_hashrate", "2y");
+        wait("1");
+        ###  3y
+        let binding = format!("v1/mining/hashrate/3y").clone();
+        let get_mining_hashrate: &str = blocking(&binding).expect("returns v1/mining/hashrate/[:timePeriod]");
+        let get_mining_hashrate = api("mining_hashrate", "3y");
+        wait("1");
+        ###  all
+        let binding = format!("v1/mining/hashrate/all").clone();
+        let get_mining_hashrate: &str = blocking(&binding).expect("returns v1/mining/hashrate/[:timePeriod]");
+        let get_mining_hashrate = api("mining_hashrate", "all");
+        wait("1");
     }
 
     ###  ...
