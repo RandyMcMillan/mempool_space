@@ -272,6 +272,14 @@ pub struct Args {
     /// slug
     pub slug: Option<String>,
 
+    /// - V1 MINING DIFFICULTY_ADJUSTMENTS \<INTERVAL\>
+    /// `https://mempool.space/api/v1/mining/difficulty-adjustments/[:interval]`
+    pub difficulty_adjustments: Option<String>,
+    /// interval
+    pub interval: Option<String>,
+
+
+
     /// - V1 BLOCKS_AUDIT_SCORE \<BLOCK_HASH\>
     /// `https://mempool.space/api/v1/mining/blocks/audit/score/<BLOCK_HASH>`
     pub blocks_audit_score: Option<String>,
@@ -289,12 +297,6 @@ pub struct Args {
     pub block_audit_summary: Option<String>,
     // /// blockhash
     // pub blockhash: Option<String>,
-
-
-
-
-
-
     /// OPTOPT
     ///
     /// Configuration file.
@@ -409,6 +411,11 @@ impl Args {
 
         opts.optflag("", "mining_pool_hashrate", "mining_pool_hashrate api call");
         opts.optopt("", "slug", "mining_pool_hashrate api call", "SLUG");
+
+
+        opts.optflag("", "difficulty_adjustments", "difficulty_adjustments api call");
+        opts.optopt("", "interval", "difficulty_adjustments api call", "INTERVAL");
+
 
         opts.optflag("", "blocks_audit_score", "blocks_audit_score api call");
         opts.optopt("", "block_hash", "blocks_audit_score api call", "BLOCK_HASH");
@@ -590,6 +597,13 @@ impl Args {
         }
 
 
+        if matches.opt_present("difficulty_adjustments") {
+            let arg_interval = matches.opt_str("interval");
+            api("difficulty_adjustments", &arg_interval.unwrap());
+            std::process::exit(0);
+        }
+
+
         if matches.opt_present("blocks_audit_scores") {
             let arg_blockheight = matches.opt_str("blockheight");
             api("blocks_audit_scores", &arg_blockheight.unwrap());
@@ -717,6 +731,16 @@ impl Args {
             // V1 MINING POOL SLUG
             mining_pool: matches.opt_str("mining_pool"),
             slug: matches.opt_str("slug"),
+
+
+
+            // V1 MINING DIFFICULTY_ADJUSTMENTS INTERVAL
+            difficulty_adjustments: matches.opt_str("difficulty_adjustments"),
+            interval: matches.opt_str("interval"),
+
+
+
+
 
             // V1 BLOCKS_AUDIT_SCORE BLOCK_HASH
             blocks_audit_score: matches.opt_str("blocks_audit_score"),
