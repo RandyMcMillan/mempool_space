@@ -183,7 +183,26 @@
 //!
 //!	mempool-space_mining_pool unknown
 //!
-//! ...
+//! MINING HASHRATE POOLS TIMEPERIOD
+//! #### [GET /api/v1/mining/hashrate/pools/[:timePeriod]](https://mempool.space/api/v1/mining/hashrate/pools/1m)
+//!
+//! timePeriod  [1m, 3m, 6m, 1y, 2y, 3y]
+//!
+//!	mempool-space \--mining_hashrate_pools \--timeperiod 1m
+//!
+//!	mempool-space_mining_hashrate_pools 1m
+//!
+//! MINING POOL HASHRATE SLUG
+//! #### [GET /api/v1/mining/pool/:slug/hashrate](https://mempool.space/api/v1/mining/foundryusa/hashrate)
+//!
+//!	mempool-space \--mining_pool_hashrate \--slug foundaryusa
+//!
+//!	mempool-space_mining_pool_hashrate foundryusa
+//!
+
+
+
+
 
 //!
 //! #### [GET /api/v1/mining/blocks/audit/score[/:blockHash]](https://mempool.space/api/v1/mining/blocks/audit/score/000000000000000000032535698c5b0c48283b792cf86c1c6e36ff84464de785)
@@ -699,6 +718,55 @@ mod tests {
         let binding = format!("v1/mining/pool/unknown").clone();
         let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug");
         let block_raw = api("mining_pool", "unknown");
+        wait("1");
+    }
+    #[test]
+    fn test_mining_hashrate_pools() {
+        // timeperiod unspecified
+        let binding = format!("v1/mining/hashrate/pools").clone();
+        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pool/hashrate[:timePeriod]");
+        let block_raw = api("mining_hashrate_pools", "1m");
+        wait("1");
+        //  [1m, 3m, 6m, 1y, 2y, 3y]
+        let binding = format!("v1/mining/hashrate/pools/1m").clone();
+        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let block_raw = api("mining_hashrate_pools", "1m");
+        wait("1");
+        let binding = format!("v1/mining/hashrate/pools/3m").clone();
+        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let block_raw = api("mining_hashrate_pools", "3m");
+        wait("1");
+        let binding = format!("v1/mining/hashrate/pools/6m").clone();
+        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let block_raw = api("mining_hashrate_pools", "6m");
+        wait("1");
+        let binding = format!("v1/mining/hashrate/pools/1y").clone();
+        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let block_raw = api("mining_hashrate_pools", "1y");
+        wait("1");
+        let binding = format!("v1/mining/hashrate/pools/2y").clone();
+        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let block_raw = api("mining_hashrate_pools", "2y");
+        wait("1");
+        let binding = format!("v1/mining/hashrate/pools/3y").clone();
+        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let block_raw = api("mining_hashrate_pools", "3y");
+        wait("1");
+    }
+    #[test]
+    fn test_mining_pool_hashrate() {
+        /// antpool
+        let binding = format!("v1/mining/pool/antpool/hashrate").clone();
+        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let block_raw = api("mining_pool_hashrate", "antpool");
+        wait("1");
+
+        /// ...
+
+        /// foundryusa
+        let binding = format!("v1/mining/pool/foundryusa/hashrate").clone();
+        let block_raw: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let block_raw = api("mining_pool_hashrate", "foundryusa");
         wait("1");
     }
 

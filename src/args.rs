@@ -289,6 +289,12 @@ pub struct Args {
     pub block_audit_summary: Option<String>,
     // /// blockhash
     // pub blockhash: Option<String>,
+
+
+
+
+
+
     /// OPTOPT
     ///
     /// Configuration file.
@@ -397,6 +403,12 @@ impl Args {
 
         opts.optflag("", "mining_pool", "mining_pool api call");
         opts.optopt("", "slug", "mining_pool api call", "SLUG");
+
+        opts.optflag("", "mining_hashrate_pools", "mining_hashrate_pools api call");
+        opts.optopt("", "timeperiod", "mining_hashrate_pools api call", "TIMEPERIOD");
+
+        opts.optflag("", "mining_pool_hashrate", "mining_pool_hashrate api call");
+        opts.optopt("", "slug", "mining_pool_hashrate api call", "SLUG");
 
         opts.optflag("", "blocks_audit_score", "blocks_audit_score api call");
         opts.optopt("", "block_hash", "blocks_audit_score api call", "BLOCK_HASH");
@@ -566,6 +578,17 @@ impl Args {
             api("mining_pool", &arg_slug.unwrap());
             std::process::exit(0);
         }
+        if matches.opt_present("mining_hashrate_pools") {
+            let arg_timeperiod = matches.opt_str("timeperiod");
+            api("mining_hashrate_pools", &arg_timeperiod.unwrap());
+            std::process::exit(0);
+        }
+        if matches.opt_present("mining_pool_hashrate") {
+            let arg_slug = matches.opt_str("slug");
+            api("mining_hashrate_pool", &arg_slug.unwrap());
+            std::process::exit(0);
+        }
+
 
         if matches.opt_present("blocks_audit_scores") {
             let arg_blockheight = matches.opt_str("blockheight");
