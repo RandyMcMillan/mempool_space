@@ -493,7 +493,7 @@ mod tests {
         wait("1");
     }
 
-    /// Blocks
+    /// BLOCKS
 
     #[test]
     fn test_block() {
