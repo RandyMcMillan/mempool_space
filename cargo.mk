@@ -56,8 +56,9 @@ cargo-doc:### 	cargo-check
 	git diff doc/README.md
 
 cargo-t:cargo-test
-cargo-test:cargo-install### 	cargo-test
+cargo-test:### 	cargo-test
 	@. $(HOME)/.cargo/env
+	FORCE=--force $(MAKE) cargo-install
 	#@cargo test
 	@cargo test -- --nocapture
 cargo-test-ignored:### 	cargo-test-ignored
