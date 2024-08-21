@@ -4,7 +4,9 @@ use std::env;
 fn main() {
     {
         let args: Vec<String> = env::args().collect();
-        if args.len() == 2 {
+        if args.len() == 1 {
+            let _res = blocking(&format!("v1/mining/hashrate/all"));
+        } else if args.len() == 2 {
             let mut timeperiod = &String::from("");
             timeperiod = &args[1];
             let _res = blocking(&format!("v1/mining/hashrate/{}", &timeperiod));
