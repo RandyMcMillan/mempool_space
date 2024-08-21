@@ -444,7 +444,7 @@ mod tests {
         wait("1");
     }
 
-    /// Addresses
+    /// ADDRESSES
 
     #[test]
     fn test_address() {
