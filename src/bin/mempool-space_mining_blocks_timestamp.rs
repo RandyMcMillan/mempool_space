@@ -1,21 +1,20 @@
-use std::io::Read;
-use std::time::{Instant, SystemTime};
-
-use mempool_space::blocking::blocking;
-use reqwest::Url;
-
-// use ureq::get;
-
-const URL: &str = "https://mempool.space/api/v1/mining/blocks/timestamp/1672531200";
-// const URL: &str = "https://mempool.space/api/blocks/tip";
-// const URL: &str = "https://mempool.space/api/blocks/tip/height";
+use mempool_space::api::blocking;
+use std::env;
+use std::time::SystemTime;
 
 fn main() {
-    let n = 1;
+    let now_secs = SystemTime::now().duration_since(SystemTime::UNIX_EPOCH);
     {
-        let start = Instant::now();
-        let mining_blocks_timestamp = String::from("/mining/blocks/timestamp");
-        let res = blocking(&mining_blocks_timestamp);
-        println!("blocking {:?} {:?} bytes", start.elapsed(), res);
+        let args: Vec<String> = env::args().collect();
+        if args.len() == 1 {
+            let _res = blocking(&format!("v1/mining/blocks/timestamp/{:?}", now_secs.unwrap().as_secs()));
+        } else if args.len() == 2 {
+            let mut utc_secs = &String::from("");
+            utc_secs = &args[1];
+            let _res = blocking(&format!("v1/mining/blocks/timestamp/{}", &utc_secs));
+        } else {
+            // silence is golden
+            std::process::exit(0);
+        }
     }
 }
