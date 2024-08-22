@@ -178,6 +178,9 @@ more:## 	more help
 
 -include Makefile
 
+tests:## 	tests
+	for bin in $$(ls target/release/mempool-space*); do ./$${bin/.d} 2>/dev/null; done
+
 ##initialize
 ##	git submodule update --init --recursive
 initialize:## 	ensure submodules exist
