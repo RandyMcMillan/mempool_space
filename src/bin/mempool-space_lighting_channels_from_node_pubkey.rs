@@ -1,16 +1,18 @@
-use mempool_space::blocking::blocking;
+use mempool_space::api::blocking;
 use std::env;
+use std::time::SystemTime;
 
 fn main() {
-    {
         let args: Vec<String> = env::args().collect();
-        let mut address = &String::from("");
-        if args.len() > 1 {
-            address = &args[1];
+        if args.len() == 2 {
+            let public_key = &args[1];
+            let _res = blocking(&format!("v1/lightning/channels?public_key={}&status=open", &public_key));
+        } else if args.len() == 3 {
+            let public_key = &args[1];
+            let status = &args[2];
+            let _res = blocking(&format!("v1/lightning/channels?public_key={}&status={}", &public_key, &status));
         } else {
             // silence is golden
             std::process::exit(0);
         }
-        let _res = blocking(&format!("/address/{}", &address));
-    }
 }
