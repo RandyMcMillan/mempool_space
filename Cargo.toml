@@ -20,6 +20,12 @@ name = "mempool-space"
 path = "src/bin/mempool-space.rs"
 doc = true
 
+[[example]]
+name = "lightning-search"
+path = "examples/lightning_search/src/main.rs"
+crate-type = ["bin"]
+doc = true
+
 [package.metadata.wix]
 upgrade-guid = "5D3A3DB4-15D1-47AF-BE84-D3A6F541BB8B"
 path-guid = "60912461-41F2-4FD0-BD2E-29E3D03F2AE9"
@@ -51,8 +57,9 @@ toml = "0.8.19"
 ureq = { version = "2.10.1", features = ["json"] }
 url = "2.5.2"
 
+[build-dependencies]
+
 [dev-dependencies]
-axoupdater = "0.7.0"
 mockall = { version = "0.10.2" }
 
 [features]
@@ -62,28 +69,30 @@ async   = ["futures", "tokio"]
 [workspace]
 members = [
     "examples/async_usage",
-    "examples/async_usage_custom_target",
+    "examples/async_usage_custom_target", "examples/lightning_search",
     "examples/usage",
 ]
 
 # Config for 'cargo dist'
 [workspace.metadata.dist]
 # The preferred cargo-dist version to use in CI (Cargo.toml SemVer syntax)
-cargo-dist-version = "0.14.1"
+cargo-dist-version = "0.21.1"
 # CI backends to support
 ci = "github"
 # The installers to generate for each app
-installers = ["shell", "homebrew"]
+installers = ["shell", "powershell", "homebrew"]
 # A GitHub repo to push Homebrew formulas to
 tap = "randymcmillan/homebrew-randymcmillan"
 # Target platforms to build apps for (Rust target-triple syntax)
 targets = ["aarch64-apple-darwin", "x86_64-apple-darwin", "x86_64-unknown-linux-gnu", "x86_64-unknown-linux-musl"]
 # Publish jobs to run in CI
 publish-jobs = ["homebrew"]
-# Publish jobs to run in CI
+# Which actions to run on pull requests
 pr-run-mode = "plan"
 # Whether to install an updater program
 install-updater = true
+# Path that installers should place binaries in
+install-path = "CARGO_HOME"
 
 # The profile that 'cargo dist' will build with
 [profile.dist]
