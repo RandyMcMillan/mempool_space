@@ -4,4 +4,4 @@ edition = "2021"
 version.workspace = true
 
 [dependencies]
-mempool_space = { version = "0.0.28", path = "../.." }
+mempool_space = { path = "../.." }
