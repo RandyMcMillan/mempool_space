@@ -2,6 +2,12 @@
 name = "lightning-search"
 edition = "2021"
 version.workspace = true
+description = "lightning-search <searchText>"
+homepage = "https://github.com/randymcmillan/mempool_space.git"
+repository = "https://github.com/randymcmillan/mempool_space.git"
+keywords = ["bitcoin", "mempool"]
+categories = ["network-programming"]
+license = "MIT"
 
 [dependencies]
 mempool_space = { path = "../.." }
