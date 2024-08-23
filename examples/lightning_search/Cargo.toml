@@ -1,0 +1,7 @@
+[package]
+name = "lightning_search"
+edition = "2021"
+version.workspace = true
+
+[dependencies]
+mempool_space = { version = "0.0.27", path = "../.." }

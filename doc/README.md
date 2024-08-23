@@ -892,7 +892,20 @@ mod tests {
         wait("1");
     }
 
-    ###  Lightning
+    ###  LIGHTNING TESTS
+    ###  lighting_channels_from_node_pubkey
+    ###  lighting_channels_from_txid
+    ###  lighting_isp_nodes.rs
+    ###  lighting_network_status.rs
+    ###  lighting_node_stats.rs
+    ###  lighting_node_stats_per_country.rs
+    ###  lighting_nodes_channels.rs
+    ###  lighting_nodes_in_country.rs
+    ###  lighting_nodes_stats_per_isp.rs
+    ###  lighting_top_nodes.rs
+    ###  lighting_top_nodes_by_connectivity.rs
+    ###  lighting_top_nodes_by_liquidity.rs
+    ###  lighting_top_oldests_nodes.rs
 
     ###  Accelerator (Public)
 
