@@ -285,9 +285,8 @@ use std::io::Read;
 use std::io::{self};
 
 
-###  const URL: &str = "https:mempool.space/api";
-
 const URL: &str = "https:mempool.space/api";
+const TOR_URL: &str = "http:mempoolhqx4isw62xs7abwphsq7ldayuidyx2v2oethdhhj6mlo2r6ad.onion/api";
 
 ###  const CONFIG_FILE: &str = "config.toml";
 
@@ -308,7 +307,8 @@ pub fn run(args: Args) -> Result<()> {
         
         for path in [
             dirs_next::home_dir().map(|p| p.join(".mempool").join(CONFIG_FILE)),
-            dirs_next::config_dir().map(|p| p.join("rustypaste").join(CONFIG_FILE)),
+            dirs_next::home_dir().map(|p| p.join(".config").join(CONFIG_FILE)),
+            dirs_next::config_dir().map(|p| p.join(".config").join(CONFIG_FILE)),
         ]
         .iter()
         .filter_map(|v| v.as_ref())
@@ -328,7 +328,7 @@ pub fn run(args: Args) -> Result<()> {
     let uploader = Uploader::new(&config);
 
     if args.print_server_version {
-        println!("rustypaste-server {}", uploader.retrieve_version()?.trim());
+        println!("TODO: {}", uploader.retrieve_version()?.trim());
 
         return Ok(());
     }
@@ -344,6 +344,7 @@ pub fn run(args: Args) -> Result<()> {
     let mut results = Vec::new();
 
     if let Some(ref url) = args.url {
+        TODO TOR_URL etc...
         results.push(uploader.upload_url(url));
     } else if let Some(ref remote_url) = args.remote {
         results.push(uploader.upload_remote_url(remote_url));
