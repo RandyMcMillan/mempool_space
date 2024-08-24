@@ -1,6 +1,5 @@
 use mempool_space::api::blocking;
 use std::env;
-use std::time::SystemTime;
 
 fn main() {
     let args: Vec<String> = env::args().collect();

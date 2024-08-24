@@ -9,8 +9,7 @@ fn main() {
         if args.len() == 1 {
             let _res = blocking(&format!("v1/mining/blocks/timestamp/{:?}", now_secs.unwrap().as_secs()));
         } else if args.len() == 2 {
-            let mut utc_secs = &String::from("");
-            utc_secs = &args[1];
+            let utc_secs = &args[1];
             let _res = blocking(&format!("v1/mining/blocks/timestamp/{}", &utc_secs));
         } else {
             // silence is golden

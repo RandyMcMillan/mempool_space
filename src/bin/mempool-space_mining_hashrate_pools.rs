@@ -5,8 +5,7 @@ fn main() {
     {
         let args: Vec<String> = env::args().collect();
         if args.len() > 1 {
-            let mut timeperiod = &String::from("");
-            timeperiod = &args[1];
+            let timeperiod = &args[1];
             let _res = blocking(&format!("v1/mining/hashrate/pools/{}", &timeperiod));
         } else {
             // silence is golden

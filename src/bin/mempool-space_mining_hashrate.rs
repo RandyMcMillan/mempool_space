@@ -7,8 +7,7 @@ fn main() {
         if args.len() == 1 {
             let _res = blocking(&format!("v1/mining/hashrate/all"));
         } else if args.len() == 2 {
-            let mut timeperiod = &String::from("");
-            timeperiod = &args[1];
+            let timeperiod = &args[1];
             let _res = blocking(&format!("v1/mining/hashrate/{}", &timeperiod));
         } else {
             // silence is golden

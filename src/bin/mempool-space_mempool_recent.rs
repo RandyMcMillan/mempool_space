@@ -1,5 +1,4 @@
 use mempool_space::api::blocking;
-use std::env;
 
 fn main() {
     {

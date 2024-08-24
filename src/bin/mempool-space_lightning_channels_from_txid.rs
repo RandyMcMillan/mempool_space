@@ -1,6 +1,5 @@
 use mempool_space::api::blocking;
 use std::env;
-use std::time::SystemTime;
 
 // COMMAND EXAMPLE
 // mempool-space_lighting_channels_from_txid c3173549f502ede6440d5c48ea74af5607d88484c7a912bbef73d430049f8af4 d78f0b41a263af3df91fa4171cc2f60c40196aaf8f4bde5d1c8ff4474cfe753b

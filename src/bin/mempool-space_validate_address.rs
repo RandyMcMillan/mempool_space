@@ -5,8 +5,7 @@ fn main() {
     {
         let args: Vec<String> = env::args().collect();
         if args.len() > 1 {
-            let mut address = &String::from("");
-            address = &args[1];
+            let address = &args[1];
             let _res = blocking(&format!("v1/validate-address/{}", &address));
         } else {
             // silence is golden

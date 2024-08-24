@@ -5,8 +5,7 @@ fn main() {
     {
         let args: Vec<String> = env::args().collect();
         if args.len() > 1 {
-            let mut txid = &String::from("");
-            txid = &args[1];
+            let txid = &args[1];
             let _res = blocking(&format!("tx/{}/hex", &txid));
         } else {
             // silence is golden
