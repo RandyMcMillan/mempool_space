@@ -1,4 +1,3 @@
-# [mempool-space](https:github.com/RandyMcMillan/mempool_space)
 
 cargo install --git <https:github.com/RandyMcMillan/mempool_space.git>
 
