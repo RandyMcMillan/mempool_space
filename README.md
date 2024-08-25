@@ -201,6 +201,42 @@ mempool-space_fees_recommended
 
 
 
+MEMPOOL
+
+
+
+
+
+
+
+TRANSACTIONS
+
+
+
+
+
+
+
+LIGHTNING
+
+
+
+
+
+
+
+ACCELERATOR PUBLIC
+
+
+
+
+
+
+
+ACCELERATOR AUTHENTICATED
+
+
+
 
 
 #![warn(missing_docs, clippy::unwrap\_used)]
@@ -866,8 +902,32 @@ mod tests {
     }
 
     ###  Fees
+    #[test]
+    fn test_fees_mempool_blocks() {
+        ###  GET /api/v1/fees/mempool-blocks
+        let binding = format!("v1/fees/mempool-blocks").clone();
+        let fees_mempool_blocks: &str = blocking(&binding).expect("returns v1/fees/mempool-blocks");
+        let block_audit_summary = api("fees_mempool_blocks", &"");
+        wait("1");
+    }
+    #[test]
+    fn test_fees_recommended() {
+        ###  GET /api/v1/fees/recommended
+        let binding = format!("v1/fees/recommended").clone();
+        let fees_recommended: &str = blocking(&binding).expect("returns v1/fees/recommended");
+        let block_audit_summary = api("fees_recommended", &"");
+        wait("1");
+    }
 
     ###  Mempool
+    #[test]
+    fn test_mempool() {
+        ###  GET /api/mempool
+        let binding = format!("mempool").clone();
+        let fees_recommended: &str = blocking(&binding).expect("returns mempool");
+        let block_audit_summary = api("mempool", &"");
+        wait("1");
+    }
 
     ###  Transactions
     ###  CPFP

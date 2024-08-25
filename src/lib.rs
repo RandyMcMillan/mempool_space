@@ -198,10 +198,46 @@
 //! mempool-space_fees_mempool_blocks
 //!
 //! mempool-space_fees_recommended
-//!
-//!
-//!
-//!
+//
+//
+//
+//! MEMPOOL
+//
+//
+//
+
+//
+//
+//
+//! TRANSACTIONS
+//
+//
+//
+
+//
+//
+//
+//! LIGHTNING
+//
+//
+//
+
+//
+//
+//
+//! ACCELERATOR PUBLIC
+//
+//
+//
+
+//
+//
+//
+//! ACCELERATOR AUTHENTICATED
+//
+//
+//
+
 
 #![warn(missing_docs, clippy::unwrap_used)]
 //
@@ -884,6 +920,14 @@ mod tests {
     }
 
     /// Mempool
+    #[test]
+    fn test_mempool() {
+        /// GET /api/mempool
+        let binding = format!("mempool").clone();
+        let fees_recommended: &str = blocking(&binding).expect("returns mempool");
+        let block_audit_summary = api("mempool", &"");
+        wait("1");
+    }
 
     /// Transactions
     /// CPFP
