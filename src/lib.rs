@@ -874,6 +874,14 @@ mod tests {
         let block_audit_summary = api("fees_mempool_blocks", &"");
         wait("1");
     }
+    #[test]
+    fn test_fees_recommended() {
+        /// GET /api/v1/fees/recommended
+        let binding = format!("v1/fees/recommended").clone();
+        let fees_recommended: &str = blocking(&binding).expect("returns v1/fees/recommended");
+        let block_audit_summary = api("fees_recommended", &"");
+        wait("1");
+    }
 
     /// Mempool
 
