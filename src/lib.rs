@@ -1,9 +1,15 @@
 //!
-//! cargo install \--git <https://github.com/RandyMcMillan/mempool_space.git>
+//! ## cargo install:
 //!
-//! cargo add \--git <https://github.com/RandyMcMillan/mempool_space.git>
+//! ``cargo install mempool_space``
+//!
+//! ## cargo install \-\-git:
+//!
+//! ``cargo install --git https://github.com/RandyMcMillan/mempool_space.git``
+//!
 //
-//! ### CLI: [mempool-space](https://docs.rs/mempool_space/latest/mempool_space) \--option arg<sub>1</sub> ... \--option arg<sub>n</sub>
+//!
+//! ### [mempool-space](src/bin/mempool-space.rs) \--option arg<sub>1</sub> ... \--option arg<sub>n</sub>
 //!
 //!	mempool-space \--option
 //!
@@ -11,7 +17,7 @@
 //!
 //!	mempool-space \--option arg \--option arg
 //!
-//! ### BIN: mempool-space_option arg<sub>1</sub> ... arg<sub>n</sub>
+//! ### [mempool-space_option](src/bin/) arg<sub>1</sub> ... arg<sub>n</sub>
 //!
 //!	mempool-space_option
 //!
@@ -19,22 +25,29 @@
 //!
 //!	mempool-space_option arg arg
 //!
+//! ### [mempool-space_option_string](src/bin/) arg<sub>1</sub> ... arg<sub>n</sub>
+//!
+//!	mempool-space_option_string
+//!
+//!	mempool-space_option_string arg
+//!
+//!	mempool-space_option_string arg arg
+//!
 //
-//! ## [GENERAL](https://mempool.space/docs/api/rest#get-difficulty-adjustment)
 //
-//! #### [GET /api/v1/difficulty-adjustment](https://mempool.space/api/v1/difficulty-adjustment)
+//
+//! ## GENERAL
+//
+//
+//
 //!
 //!	mempool-space \--difficulty_adjustment
 //!
 //!	mempool-space_difficulty_adjustment
 //!
-//! #### [GET /api/v1/prices](https://mempool.space/api/v1/prices)
-//!
 //!	mempool-space \--prices
 //!
 //!	mempool-space_prices
-//!
-//! #### [GET /api/v1/historical-price?currency=EUR&timestamp=1500000000](https://mempool.space/api/v1/historical-price?currency=EUR&timestamp=1500000000)
 //!
 //!	mempool-space \--historical_price \--currency [USD, CAD, GBP, CHF, AUD, JPY] \--timestamp utc_sec
 //!
@@ -43,109 +56,83 @@
 //!	mempool-space \--historical_price \--currency USD \--timestamp $(date +%s)
 //!
 //
-//! ## [ADDRESSES](https://mempool.space/docs/api/rest#get-address)
 //
-//!
-//! #### [GET /api/address:address](https://mempool.space/api/address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv)
+//
+//! ## ADDRESSES
+//
+//
+//
 //!
 //!	mempool-space \--address 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
 //!
 //!	mempool-space_address 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
 //!
-//! #### [GET /api/address:address/txs](https://mempool.space/api/address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv/txs)
-//!
 //!	mempool-space \--address_txs 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
 //!
 //!	mempool-space_address_txs 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
-//!
-//! #### [GET /api/address:address/txs/chain](https://mempool.space/api/address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv/txs/chain)
 //!
 //!	mempool-space \--address_txs_chain 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
 //!
 //!	mempool-space_address_txs_chain 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
 //!
-//! #### [GET /api/address:address/txs/mempool](https://mempool.space/api/address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv/txs/mempool) (may be empty for test address)
-//!
 //!	mempool-space \--address_txs_mempool 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
 //!
 //!	mempool-space_address_txs_mempool 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
-//!
-//! #### [GET /api/address:address/utxo](https://mempool.space/api/address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv/utxo)
 //!
 //!	mempool-space \--address_utxo 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
 //!
 //!	mempool-space_address_utxo 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
 //!
-//! #### [GET /api/v1/validate-address/:address](https://mempool.space/api/v1/validate-address/1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY)
-//!
 //!	mempool-space \--validate_address 1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY
 //!
 //!	mempool-space_validate_address 1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY
 //
-//! ## [BLOCKS](https://mempool.space/docs/api/rest#get-block)
 //
-//!
-//! #### [GET /api/block/:hash](https://mempool.space/api/block/000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce)
+//
+//! ## BLOCKS
+//
+//
+//
 //!
 //!	mempool-space \--block 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce
 //!
 //!	mempool-space_block 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce
 //!
-//! #### [GET /api/block/:hash/header](https://mempool.space/api/block/0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2/header)
-//!
 //!	mempool-space \--block_header 0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2
 //!
 //!	mempool-space_block_header 0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2
-//!
-//! #### [GET /api/block-height:height](https://mempool.space/api/block-height/615615)
 //!
 //!	mempool-space \--block_height 615615
 //!
 //!	mempool-space_block_height 615615
 //!
-//! #### [GET /api/v1/mining/blocks/timestamp/:timestamp](https://mempool.space/api/v1/mining/blocks/timestamp/1672531200)
-//!
 //!	mempool-space \--blocks_timestamp 1672531200
 //!
 //!	mempool-space_blocks_timestamp 1672531200
-//!
-//! #### [GET /api/block/:hash/raw](https://mempool.space/api/block/0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2/raw)
 //!
 //!	mempool-space \--block_raw 0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2
 //!
 //!	mempool-space_block_raw 0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2
 //!
-//! #### [GET /api/block/:hash/status](https://mempool.space/api/block/0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2/status)
-//!
 //!	mempool-space \--block_status 0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2
 //!
 //!	mempool-space_block_status 0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2
-//!
-//! #### [GET /api/blocks/tip/height](https://mempool.space/api/blocks/tip/height)
 //!
 //!	mempool-space \--blocks_tip_height
 //!
 //!	mempool-space_blocks_tip_height
 //!
-//! #### [GET /api/blocks/tip/hash](https://mempool.space/api/blocks/tip/hash)
-//!
 //!	mempool-space \--blocks_tip_hash
 //!
 //!	mempool-space_blocks_tip_hash
-//!
-//! #### [GET /api/block/:hash/txid/:index](https://mempool.space/api/block/000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txid/218)
 //!
 //!	mempool-space \--block_txid 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce \--block_txindex 218
 //!
 //!	mempool-space_block_txid 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce 218
 //!
-//! #### [GET /api/block/:hash/txids](https://mempool.space/api/block/000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txids)
-//!
 //!	mempool-space \--block_txids 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce
 //!
 //!	mempool-space_block_txids 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce
-//!
-//! #### [GET /api/block/:hash/txs/:start_index](https://mempool.space/api/block/000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txs/0) (start_index % 25 == 0)
 //!
 //!	mempool-space \--block_txs 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce \--start_index 0
 //!
@@ -155,71 +142,48 @@
 //!
 //!	mempool-space_block_txs 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce 25
 //!
-//! #### [GET /api/v1/blocks[/:startHeight]](https://mempool.space/api/v1/blocks/730000)
-//!
 //!	mempool-space \--blocks 730000
 //!
 //!	mempool-space_blocks 730000
-//!
-//! #### [GET /api/v1/blocks-bulk/:minHeight[/:maxHeight]](https://mempool.space/api/v1/blocks-bulk/100000/100000)
 //!
 //!	mempool-space \--blocks_bulk \--min_height 730000 \--max_height 840000
 //!
 //!	mempool-space_blocks_bulk 730000 840000
 //
-//! ## [MINING](https://mempool.space/docs/api/rest#get-mining-pools)
 //
-//!
-//! #### [GET /api/v1/mining/pools[/:timePeriod]](https://mempool.space/api/v1/mining/pools/1w)
+//
+//! ## MINING
+//
+//
+//
 //!
 //!	mempool-space \--mining_pools \--timeperiod [24h 3d 1w 1m 3m 6m 1y 2y 3y]
 //!
 //!	mempool-space_mining_pools [24h 3d 1w 1m 3m 6m 1y 2y 3y]
 //!
-//! #### [GET /api/v1/mining/pool[/:slug]](https://mempool.space/api/v1/mining/pool/unknown)
-//!
 //!	mempool-space \--mining_pool \--slug unknown
 //!
 //!	mempool-space_mining_pool unknown
 //!
-//! MINING HASHRATE POOLS TIMEPERIOD
-//! #### [GET /api/v1/mining/hashrate/pools/\[:timePeriod\]](https://mempool.space/api/v1/mining/hashrate/pools/1m)
-//!
-//! timePeriod  [1m, 3m, 6m, 1y, 2y, 3y]
-//!
-//!	mempool-space \--mining_hashrate_pools \--timeperiod 1m
+//!	mempool-space \--mining_hashrate_pools \--timeperiod [1m, 3m, 6m, 1y, 2y, 3y]
 //!
 //!	mempool-space_mining_hashrate_pools 1m
-//!
-//! MINING POOL HASHRATE SLUG
-//! #### [GET /api/v1/mining/pool/:slug/hashrate](https://mempool.space/api/v1/mining/foundryusa/hashrate)
 //!
 //!	mempool-space \--mining_pool_hashrate \--slug foundaryusa
 //!
 //!	mempool-space_mining_pool_hashrate foundryusa
 //!
-//! MINING POOL BLOCKS SLUG BLOCKHEIGHT
-//! #### [GET /api/v1/mining/pool/:slug/blocks/\[:blockHeight\]](https://mempool.space/api/v1/mining/pool/luxor/blocks/730000)
-//!
 //!	mempool-space \--mining_pool_blocks \--slug luxor \--blockheight 730000
 //!
 //!	mempool-space_mining_pool_blocks luxor 730000
-//!
-
-//!
-//! #### [GET /api/v1/mining/blocks/audit/score[/:blockHash]](https://mempool.space/api/v1/mining/blocks/audit/score/000000000000000000032535698c5b0c48283b792cf86c1c6e36ff84464de785)
 //!
 //!	mempool-space \--blocks_audit_score \--block_hash 00000000000000000002352696778fc14532ccb923fde167fc754de26e6adbcd
 //!
 //!	mempool-space_blocks_audit_score 00000000000000000002352696778fc14532ccb923fde167fc754de26e6adbcd
 //!
-//! #### [GET /api/v1/mining/blocks/audit/scores[/:blockHeight]](https://mempool.space/api/v1/mining/blocks/audit/scores/820000)
-//!
 //!	mempool-space \--blocks_audit_scores \--blockheight 820000
 //!
 //!	mempool-space_blocks_audit_scores 820000
-//!
-//! #### [GET /api/v1/block/:blockHash/audit-summary](https://mempool.space/api/v1/block/00000000000000000000f218ceda7a5d9c289040b9c3f05ef9f7c2f4930e0123/audit-summary)
 //!
 //!	mempool-space \--block_audit_summary \--blockhash 00000000000000000000f218ceda7a5d9c289040b9c3f05ef9f7c2f4930e0123
 //!
@@ -249,11 +213,11 @@ pub mod args;
 //
 
 #[cfg(feature = "async")]
-/// pub mod async_target;
+///	pub mod async_target;
 pub mod async_target;
 //
 #[cfg(feature = "async")]
-/// pub use async_target::{AsyncTarget, AsyncTargetExecutor, BoxedHandler, BoxedTarget, OldStatus};
+///	pub use async_target::{AsyncTarget, AsyncTargetExecutor, BoxedHandler, BoxedTarget, OldStatus};
 pub use async_target::{AsyncTarget, AsyncTargetExecutor, BoxedHandler, BoxedTarget, OldStatus};
 //
 ///	Configuration file parser.
