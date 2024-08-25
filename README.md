@@ -1,1 +1,940 @@
-doc/README.md
+# [mempool-space](https:github.com/RandyMcMillan/mempool_space)
+
+cargo install --git <https:github.com/RandyMcMillan/mempool_space.git>
+
+cargo add --git <https:github.com/RandyMcMillan/mempool_space.git>
+
+### CLI: [mempool-space](https:docs.rs/mempool_space/latest/mempool_space) --option arg<sub>1</sub> ... --option arg<sub>n</sub>
+
+	mempool-space --option
+
+	mempool-space --option arg
+
+	mempool-space --option arg --option arg
+
+### BIN: mempool-space_option arg<sub>1</sub> ... arg<sub>n</sub>
+
+	mempool-space_option
+
+	mempool-space_option arg
+
+	mempool-space_option arg arg
+
+
+## [GENERAL](https:mempool.space/docs/api/rest#get-difficulty-adjustment)
+
+#### [GET /api/v1/difficulty-adjustment](https:mempool.space/api/v1/difficulty-adjustment)
+
+	mempool-space --difficulty_adjustment
+
+	mempool-space_difficulty_adjustment
+
+#### [GET /api/v1/prices](https:mempool.space/api/v1/prices)
+
+	mempool-space --prices
+
+	mempool-space_prices
+
+#### [GET /api/v1/historical-price?currency=EUR&timestamp=1500000000](https:mempool.space/api/v1/historical-price?currency=EUR&timestamp=1500000000)
+
+	mempool-space --historical_price --currency [USD, CAD, GBP, CHF, AUD, JPY] --timestamp utc_sec
+
+	mempool-space --historical_price --currency EUR --timestamp 1500000000
+
+	mempool-space --historical_price --currency USD --timestamp $(date +%s)
+
+
+## [ADDRESSES](https:mempool.space/docs/api/rest#get-address)
+
+
+#### [GET /api/address:address](https:mempool.space/api/address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv)
+
+	mempool-space --address 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+
+	mempool-space_address 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+
+#### [GET /api/address:address/txs](https:mempool.space/api/address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv/txs)
+
+	mempool-space --address_txs 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+
+	mempool-space_address_txs 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+
+#### [GET /api/address:address/txs/chain](https:mempool.space/api/address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv/txs/chain)
+
+	mempool-space --address_txs_chain 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+
+	mempool-space_address_txs_chain 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+
+#### [GET /api/address:address/txs/mempool](https:mempool.space/api/address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv/txs/mempool) (may be empty for test address)
+
+	mempool-space --address_txs_mempool 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+
+	mempool-space_address_txs_mempool 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+
+#### [GET /api/address:address/utxo](https:mempool.space/api/address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv/utxo)
+
+	mempool-space --address_utxo 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+
+	mempool-space_address_utxo 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+
+#### [GET /api/v1/validate-address/:address](https:mempool.space/api/v1/validate-address/1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY)
+
+	mempool-space --validate_address 1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY
+
+	mempool-space_validate_address 1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY
+
+## [BLOCKS](https:mempool.space/docs/api/rest#get-block)
+
+
+#### [GET /api/block/:hash](https:mempool.space/api/block/000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce)
+
+	mempool-space --block 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce
+
+	mempool-space_block 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce
+
+#### [GET /api/block/:hash/header](https:mempool.space/api/block/0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2/header)
+
+	mempool-space --block_header 0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2
+
+	mempool-space_block_header 0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2
+
+#### [GET /api/block-height:height](https:mempool.space/api/block-height/615615)
+
+	mempool-space --block_height 615615
+
+	mempool-space_block_height 615615
+
+#### [GET /api/v1/mining/blocks/timestamp/:timestamp](https:mempool.space/api/v1/mining/blocks/timestamp/1672531200)
+
+	mempool-space --blocks_timestamp 1672531200
+
+	mempool-space_blocks_timestamp 1672531200
+
+#### [GET /api/block/:hash/raw](https:mempool.space/api/block/0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2/raw)
+
+	mempool-space --block_raw 0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2
+
+	mempool-space_block_raw 0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2
+
+#### [GET /api/block/:hash/status](https:mempool.space/api/block/0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2/status)
+
+	mempool-space --block_status 0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2
+
+	mempool-space_block_status 0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2
+
+#### [GET /api/blocks/tip/height](https:mempool.space/api/blocks/tip/height)
+
+	mempool-space --blocks_tip_height
+
+	mempool-space_blocks_tip_height
+
+#### [GET /api/blocks/tip/hash](https:mempool.space/api/blocks/tip/hash)
+
+	mempool-space --blocks_tip_hash
+
+	mempool-space_blocks_tip_hash
+
+#### [GET /api/block/:hash/txid/:index](https:mempool.space/api/block/000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txid/218)
+
+	mempool-space --block_txid 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce --block_txindex 218
+
+	mempool-space_block_txid 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce 218
+
+#### [GET /api/block/:hash/txids](https:mempool.space/api/block/000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txids)
+
+	mempool-space --block_txids 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce
+
+	mempool-space_block_txids 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce
+
+#### [GET /api/block/:hash/txs/:start_index](https:mempool.space/api/block/000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txs/0) (start_index % 25 == 0)
+
+	mempool-space --block_txs 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce --start_index 0
+
+	mempool-space --block_txs 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce --start_index 25
+
+	mempool-space_block_txs 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce 0
+
+	mempool-space_block_txs 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce 25
+
+#### [GET /api/v1/blocks[/:startHeight]](https:mempool.space/api/v1/blocks/730000)
+
+	mempool-space --blocks 730000
+
+	mempool-space_blocks 730000
+
+#### [GET /api/v1/blocks-bulk/:minHeight[/:maxHeight]](https:mempool.space/api/v1/blocks-bulk/100000/100000)
+
+	mempool-space --blocks_bulk --min_height 730000 --max_height 840000
+
+	mempool-space_blocks_bulk 730000 840000
+
+## [MINING](https:mempool.space/docs/api/rest#get-mining-pools)
+
+
+#### [GET /api/v1/mining/pools[/:timePeriod]](https:mempool.space/api/v1/mining/pools/1w)
+
+	mempool-space --mining_pools --timeperiod [24h 3d 1w 1m 3m 6m 1y 2y 3y]
+
+	mempool-space_mining_pools [24h 3d 1w 1m 3m 6m 1y 2y 3y]
+
+#### [GET /api/v1/mining/pool[/:slug]](https:mempool.space/api/v1/mining/pool/unknown)
+
+	mempool-space --mining_pool --slug unknown
+
+	mempool-space_mining_pool unknown
+
+MINING HASHRATE POOLS TIMEPERIOD
+#### [GET /api/v1/mining/hashrate/pools/\[:timePeriod\]](https:mempool.space/api/v1/mining/hashrate/pools/1m)
+
+timePeriod  [1m, 3m, 6m, 1y, 2y, 3y]
+
+	mempool-space --mining_hashrate_pools --timeperiod 1m
+
+	mempool-space_mining_hashrate_pools 1m
+
+MINING POOL HASHRATE SLUG
+#### [GET /api/v1/mining/pool/:slug/hashrate](https:mempool.space/api/v1/mining/foundryusa/hashrate)
+
+	mempool-space --mining_pool_hashrate --slug foundaryusa
+
+	mempool-space_mining_pool_hashrate foundryusa
+
+MINING POOL BLOCKS SLUG BLOCKHEIGHT
+#### [GET /api/v1/mining/pool/:slug/blocks/\[:blockHeight\]](https:mempool.space/api/v1/mining/pool/luxor/blocks/730000)
+
+	mempool-space --mining_pool_blocks --slug luxor --blockheight 730000
+
+	mempool-space_mining_pool_blocks luxor 730000
+
+
+
+#### [GET /api/v1/mining/blocks/audit/score[/:blockHash]](https:mempool.space/api/v1/mining/blocks/audit/score/000000000000000000032535698c5b0c48283b792cf86c1c6e36ff84464de785)
+
+	mempool-space --blocks_audit_score --block_hash 00000000000000000002352696778fc14532ccb923fde167fc754de26e6adbcd
+
+	mempool-space_blocks_audit_score 00000000000000000002352696778fc14532ccb923fde167fc754de26e6adbcd
+
+#### [GET /api/v1/mining/blocks/audit/scores[/:blockHeight]](https:mempool.space/api/v1/mining/blocks/audit/scores/820000)
+
+	mempool-space --blocks_audit_scores --blockheight 820000
+
+	mempool-space_blocks_audit_scores 820000
+
+#### [GET /api/v1/block/:blockHash/audit-summary](https:mempool.space/api/v1/block/00000000000000000000f218ceda7a5d9c289040b9c3f05ef9f7c2f4930e0123/audit-summary)
+
+	mempool-space --block_audit_summary --blockhash 00000000000000000000f218ceda7a5d9c289040b9c3f05ef9f7c2f4930e0123
+
+	mempool-space_block_audit_summary 00000000000000000000f218ceda7a5d9c289040b9c3f05ef9f7c2f4930e0123
+
+#![warn(missing_docs, clippy::unwrap\_used)]
+
+#[warn(missing_docs, clippy::unwrap\_used)]
+### 	pub mod api
+pub mod api;
+### 	pub mod error
+pub mod error;
+### 	pub mod resolve_policy
+pub mod resolve_policy;
+### 	pub mod target
+pub mod target;
+
+pub use error::{CheckTargetError, ParseTargetError, ResolveTargetError};
+
+pub use resolve_policy::ResolvePolicy;
+
+pub use target::{Fqhn, IcmpTarget, Port, Status, Target, TcpTarget};
+
+
+### 	Command-line argument parser.
+pub mod args;
+
+
+#[cfg(feature = "async")]
+###  pub mod async_target;
+pub mod async_target;
+
+#[cfg(feature = "async")]
+###  pub use async_target::{AsyncTarget, AsyncTargetExecutor, BoxedHandler, BoxedTarget, OldStatus};
+pub use async_target::{AsyncTarget, AsyncTargetExecutor, BoxedHandler, BoxedTarget, OldStatus};
+
+### 	Configuration file parser.
+pub mod config;
+
+### 	Custom error implementation.
+pub mod this_error;
+
+### 	Upload handler.
+pub mod upload;
+
+use crate::args::Args;
+
+use crate::config::Config;
+
+use crate::this_error::{Error, Result};
+
+use crate::upload::Uploader;
+
+use crossterm::style::Stylize;
+
+use std::fs;
+
+use std::io::IsTerminal;
+
+use std::io::Read;
+
+use std::io::{self};
+
+
+#[allow(dead_code)]
+const URL: &str = "https:mempool.space/api";
+#[allow(dead_code)]
+const TOR_URL: &str = "http:mempoolhqx4isw62xs7abwphsq7ldayuidyx2v2oethdhhj6mlo2r6ad.onion/api";
+
+###  const CONFIG_FILE: &str = "config.toml";
+
+const CONFIG_FILE: &str = "config.toml";
+
+### 	pub fn run(args: Args) -> Result<()>
+
+pub fn run(args: Args) -> Result<()> {
+    
+    let mut config = Config::default();
+    
+
+    if let Some(ref config_path) = args.config {
+        
+        config = toml::from_str(&fs::read_to_string(config_path)?)?
+    
+    } else {
+        
+        for path in [
+            dirs_next::home_dir().map(|p| p.join(".mempool").join(CONFIG_FILE)),
+            dirs_next::home_dir().map(|p| p.join(".config").join(CONFIG_FILE)),
+            dirs_next::config_dir().map(|p| p.join(".config").join(CONFIG_FILE)),
+        ]
+        .iter()
+        .filter_map(|v| v.as_ref())
+        {
+            if path.exists() {
+                config = toml::from_str(&fs::read_to_string(path)?)?;
+                break;
+            }
+        }
+    }
+    config.update_from_args(&args);
+
+    if config.server.address.is_empty() {
+        return Err(Error::NoServerAddressError);
+    }
+
+    let uploader = Uploader::new(&config);
+
+    if args.print_server_version {
+        println!("TODO: {}", uploader.retrieve_version()?.trim());
+
+        return Ok(());
+    }
+
+    if args.list_files {
+        let prettify = args.prettify || config.style.as_ref().map(|style| style.prettify).unwrap_or(false);
+
+        uploader.retrieve_list(&mut io::stdout(), prettify)?;
+
+        return Ok(());
+    }
+
+    let mut results = Vec::new();
+
+    if let Some(ref url) = args.url {
+        TODO TOR_URL etc...
+        results.push(uploader.upload_url(url));
+    } else if let Some(ref remote_url) = args.remote {
+        results.push(uploader.upload_remote_url(remote_url));
+    } else if !std::io::stdin().is_terminal() || args.files.contains(&String::from("-")) {
+        let mut buffer = Vec::new();
+
+        let mut stdin = io::stdin();
+
+        stdin.read_to_end(&mut buffer)?;
+
+        results.push(uploader.upload_stream(&*buffer));
+    } else {
+        for file in args.files.iter() {
+            if !args.delete {
+                results.push(uploader.upload_file(file))
+            } else {
+                results.push(uploader.delete_file(file))
+            }
+        }
+    }
+    let prettify = args.prettify || config.style.as_ref().map(|style| style.prettify).unwrap_or(false);
+
+    let format_padding = prettify
+        .then(|| results.iter().map(|v| v.0.len()).max())
+        .flatten()
+        .unwrap_or(1);
+
+    for (data, result) in results.iter().map(|v| (v.0, v.1.as_ref())) {
+        let data = if prettify {
+            format!(
+                "{:p$} {} ",
+                data,
+                if result.is_ok() {
+                    "=>".green().bold()
+                } else {
+                    "=>".red().bold()
+                },
+                p = format_padding,
+            )
+        } else {
+            String::new()
+        };
+        match result {
+            Ok(url) => println!("{}{}", data, url.trim()),
+            Err(e) => eprintln!("{data}{e}"),
+        }
+    }
+
+    Ok(())
+}
+
+###  pub fn wait(sleep: &str)
+
+pub fn wait(sleep: &str) {
+    
+    use std::process::Command;
+
+    let sleep_cmd = Command::new("sleep").arg(sleep).output().expect("wait:sleep failed");
+
+    let result = String::from_utf8(sleep_cmd.stdout)
+        .map_err(|non_utf8| String::from_utf8_lossy(non_utf8.as_bytes()).into_owned())
+        .unwrap();
+
+    eprintln!("\nwait(sleep: &{:?})", sleep);
+
+    eprintln!("\nresult={}", result);
+}
+
+###  cargo test -- --nocapture
+
+#[cfg(test)]
+mod tests {
+
+    use super::*;
+
+    use crate::api::{api, blocking};
+
+    #[test]
+    fn test_difficulty_adjustment() {
+         GET /api/v1/difficulty-adjustment
+        let binding = format!("v1/difficulty-adjustment").clone();
+        let get_difficulty_adjustment: &str = blocking(&binding).expect("REASON");
+        let get_difficulty_adjustment = api("difficulty_adjustment", "extraneous_arg");
+        wait("1");
+    }
+    #[test]
+    fn test_price() {
+         GET /api/v1/prices
+        let binding = format!("v1/prices").clone();
+        let get_prices: &str = blocking(&binding).expect("REASON");
+        let get_prices = api("prices", "extraneous_arg");
+        wait("1");
+    }
+    #[test]
+    fn test_historical_price() {
+        use crate::args::historical_price;
+         GET /api/v1/historical-price?currency=EUR&timestamp=1500000000
+        let get_historical_price = historical_price(&"EUR", &"1500000000");
+        let get_historical_prices = api("historical_price", "USD");
+        wait("1");
+    }
+
+    ###  ADDRESSES TESTS
+
+    #[test]
+    fn test_address() {
+         GET /api/address/:address
+        let binding = format!("address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv").clone();
+        let get_address: &str = blocking(&binding).expect("test_address failed");
+        let get_address = api("address", "1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv");
+        wait("1");
+    }
+    #[test]
+    fn test_address_txs() {
+         GET /api/address/:address/txs
+        let binding = format!("address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv/txs").clone();
+        let get_address_txs: &str = blocking(&binding).expect("test_address_txs failed");
+        let get_address_txs = api("address_txs", "1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv");
+        wait("1");
+    }
+    #[test]
+    fn test_address_txs_chain() {
+         GET /api/address/:address/txs/chain
+        let binding = format!("address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv/txs/chain").clone();
+        let get_address_txs_chain: &str = blocking(&binding).expect("REASON");
+        let get_address_txs_chain = api("address_txs_chain", "1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv");
+        wait("1");
+    }
+    #[test]
+    fn test_address_txs_mempool() {
+         GET /api/address/:address/txs/mempool
+        let binding = format!("address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv/txs/mempool").clone();
+        let get_address_txs_mempool: &str = blocking(&binding).expect("REASON");
+        let get_address_txs_mempool = api("address_txs_mempool", "1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv");
+        wait("1");
+    }
+    #[test]
+    fn test_address_utxo() {
+         GET /api/address/:address/utxo
+        let binding = format!("address/1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY/utxo").clone();
+        let get_address_utxo: &str = blocking(&binding).expect("existing valid address needed");
+        let get_address_utxo = api("address_utxo", "1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv");
+        wait("1");
+    }
+    #[test]
+    fn test_validate_address() {
+         GET /api/v1/validate-address/:address
+        let binding = format!("v1/validate-address/1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY").clone();
+        let get_valid_address: &str = blocking(&binding).expect("valid address needed");
+        wait("1");
+    }
+
+    ###  BLOCKS TESTS
+
+    #[test]
+    fn test_block() {
+         GET /api/block/:hash
+        let binding = format!("block/000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce").clone();
+        let get_block: &str = blocking(&binding).expect("an existing block hash is needed");
+        let get_block = api(
+            "block",
+            "000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce",
+        );
+        wait("1");
+    }
+    #[test]
+    fn test_block_header() {
+         GET /api/block/:hash/header
+        let binding = format!("block/000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce").clone();
+        let get_block_header: &str = blocking(&binding).expect("an existing block hash is needed");
+        let get_block_header = api(
+            "block_header",
+            "000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce",
+        );
+        wait("1");
+    }
+    #[test]
+    fn test_block_height() {
+         GET /api/block-height:height
+        let binding = format!("block-height/615615").clone();
+        let get_block_height: &str = blocking(&binding).expect("an existing block hash is needed");
+        let get_block_height = api("block_height", "615615");
+        wait("1");
+    }
+    #[test]
+    fn test_blocks_timestamp() {
+         GET /api/v1/mining/blocks/timestamp/:timestamp
+        let binding = format!("v1/mining/blocks/timestamp/1672531200").clone();
+        let get_timestamp: &str = blocking(&binding).expect("an existing block hash is needed");
+        let get_timestamp = api("blocks_timestamp", "1672531200");
+        wait("1");
+    }
+    #[test]
+    fn test_block_raw() {
+         GET /api/block/:hash/raw
+        let binding = format!("block/0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2").clone();
+        let get_block_raw: &str = blocking(&binding).expect("an existing block hash is needed");
+        let get_block_raw = api(
+            "block_raw",
+            "0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2",
+        );
+        wait("1");
+    }
+
+    #[test]
+    fn test_block_status() {
+         GET /api/block/:hash/status
+        let binding = format!("block/0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2").clone();
+        let get_block_status: &str = blocking(&binding).expect("an existing block hash is needed");
+        let get_block_status = api(
+            "block_status",
+            "0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2",
+        );
+        wait("1");
+    }
+    #[test]
+    fn test_blocks_tip_height() {
+         GET /api/blocks/tip/height
+        let binding = format!("blocks/tip/height").clone();
+        let get_blocks_tip_height: &str = blocking(&binding).expect("returns current block_height");
+        let get_blocks_tip_height = api("blocks_tip_height", "extraneous_arg");
+        wait("1");
+    }
+    #[test]
+    fn test_blocks_tip_hash() {
+         GET /api/blocks/tip/hash
+        let binding = format!("blocks/tip/hash").clone();
+        let get_blocks_tip_hash: &str = blocking(&binding).expect("returns current block/tip/hash");
+        let get_block_tip_hash = api("blocks_tip_hash", "extraneous_arg");
+        wait("1");
+    }
+    #[test]
+    fn test_block_txid() {
+         GET /api/block/:hash/txid/:index
+        let binding =
+            format!("block/000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txid/218").clone();
+        let get_block_txid: &str = blocking(&binding).expect("returns current txid from block index");
+        let get_block_txid = api(
+            "block_txid",
+            "000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txid/218",
+        );
+        use crate::args::block_txid;
+        block_txid(
+            &"000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce",
+            &"218",
+        );
+        wait("1");
+    }
+    #[test]
+    fn test_block_txids() {
+         GET /api/block/:hash/txids
+        let binding = format!("block/000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txids").clone();
+        let get_block_txids: &str = blocking(&binding).expect("returns current txids from block");
+        let get_block_txids = api(
+            "block_txid",
+            "000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txids",
+        );
+        use crate::args::block_txids;
+        block_txids(&"000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce");
+        wait("1");
+    }
+    #[test]
+    fn test_block_txs() {
+        let binding = format!("block/000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txs").clone();
+        let get_block_txs: &str = blocking(&binding).expect("returns current txids from block");
+        let get_block_txs = api(
+            "block_txs",
+            "000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txs",
+        );
+        let get_block_txs = api(
+            "block_txs",
+            "000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txs/0",
+        );
+        let get_block_txs = api(
+            "block_txs",
+            "000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txs/1", test if start_index_int % 25 == 0
+        );
+        let get_block_txs = api(
+            "block_txs",
+            "000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txs/25",
+        );
+    }
+    #[test]
+    fn test_blocks() {
+        let binding = format!("v1/blocks/730000").clone();
+        let get_block_txid: &str = blocking(&binding).expect("returns current txid from block index");
+        let get_block_txid = api("blocks", "730000");
+        let get_blocks_tip_height = api("blocks_tip_height", "extraneous_arg");
+        use crate::args::blocks;
+        blocks(&"");
+        wait("1");
+        blocks(&"0");
+        wait("1");
+        blocks(&"25");
+        wait("1");
+        blocks(&"730000");
+        wait("1");
+        blocks(&get_blocks_tip_height);
+        wait("1");
+    }
+    #[test]
+    #[should_panic]
+    fn test_blocks_bulk() {
+        let binding = format!("v1/blocks-bulk/730000/840000").clone();
+        let get_block_bulk: &str = blocking(&binding).expect("returns current txid from block index");
+        let get_block_bulk = api("blocks_bulk", "730000/840000");
+        let get_blocks_tip_height = api("blocks_tip_height", "extraneous_arg");
+        use crate::args::blocks_bulk;
+        blocks_bulk(&"0", &"0");
+        wait("1");
+        blocks_bulk(&"0", &"1");
+        wait("1");
+        blocks_bulk(&"730000", &"840000");
+        wait("1");
+        blocks_bulk(&"730000", &get_blocks_tip_height);
+        wait("1");
+    }
+
+    ###  MINING TESTS
+
+    #[test]
+    fn test_mining_pools() {
+        ###  [24h 3d 1w 1m 3m 6m 1y 2y 3y]
+        let binding = format!("v1/mining/pools/24h").clone();
+        let get_mining_pools: &str = blocking(&binding).expect("returns current v1/mining/pools/1d");
+        let get_mining_pools = api("mining_pools", "24h");
+        wait("1");
+        let binding = format!("v1/mining/pools/1d").clone();
+        let get_mining_pools: &str = blocking(&binding).expect("returns current v1/mining/pools/1d");
+        let get_mining_pools = api("mining_pools", "1d");
+        wait("1");
+        let binding = format!("v1/mining/pools/3d").clone();
+        let get_mining_pools: &str = blocking(&binding).expect("returns current v1/mining/pools/3d");
+        let get_mining_pools = api("mining_pools", "3d");
+        wait("1");
+        let binding = format!("v1/mining/pools/1w").clone();
+        let get_mining_pools: &str = blocking(&binding).expect("returns current v1/mining/pools/1w");
+        let get_mining_pools = api("mining_pools", "1w");
+        wait("1");
+        let binding = format!("v1/mining/pools/1m").clone();
+        let get_mining_pools: &str = blocking(&binding).expect("returns current v1/mining/pools/1m");
+        let get_mining_pools = api("mining_pools", "1m");
+        wait("1");
+        let binding = format!("v1/mining/pools/3m").clone();
+        let get_mining_pools: &str = blocking(&binding).expect("returns current v1/mining/pools/3m");
+        let get_mining_pools = api("mining_pools", "3m");
+        wait("1");
+        let binding = format!("v1/mining/pools/6m").clone();
+        let get_mining_pools: &str = blocking(&binding).expect("returns current v1/mining/pools/6m");
+        let get_mining_pools = api("mining_pools", "6m");
+        wait("1");
+        let binding = format!("v1/mining/pools/1y").clone();
+        let get_mining_pools: &str = blocking(&binding).expect("returns current v1/mining/pools/1y");
+        let get_mining_pools = api("mining_pools", "1y");
+        wait("1");
+        let binding = format!("v1/mining/pools/2y").clone();
+        let get_mining_pools: &str = blocking(&binding).expect("returns current v1/mining/pools/2y");
+        let get_mining_pools = api("mining_pools", "2y");
+        wait("1");
+        let binding = format!("v1/mining/pools/3y").clone();
+        let get_mining_pools: &str = blocking(&binding).expect("returns current v1/mining/pools/3y");
+        let get_mining_pools = api("mining_pools", "3y");
+        wait("1");
+    }
+    #[test]
+    fn test_mining_pool() {
+        ###  antpool
+        let binding = format!("v1/mining/pool/antpool").clone();
+        let get_mining_pool: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug");
+        let get_mining_pool = api("mining_pool", "antpool");
+        wait("1");
+
+        ###  ...
+
+        ###  unknown
+        let binding = format!("v1/mining/pool/unknown").clone();
+        let get_mining_pool: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug");
+        let get_mining_pool = api("mining_pool", "unknown");
+        wait("1");
+    }
+    #[test]
+    fn test_mining_hashrate_pools() {
+         timeperiod unspecified
+        let binding = format!("v1/mining/hashrate/pools").clone();
+        let mining_hashrate_pools: &str =
+            blocking(&binding).expect("returns current v1/mining/pool/hashrate[:timePeriod]");
+        let get_mining_hashrate_pools = api("mining_hashrate_pools", "1m");
+        wait("1");
+          [1m, 3m, 6m, 1y, 2y, 3y]
+        let binding = format!("v1/mining/hashrate/pools/1m").clone();
+        let get_mining_hashrate_pools: &str =
+            blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let get_mining_hashrate_pools = api("mining_hashrate_pools", "1m");
+        wait("1");
+        let binding = format!("v1/mining/hashrate/pools/3m").clone();
+        let get_mining_hashrate_pools: &str =
+            blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let get_mining_hashrate_pools = api("mining_hashrate_pools", "3m");
+        wait("1");
+        let binding = format!("v1/mining/hashrate/pools/6m").clone();
+        let get_mining_hashrate_pools: &str =
+            blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let get_mining_hashrate_pools = api("mining_hashrate_pools", "6m");
+        wait("1");
+        let binding = format!("v1/mining/hashrate/pools/1y").clone();
+        let get_mining_hashrate_pools: &str =
+            blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let get_mining_hashrate_pools = api("mining_hashrate_pools", "1y");
+        wait("1");
+        let binding = format!("v1/mining/hashrate/pools/2y").clone();
+        let get_mining_hashrate_pools: &str =
+            blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let get_mining_hashrate_pools = api("mining_hashrate_pools", "2y");
+        wait("1");
+        let binding = format!("v1/mining/hashrate/pools/3y").clone();
+        let get_mining_hashrate_pools: &str =
+            blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let get_mining_hashrate_pools = api("mining_hashrate_pools", "3y");
+        wait("1");
+    }
+    #[test]
+    fn test_mining_pool_hashrate() {
+        ###  antpool
+        let binding = format!("v1/mining/pool/antpool/hashrate").clone();
+        let get_mining_pool_hashrate: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let get_mining_pool_hashrate = api("mining_pool_hashrate", "antpool");
+        wait("1");
+
+        ###  ...
+
+        ###  foundryusa
+        let binding = format!("v1/mining/pool/foundryusa/hashrate").clone();
+        let get_mining_pool_hashrate: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+        let get_mining_pool_hashrate = api("mining_pool_hashrate", "foundryusa");
+        wait("1");
+    }
+    #[test]
+    fn test_mining_pool_blocks() {
+        use crate::args::mining_pool_blocks;
+        ###  luxor
+        let binding = format!("v1/mining/pool/luxor/blocks/730000").clone();
+        let get_mining_pool_blocks: &str = blocking(&binding).expect("returns v1/mining/pool/:slug/hashrate");
+        let get_mining_pool_blocks = mining_pool_blocks("luxor", "730000");
+        wait("1");
+
+        ###  ...
+
+        ###  antpool
+        let binding = format!("v1/mining/pool/antpool/blocks/730000").clone();
+        let get_mining_pool_blocks: &str = blocking(&binding).expect("returns v1/mining/pool/:slug/hashrate");
+        let get_mining_pool_blocks = mining_pool_blocks("antpool", "730000");
+        wait("1");
+    }
+    #[test]
+    fn test_mining_hashrate() {
+        ###  1m
+        let binding = format!("v1/mining/hashrate/1m").clone();
+        let get_mining_hashrate: &str = blocking(&binding).expect("returns v1/mining/hashrate/[:timePeriod]");
+        let get_mining_hashrate = api("mining_hashrate", "1m");
+        wait("1");
+        ###  3m
+        let binding = format!("v1/mining/hashrate/3m").clone();
+        let get_mining_hashrate: &str = blocking(&binding).expect("returns v1/mining/hashrate/[:timePeriod]");
+        let get_mining_hashrate = api("mining_hashrate", "3m");
+        wait("1");
+        ###  6m
+        let binding = format!("v1/mining/hashrate/6m").clone();
+        let get_mining_hashrate: &str = blocking(&binding).expect("returns v1/mining/hashrate/[:timePeriod]");
+        let get_mining_hashrate = api("mining_hashrate", "6m");
+        wait("1");
+        ###  1y
+        let binding = format!("v1/mining/hashrate/1y").clone();
+        let get_mining_hashrate: &str = blocking(&binding).expect("returns v1/mining/hashrate/[:timePeriod]");
+        let get_mining_hashrate = api("mining_hashrate", "1y");
+        wait("1");
+        ###  2y
+        let binding = format!("v1/mining/hashrate/2y").clone();
+        let get_mining_hashrate: &str = blocking(&binding).expect("returns v1/mining/hashrate/[:timePeriod]");
+        let get_mining_hashrate = api("mining_hashrate", "2y");
+        wait("1");
+        ###  3y
+        let binding = format!("v1/mining/hashrate/3y").clone();
+        let get_mining_hashrate: &str = blocking(&binding).expect("returns v1/mining/hashrate/[:timePeriod]");
+        let get_mining_hashrate = api("mining_hashrate", "3y");
+        wait("1");
+        ###  all
+        let binding = format!("v1/mining/hashrate/all").clone();
+        let get_mining_hashrate: &str = blocking(&binding).expect("returns v1/mining/hashrate/[:timePeriod]");
+        let get_mining_hashrate = api("mining_hashrate", "all");
+        wait("1");
+    }
+
+    ###  ...
+
+    #[test]
+    fn test_mining_blocks_audit_score() {
+        ###  GET /api/v1/mining/blocks/audit/score/:blockHash
+        let blockHash = "000000000000000000032535698c5b0c48283b792cf86c1c6e36ff84464de785";
+        let binding = format!("v1/mining/blocks/audit/score/{blockHash}").clone();
+        let blocks_audit_score: &str =
+            blocking(&binding).expect("returns current v1/mining/blocks/audit/score/:blockHash");
+        let block_audit_score = api(
+            "blocks_audit_score",
+            "000000000000000000032535698c5b0c48283b792cf86c1c6e36ff84464de785",
+        );
+        wait("1");
+    }
+    #[test]
+    fn test_mining_blocks_audit_scores() {
+        ###  GET /api/v1/mining/blocks/audit/scores/:startHeight
+        let startHeight = "820000";
+        let binding = format!("v1/mining/blocks/audit/scores/{startHeight}").clone();
+        let blocks_audit_scores: &str =
+            blocking(&binding).expect("returns current v1/mining/blocks/audit/scores/:startHeight");
+        let blocks_audit_scores = api("blocks_audit_scores", "820000");
+        wait("1");
+    }
+    #[test]
+    fn test_mining_block_audit_summary() {
+        ###  GET /api/v1/block/:blockHash/audit-summary
+        let blockHash = "00000000000000000000f218ceda7a5d9c289040b9c3f05ef9f7c2f4930e0123";
+        let binding = format!("v1/block/{blockHash}/audit-summary").clone();
+        let block_audit_summary: &str = blocking(&binding).expect("returns v1/block/{blockHash}/audit-summary");
+        let block_audit_summary = api("block_audit_summary", "820000");
+        wait("1");
+    }
+
+    ###  Fees
+
+    ###  Mempool
+
+    ###  Transactions
+    ###  CPFP
+    ###  CHILDREN_PAY_FOR_PARENT
+    #[test]
+    fn test_children_pay_for_parent() {
+        ###  GET /api/v1/cpfp
+        let txid = "e09d8afb19968715a4492205b8db5fe41da144b0c1e4f7a756c8bf9742d4f1f4";
+        let binding = format!("v1/cpfp/{txid}").clone();
+        ###  AS OF BLOCK_HEIGHT
+        let children_pay_for_parent: &str = blocking(&binding).expect("returns v1/cpfp/:txid");
+        let children_pay_for_parent = api(
+            "children_pay_for_parent",
+            "e09d8afb19968715a4492205b8db5fe41da144b0c1e4f7a756c8bf9742d4f1f4",
+        );
+        wait("1");
+    }
+
+    ###  LIGHTNING TESTS
+    ###  lighting_channels_from_node_pubkey
+    ###  lighting_channels_from_txid
+    ###  lighting_isp_nodes.rs
+    ###  lighting_network_status.rs
+    ###  lighting_node_stats.rs
+    ###  lighting_node_stats_per_country.rs
+    ###  lighting_nodes_channels.rs
+    ###  lighting_nodes_in_country.rs
+    ###  lighting_nodes_stats_per_isp.rs
+    ###  lighting_top_nodes.rs
+    ###  lighting_top_nodes_by_connectivity.rs
+    ###  lighting_top_nodes_by_liquidity.rs
+    ###  lighting_top_oldests_nodes.rs
+
+    ###  Accelerator (Public)
+
+    ###  Accelerator (Authenticated)
+
+    #[test]
+    fn test_add() {
+         assert_eq!(add(1, 2), 3);
+        wait("1");
+    }
+
+    #[test]
+    fn test_bad_add() {
+         This assert would fire and test will fail.
+         Please note, that private functions can be tested too!
+         assert_ne!(bad_add(1, 2), 3);
+        wait("1");
+    }
+    use std::panic::{catch_unwind, AssertUnwindSafe};
+    #[test]
+    fn should_panic() {
+        let msg = catch_unwind(AssertUnwindSafe(|| {
+            panic!(" foo panic message");
+        }));
+
+        assert_ne!("foo panic message", *msg.unwrap_err().downcast_ref::<&str>().unwrap());
+        wait("1");
+    }
+}

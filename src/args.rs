@@ -423,7 +423,7 @@ impl Args {
         opts.optopt("", "slug", "mining_pool_hashrate api call", "SLUG");
         opts.optopt("", "blockheight", "mining_pool_hashrate api call", "BLOCKHEIGHT");
 
-        ///
+        
         opts.optflag("", "difficulty_adjustments", "difficulty_adjustments api call");
         opts.optopt("", "interval", "difficulty_adjustments api call", "INTERVAL");
 

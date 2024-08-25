@@ -1,5 +1,5 @@
 [workspace.package]
-version = "0.0.32"
+version = "0.0.33"
 
 [package]
 name = "mempool_space"
