@@ -189,6 +189,20 @@
 
 	mempool-space_block_audit_summary 00000000000000000000f218ceda7a5d9c289040b9c3f05ef9f7c2f4930e0123
 
+
+
+FEES
+
+
+
+mempool-space_fees_mempool_blocks
+
+mempool-space_fees_recommended
+
+
+
+
+
 #![warn(missing_docs, clippy::unwrap\_used)]
 
 #[warn(missing_docs, clippy::unwrap\_used)]
@@ -383,10 +397,24 @@ pub fn wait(sleep: &str) {
 #[cfg(test)]
 mod tests {
 
+    ###  TESTS
     use super::*;
-
     use crate::api::{api, blocking};
 
+    #[test]
+    fn test_reachable() {
+        use std::time::Instant;
+         use mempool_space::api::{api, blocking};
+        let start = Instant::now();
+        let blocks_tip_height = String::from("blocks/tip/height");
+        let res = blocking(&blocks_tip_height);
+        println!("\nblocking {:?} {:?} bytes", start.elapsed(), res);
+        let start = Instant::now();
+        let blocks_tip_height = String::from("blocks_tip_height");
+        let res = api(&blocks_tip_height, "");
+        println!("\napi {:?} {:?} bytes", start.elapsed(), res);
+        wait("1");
+    }
     #[test]
     fn test_difficulty_adjustment() {
          GET /api/v1/difficulty-adjustment

@@ -1,6 +1,6 @@
-use std::time::{Instant};
+use std::time::Instant;
 
-use mempool_space::api::{api,blocking};
+use mempool_space::api::{api, blocking};
 
 // use ureq::get;
 fn main() {
@@ -11,7 +11,7 @@ fn main() {
         println!("\nblocking {:?} {:?} bytes", start.elapsed(), res);
         let start = Instant::now();
         let blocks_tip_height = String::from("blocks_tip_height");
-        let res = api(&blocks_tip_height, &"");
+        let res = api(&blocks_tip_height, "");
         println!("\napi {:?} {:?} bytes", start.elapsed(), res);
     }
 }
