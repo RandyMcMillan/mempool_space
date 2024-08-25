@@ -28,9 +28,10 @@ cargo-build:### 	cargo build
 	@. $(HOME)/.cargo/env
 	@RUST_BACKTRACE=all cargo b $(QUIET)
 cargo-i:cargo-install
-cargo-install:### 	cargo install --path jj
+cargo-install:### 	cargo install --path .
 	@. $(HOME)/.cargo/env
 	@cargo install --path . $(FORCE)
+	@cargo install --path ./examples/lightning_search
 cargo-bench:### 	cargo-bench
 	@. $(HOME)/.cargo/env
 	@cargo bench

@@ -180,6 +180,8 @@ more:## 	more help
 
 .PHONY:docs
 docs:cargo-docs## 	docs
+lightning-search:## 	lightning-search
+	@cargo install --path ./examples/lightning_search
 tests:## 	tests
 	for bin in $$(ls target/release/mempool-space*); do ./$${bin/.d} 2>/dev/null; done
 
