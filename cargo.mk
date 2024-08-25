@@ -44,7 +44,7 @@ cargo-c:cargo-check
 cargo-check:### 	cargo-check
 	@. $(HOME)/.cargo/env
 	@cargo c
-cargo-d:cargo-doc
+cargo-docs:cargo-doc
 cargo-doc:### 	cargo-check
 	@. $(HOME)/.cargo/env
 	@cargo test --doc

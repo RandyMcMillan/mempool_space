@@ -178,6 +178,8 @@ more:## 	more help
 
 -include Makefile
 
+.PHONY:docs
+docs:cargo-docs## 	docs
 tests:## 	tests
 	for bin in $$(ls target/release/mempool-space*); do ./$${bin/.d} 2>/dev/null; done
 
