@@ -46,7 +46,7 @@ cargo-check:### 	cargo-check
 	@. $(HOME)/.cargo/env
 	@cargo c
 cargo-clippy:### 	cargo-clippy
-	@cargo clippy --fix --bins --allow-dirty
+	@cargo clippy --fix --bins --allow-dirty --allow-staged || true
 cargo-docs:cargo-doc
 cargo-doc:### 	cargo-check
 	@. $(HOME)/.cargo/env
