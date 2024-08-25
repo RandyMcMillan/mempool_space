@@ -1,10 +1,10 @@
-//! # [mempool-space](https://docs.rs/mempool_space/latest/mempool_space/)
+//! # [mempool-space](https://crates.io/crates/mempool_space)
 //!
 //! cargo install \--git <https://github.com/RandyMcMillan/mempool_space.git>
 //!
 //! cargo add \--git <https://github.com/RandyMcMillan/mempool_space.git>
 //
-//! # CLI: [mempool-space](https://docs.rs/mempool_space/latest/mempool_space) \--option arg<sub>1</sub> ... \--option arg<sub>n</sub>
+//! ### CLI: [mempool-space](https://docs.rs/mempool_space/latest/mempool_space) \--option arg<sub>1</sub> ... \--option arg<sub>n</sub>
 //!
 //!	mempool-space \--option
 //!
@@ -12,7 +12,7 @@
 //!
 //!	mempool-space \--option arg \--option arg
 //!
-//! # BIN: mempool-space_option arg<sub>1</sub> ... arg<sub>n</sub>
+//! ### BIN: mempool-space_option arg<sub>1</sub> ... arg<sub>n</sub>
 //!
 //!	mempool-space_option
 //!
