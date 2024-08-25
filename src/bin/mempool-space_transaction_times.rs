@@ -11,12 +11,12 @@ fn main() {
             if count > 0 {
                 //print!("txId[]={}\n",arg);
                 query.push_str(&("txId[]=".to_owned() + &arg));
-                query.push_str(&("&".to_owned()));
+                query.push('&');
             }
-            count = count + 1;
+            count += 1;
         }
         //print!("{}", query);
-        let _res = blocking(&format!("{}", &query));
+        let _res = blocking(&query.to_string());
     } else {
         // silence is golden
         std::process::exit(0);

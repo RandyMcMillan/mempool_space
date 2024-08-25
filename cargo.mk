@@ -45,6 +45,8 @@ cargo-c:cargo-check
 cargo-check:### 	cargo-check
 	@. $(HOME)/.cargo/env
 	@cargo c
+cargo-clippy:### 	cargo-clippy
+	@cargo clippy --fix --bins --allow-dirty
 cargo-docs:cargo-doc
 cargo-doc:### 	cargo-check
 	@. $(HOME)/.cargo/env
@@ -57,7 +59,7 @@ cargo-doc:### 	cargo-check
 	git diff doc/README.md
 
 cargo-t:cargo-test
-cargo-test:### 	cargo-test
+cargo-test:cargo-clippy### 	cargo-test
 	@. $(HOME)/.cargo/env
 	FORCE=--force $(MAKE) cargo-br cargo-install
 	#@cargo test

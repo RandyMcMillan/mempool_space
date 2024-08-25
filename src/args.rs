@@ -23,8 +23,8 @@ use crate::api::{api, blocking};
 pub fn historical_price(currency: &str, timestamp: &str) {
     let _res = blocking(&format!(
         "v1/historical-price?currency={}&timestamp={}",
-        &format!("{:}", &currency),
-        &format!("{:}", &timestamp)
+        &(&currency).to_string(),
+        &(&timestamp).to_string()
     ));
 }
 /// GET /api/block/:hash/txid/:index
@@ -50,13 +50,13 @@ pub fn block_txs(block_hash: &str, start_index: &str) {
 /// GET /api/v1/blocks[/:startHeight]
 /// <https://mempool.space/docs/api/rest#get-blocks>
 pub fn blocks(start_height: &str) {
-    let blocks_tip_height = api::api("blocks_tip_height", &"extraneous_arg");
+    let blocks_tip_height = api::api("blocks_tip_height", "extraneous_arg");
     let blocks_tip_height_int = blocks_tip_height.parse::<i32>().unwrap_or(0);
     let start_height_int = start_height.parse::<i32>().unwrap_or(0);
     if start_height_int >= 0 && start_height_int <= blocks_tip_height_int {
         let _res = blocking(&format!("v1/blocks/{}", start_height));
     } else {
-        let _res = blocking(&format!("v1/blocks"));
+        let _res = blocking(&"v1/blocks".to_string());
     }
 }
 /// GET /api/v1/blocks-bulk/:minHeight[/:maxHeight]
@@ -69,7 +69,7 @@ pub fn blocks_bulk(min_height: &str, max_height: &str) {
     } else if min_height_int >= 0 && max_height_int >= 0 && min_height_int >= max_height_int {
         let _res = blocking(&format!("v1/blocks-bulk/{}/{}", max_height, min_height));
     } else {
-        let blocks_tip_height = api::api("blocks_tip_height", &"extraneous_arg");
+        let blocks_tip_height = api::api("blocks_tip_height", "extraneous_arg");
         let _res = blocking(&format!("v1/blocks-bulk/{}/{}", min_height, blocks_tip_height));
     }
     print!("This API is disabled. Set config.MEMPOOL.MAX_BLOCKS_BULK_QUERY to a positive number to enable it.");
@@ -79,8 +79,8 @@ pub fn blocks_bulk(min_height: &str, max_height: &str) {
 pub fn mining_pool_blocks(slug: &str, blockheight: &str) {
     let _res = blocking(&format!(
         "v1/mining/pool/{}/blocks/{}",
-        &format!("{:}", &slug),
-        &format!("{:}", &blockheight)
+        &(&slug).to_string(),
+        &(&blockheight).to_string()
     ));
 }
 
@@ -547,11 +547,11 @@ impl Args {
         // VERSION
         // GENERAL
         if matches.opt_present("difficulty_adjustment") {
-            api("difficulty_adjustment", &"v9999");
+            api("difficulty_adjustment", "v9999");
             std::process::exit(0);
         }
         if matches.opt_present("prices") {
-            api("prices", &"v9999");
+            api("prices", "v9999");
             std::process::exit(0);
         }
         if matches.opt_present("historical_price") {
@@ -562,7 +562,7 @@ impl Args {
                 if matches.opt_present("timestamp") {
                     //print!("timestamp={}\n", matches.opt_present("timestamp"));
                     let timestamp = matches.opt_str("timestamp");
-                    historical_price(&currency.as_ref().unwrap(), &timestamp.unwrap());
+                    historical_price(currency.as_ref().unwrap(), &timestamp.unwrap());
                 } else {
                     historical_price(&currency.unwrap(), "");
                 }
@@ -638,11 +638,11 @@ impl Args {
             std::process::exit(0);
         }
         if matches.opt_present("blocks_tip_height") {
-            api("blocks_tip_height", &"extraneous_arg");
+            api("blocks_tip_height", "extraneous_arg");
             std::process::exit(0);
         }
         if matches.opt_present("blocks_tip_hash") {
-            api("blocks_tip_hash", &"extraneous_arg");
+            api("blocks_tip_hash", "extraneous_arg");
             std::process::exit(0);
         }
         if matches.opt_present("block_txid") {

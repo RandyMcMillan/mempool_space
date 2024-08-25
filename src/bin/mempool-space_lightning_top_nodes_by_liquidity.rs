@@ -1,5 +1,5 @@
 use mempool_space::api::blocking;
 
 fn main() {
-    let _res = blocking(&format!("v1/lightning/nodes/rankings/liquidity"));
+    let _res = blocking(&"v1/lightning/nodes/rankings/liquidity".to_string());
 }

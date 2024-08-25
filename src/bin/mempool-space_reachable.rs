@@ -1,8 +1,6 @@
-use std::io::Read;
-use std::time::{Instant, SystemTime};
+use std::time::{Instant};
 
 use mempool_space::api::blocking;
-use reqwest::Url;
 
 // use ureq::get;
 

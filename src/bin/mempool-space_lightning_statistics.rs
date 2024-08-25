@@ -9,7 +9,7 @@ fn main() {
             let interval = &args[1];
             let _res = blocking(&format!("v1/lightning/statistics/{}", &interval));
         } else if args.len() == 1 {
-            let _res = blocking(&format!("v1/lightning/statistics/latest"));
+            let _res = blocking(&"v1/lightning/statistics/latest".to_string());
         } else {
             // silence is golden
             std::process::exit(0);

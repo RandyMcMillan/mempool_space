@@ -5,7 +5,7 @@ fn main() {
     {
         let args: Vec<String> = env::args().collect();
         if args.len() < 2 {
-            let _res = blocking(&format!("v1/mining/pools"));
+            let _res = blocking(&"v1/mining/pools".to_string());
         } else if args.len() == 2 {
             let timeperiod = &args[1];
             let _res = blocking(&format!("v1/mining/pools/{}", &timeperiod));
