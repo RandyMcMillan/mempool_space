@@ -7,6 +7,8 @@ use std::process;
 use crate::api;
 use crate::api::{api, blocking};
 
+/// GET /api/v1/historical-price?currency=EUR&timestamp=1500000000
+/// pub fn historical_price(currency: &str, timestamp: &str)
 pub fn historical_price(currency: &str, timestamp: &str) {
     let _res = blocking(&format!(
         "v1/historical-price?currency={}&timestamp={}",
