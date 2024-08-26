@@ -1,0 +1,131 @@
+#!/usr/bin/env sh
+
+## GENERAL
+mempool-space --difficulty_adjustment
+
+mempool-space_difficulty_adjustment
+
+mempool-space --prices
+
+mempool-space_prices
+
+mempool-space --historical_price --currency [USD, CAD, GBP, CHF, AUD, JPY] --timestamp utc_sec  2>/dev/null
+
+mempool-space --historical_price --currency EUR --timestamp 1500000000
+
+mempool-space --historical_price --currency USD --timestamp $(date +%s)
+
+## ADDRESSES
+mempool-space --address 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+
+mempool-space_address 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+
+mempool-space --address_txs 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+
+mempool-space_address_txs 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+
+mempool-space --address_txs_chain 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+
+mempool-space_address_txs_chain 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+
+mempool-space --address_txs_mempool 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+
+mempool-space_address_txs_mempool 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+
+mempool-space --address_utxo 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+
+mempool-space_address_utxo 1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv
+
+mempool-space --validate_address 1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY
+
+mempool-space_validate_address 1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY
+
+## BLOCKS
+mempool-space --block 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce
+
+mempool-space_block 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce
+
+mempool-space --block_header 0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2
+
+mempool-space_block_header 0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2
+
+mempool-space --block_height 615615
+
+mempool-space_block_height 615615
+
+mempool-space --blocks_timestamp 1672531200
+
+mempool-space_blocks_timestamp 1672531200
+
+mempool-space --block_raw 0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2
+
+mempool-space_block_raw 0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2
+
+mempool-space --block_status 0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2
+
+mempool-space_block_status 0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2
+
+mempool-space --blocks_tip_height
+
+mempool-space_blocks_tip_height
+
+mempool-space --blocks_tip_hash
+
+mempool-space_blocks_tip_hash
+
+mempool-space --block_txid 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce --block_txindex 218
+
+mempool-space_block_txid 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce 218
+
+mempool-space --block_txids 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce
+
+mempool-space_block_txids 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce
+
+mempool-space --block_txs 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce --start_index 0
+
+mempool-space --block_txs 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce --start_index 25
+
+mempool-space_block_txs 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce 0
+
+mempool-space_block_txs 000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce 25
+
+mempool-space --blocks 730000
+
+mempool-space_blocks 730000
+
+mempool-space --blocks_bulk --min_height 730000 --max_height 840000 2>/dev/null
+
+mempool-space_blocks_bulk 730000 840000 2>/dev/null
+
+## MINING
+mempool-space --mining_pools --timeperiod 24h #[24h 3d 1w 1m 3m 6m 1y 2y 3y]
+
+mempool-space_mining_pools 24h #[24h 3d 1w 1m 3m 6m 1y 2y 3y]
+
+mempool-space --mining_pool --slug unknown
+
+mempool-space_mining_pool unknown
+
+mempool-space --mining_hashrate_pools --timeperiod 1m #[1m, 3m, 6m, 1y, 2y, 3y]
+
+mempool-space_mining_hashrate_pools 1m
+
+mempool-space --mining_pool_hashrate --slug foundaryusa
+
+mempool-space_mining_pool_hashrate foundryusa
+
+mempool-space --mining_pool_blocks --slug luxor --blockheight 730000
+
+mempool-space_mining_pool_blocks luxor 730000
+
+mempool-space --blocks_audit_score --block_hash 00000000000000000002352696778fc14532ccb923fde167fc754de26e6adbcd
+
+mempool-space_blocks_audit_score 00000000000000000002352696778fc14532ccb923fde167fc754de26e6adbcd
+
+mempool-space --blocks_audit_scores --blockheight 820000
+
+mempool-space_blocks_audit_scores 820000
+
+mempool-space --block_audit_summary --blockhash 00000000000000000000f218ceda7a5d9c289040b9c3f05ef9f7c2f4930e0123
+
+mempool-space_block_audit_summary 00000000000000000000f218ceda7a5d9c289040b9c3f05ef9f7c2f4930e0123 FEES mempool-space_fees_mempool_blocks

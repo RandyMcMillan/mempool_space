@@ -183,6 +183,8 @@ docs:cargo-docs## 	docs
 lightning-search:## 	lightning-search
 	@cargo install --path ./examples/lightning_search
 tests:## 	tests
+	rm $(shell which mempool-space_tests)
+	install scripts/mempool-space_tests /usr/local/bin/ && mempool-space_tests
 	for bin in $$(ls target/release/mempool-space*); do ./$${bin/.d} 2>/dev/null; done
 
 ##initialize
