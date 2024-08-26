@@ -206,6 +206,17 @@ MEMPOOL
 
 
 
+mempool-space_mempool
+
+mempool-space_mempool_full_rbf_transactions
+
+mempool-space_mempool_rbf_transactions
+
+mempool-space_mempool_recent
+
+mempool-space_mempool_txids
+
+
 
 
 
@@ -234,7 +245,6 @@ ACCELERATOR PUBLIC
 
 
 ACCELERATOR AUTHENTICATED
-
 
 
 
