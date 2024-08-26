@@ -7,19 +7,6 @@ use std::process;
 use crate::api;
 use crate::api::{api, blocking};
 
-/// GET /api/v1/historical-price?currency=CURRENCY&timestamp=TIMESTAMP
-///
-/// <https://mempool.space/docs/api/rest#get-historical-price>
-///
-/// CURRENCY [USD, EUR, GBP, CAD, CHF, AUD, JPY]
-///
-/// TIMESTAMP [$(date +%s), 1231006505]
-///
-/// USAGE:
-///
-/// `mempool-space --historical_price --currency USD --timestamp $(date +%s)`
-///
-/// `mempool-space_historical_price USD $(date +%s)`
 pub fn historical_price(currency: &str, timestamp: &str) {
     let _res = blocking(&format!(
         "v1/historical-price?currency={}&timestamp={}",
@@ -84,7 +71,7 @@ pub fn mining_pool_blocks(slug: &str, blockheight: &str) {
     ));
 }
 
-/// USAGE:
+/// USAGE
 ///
 /// ``mempool-space --difficulty_adjustment (flagged)``
 ///
@@ -103,10 +90,10 @@ pub fn mining_pool_blocks(slug: &str, blockheight: &str) {
 ///         - GET /api/v1/prices
 ///             - <https://mempool.space/api/v1/prices>
 ///         - GET /api/v1/historical-price?currency=EUR&timestamp=1500000000
-///         - <https://mempool.space/api/v1/historical-price?currency=EUR&timestamp=1500000000>
+///             - <https://mempool.space/api/v1/historical-price?currency=EUR&timestamp=1500000000>
 ///     - [ADDRESSES](https://mempool.space/docs/api/rest#get-address)
 ///         - GET /api/address/:address
-///         - <https://mempool.space/api/address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv>
+///             - <https://mempool.space/api/address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv>
 ///         - GET /api/address/:address/txs
 ///             - <https://mempool.space/api/address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv/txs>
 ///         - GET /api/address/:address/txs/chain
@@ -197,7 +184,7 @@ pub fn mining_pool_blocks(slug: &str, blockheight: &str) {
 ///             - <https://mempool.space/api/v1/fullrbf/replacements>
 ///     - [TRANSACTIONS](https://mempool.space/docs/api/rest#get-cpfp)
 ///         - GET /api/v1/cpfp
-///             - <https://mempool.space/api/v1/cpfp/txid>
+///             - <https://mempool.space/api/v1/cpfp/be6ba3c97d65478534333dc9a6db159b538c3722bd18bea43765e95c7139a8e6>
 ///         - GET /api/tx/:txid
 ///             - <https://mempool.space/api/tx/15e10745f15593a899cef391191bdd3d7c12412cc4696b7bcb669d0feadc8521>
 ///         - GET /api/tx/:txid/hex
@@ -277,9 +264,8 @@ pub fn mining_pool_blocks(slug: &str, blockheight: &str) {
 ///
 #[derive(Debug, Default)]
 pub struct Args {
-
-    // VERSION
-    // pub version: Option<String>,
+    /// `mempool-space --version`
+    pub version: Option<String>,
     /// `https://mempool.space/api/v1/difficulty-adjustment`
     pub difficulty_adjustment: Option<String>,
     /// `https://mempool.space/api/v1/prices`
@@ -291,7 +277,6 @@ pub struct Args {
     /// `https://mempool.space/api/v1/historical-price?currency=USD?timestamp=0`
     pub timestamp: Option<String>,
 
-    /// - ADDRESSES
     /// `https://mempool.space/api/address/<ADDRESS>`
     pub address: Option<String>,
     /// `https://mempool.space/api/address/<ADDRESS>/txs`
@@ -305,51 +290,34 @@ pub struct Args {
     /// `https://mempool.space/api/validate-address/<ADDRESS>`
     pub validate_address: Option<String>,
 
-    /// - BLOCK
     /// `https://mempool.space/api/block/<BLOCK_HASH>`
     pub block: Option<String>,
-    /// - BLOCK_HEADER
     /// `https://mempool.space/api/block/<BLOCK_HASH>/header`
     pub block_header: Option<String>,
-    /// - BLOCK_HEIGHT
     /// `https://mempool.space/api/block-height/<BLOCK_HEIGHT>`
     pub block_height: Option<String>,
-    /// - V1 MINING BLOCKS TIMESTAMP <UTC_SECS>
     /// `https://mempool.space/api/v1/mining/blocks/timestamp/<UTC_SECS>`
     pub blocks_timestamp: Option<String>,
-    /// - BLOCK RAW
     /// `https://mempool.space/api/block/<BLOCK_HASH>/raw`
     pub block_raw: Option<String>,
     /// `https://mempool.space/api/block/<BLOCK_HASH>/status`
     pub block_status: Option<String>,
-    /// - BLOCKS TIP HEIGHT
     /// `https://mempool.space/api/blocks/tip/height`
     pub blocks_tip_height: Option<String>,
-    /// - BLOCKS TIP HASH
     /// `https://mempool.space/api/blocks/tip/hash`
     pub blocks_tip_hash: Option<String>,
-    /// - BLOCK TXID
-    /// `https://mempool.space/api/blocks/tip/hash`
-
-
-
-
-
-    pub block_txid: Option<String>,
-    /// - BLOCK TXINDEX
-    pub block_txindex: Option<String>,
-    /// - BLOCK \<BLOCK_HASH\> \<TXIDS\>
+    /// `https://mempool.space/api/block/:hash/txid/:index`
+    pub block_txid: Option<String>, //HASH
+    /// `https://mempool.space/api/block/:hash/txid/:index`
+    pub block_txindex: Option<String>, //INDEX
     /// `https://mempool.space/api/block/<TXID>`
     pub block_txids: Option<String>,
-    /// - BLOCK \<BLOCK_HASH\> \<TXS\>
     /// `https://mempool.space/api/block/<BLOCK_HASH>/txs`
     pub block_txs: Option<String>,
-    /// mempool-space --block_txs \<BLOCK_HASH\> --start_index \<START_INDEX\>
+    /// `https://mempool.space/api/v1/blocks/<BLOCKS_START_HEIGHT>`
     pub start_index: Option<String>,
-    /// - V1 BLOCKS \<BLOCK_HEIGHT\>
     /// `https://mempool.space/api/v1/blocks/<BLOCKS_START_HEIGHT>`
     pub blocks: Option<String>,
-    /// - V1 BLOCKS_BULK \<MAX_HEIGHT\> \<MIN_HEIGHT\>
     /// `https://mempool.space/api/v1/blocks-bulk/<MIN_HEIGHT>/<MAX_HEIGHT>`
     pub blocks_bulk: Option<String>,
     /// `https://mempool.space/api/v1/blocks-bulk/<MIN_HEIGHT>/<MAX_HEIGHT>`
@@ -357,42 +325,39 @@ pub struct Args {
     /// `https://mempool.space/api/v1/blocks-bulk/<MIN_HEIGHT>/<MAX_HEIGHT>`
     pub max_height: Option<String>,
 
-    /// - MINING
-    /// - V1 MINING POOLS \<TIMEPERIOD\>
-    /// `https://mempool.space/api/v1/mining/pools/:<TIMEPERIOD>`
+    /// `https://mempool.space/api/v1/mining/pools[/:timePeriod]`
     pub mining_pools: Option<String>,
-    /// timeperiod
+    /// `https://mempool.space/api/v1/mining/pools[/:timePeriod]`
     pub timeperiod: Option<String>,
 
-    /// - V1 MINING POOL \<SLUG\>
     /// `https://mempool.space/api/v1/mining/pool/:<SLUG>`
     pub mining_pool: Option<String>,
     /// slug
     pub slug: Option<String>,
 
-    /// - V1 MINING DIFFICULTY_ADJUSTMENTS \<INTERVAL\>
     /// `https://mempool.space/api/v1/mining/difficulty-adjustments/[:interval]`
     pub difficulty_adjustments: Option<String>,
     /// interval
     pub interval: Option<String>,
 
-    /// - V1 BLOCKS_AUDIT_SCORE \<BLOCK_HASH\>
-    /// `https://mempool.space/api/v1/mining/blocks/audit/score/<BLOCK_HASH>`
+    /// `https://mempool.space/api/v1/mining/blocks/audit/score/<BLOCKHASH>`
     pub blocks_audit_score: Option<String>,
-    /// blockhash
+    /// `https://mempool.space/api/v1/mining/blocks/audit/score/<BLOCKHASH>`
     pub blockhash: Option<String>,
 
-    /// - V1 BLOCKS_AUDIT_SCORES \<BLOCKHEIGHT\>
     /// `https://mempool.space/api/v1/mining/blocks/audit/scores/<BLOCKHEIGHT>`
     pub blocks_audit_scores: Option<String>,
-    /// blockheight
+    /// `https://mempool.space/api/v1/mining/blocks/audit/scores/<BLOCKHEIGHT>`
     pub blockheight: Option<String>,
 
-    /// - V1 BLOCK_AUDIT_SUMMARY \<BLOCKHASH\>
     /// `https://mempool.space/api/v1/mining/block/<BLOCKHASH>/audit-summary`
     pub block_audit_summary: Option<String>,
-    // /// blockhash
     // pub blockhash: Option<String>,
+    //
+    //
+    //
+    //
+    //
     /// OPTOPT
     ///
     /// Configuration file.
@@ -430,7 +395,7 @@ impl Args {
 
         //OPTFLAG
         opts.optflag("h", "help", "prints help information");
-        opts.optflag("v", "vv", "prints version information");
+        opts.optflag("v", "version", "prints version information");
         opts.optflag("V", "server-version", "retrieves the server version");
         opts.optflag("l", "list", "lists files on the server");
         opts.optflag("d", "delete", "delete files from server");
@@ -512,7 +477,6 @@ impl Args {
         opts.optopt("", "slug", "mining_pool_hashrate api call", "SLUG");
         opts.optopt("", "blockheight", "mining_pool_hashrate api call", "BLOCKHEIGHT");
 
-        
         opts.optflag("", "difficulty_adjustments", "difficulty_adjustments api call");
         opts.optopt("", "interval", "difficulty_adjustments api call", "INTERVAL");
 
@@ -757,7 +721,7 @@ impl Args {
 
             // mempool api intercepts
             // mempool api version
-            // version: matches.opt_str("version"),
+            version: matches.opt_str("version"),
 
             // GENERAL
             difficulty_adjustment: matches.opt_str("difficulty_adjustment"),
