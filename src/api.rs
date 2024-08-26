@@ -1,6 +1,6 @@
 /// const API_VERSION: &str = "v1";
-//
-///  `pub fn api(option: &str, sub_string: &str) -> String`
+///
+/// pub fn api(option: &str, sub_string: &str) -> String
 pub fn api(option: &str, sub_string: &str) -> String {
     use std::process::Command;
 
@@ -30,8 +30,7 @@ pub fn api(option: &str, sub_string: &str) -> String {
     //}
 }
 use crate::URL;
-///  `pub fn blocking(api: &String) -> Result<&str>`
-///
+/// pub fn blocking(api: &String) -> Result<&str, ascii::AsciiChar>
 pub fn blocking(api: &String) -> Result<&str, ascii::AsciiChar> {
     //print!("api={}", api);
     let call = format!("{}/{}", URL, api);
