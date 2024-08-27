@@ -7,6 +7,8 @@ fn main() {
         if args.len() == 2 {
             let interval = &args[1];
             let _res = blocking(&format!("v1/mining/difficulty-adjustments/{}", &interval));
+        } else if args.len() == 1 {
+            let _res = blocking(&"v1/mining/difficulty-adjustments".to_string());
         } else {
             // silence is golden
             std::process::exit(0);
