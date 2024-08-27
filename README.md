@@ -447,6 +447,8 @@ mod tests {
     use super::*;
     use crate::api::{api, blocking};
 
+    ###  REACHABLE
+
     #[test]
     fn test_reachable() {
         use std::time::Instant;
@@ -461,6 +463,9 @@ mod tests {
         println!("\napi {:?} {:?} bytes", start.elapsed(), res);
         wait("1");
     }
+
+    ###  GENERAL
+
     #[test]
     fn test_difficulty_adjustment() {
          GET /api/v1/difficulty-adjustment
@@ -587,7 +592,6 @@ mod tests {
         );
         wait("1");
     }
-
     #[test]
     fn test_block_status() {
          GET /api/block/:hash/status
@@ -766,41 +770,41 @@ mod tests {
     }
     #[test]
     fn test_mining_hashrate_pools() {
-         timeperiod unspecified
+        ###  timeperiod unspecified
         let binding = format!("v1/mining/hashrate/pools").clone();
         let mining_hashrate_pools: &str =
-            blocking(&binding).expect("returns current v1/mining/pool/hashrate[:timePeriod]");
+            blocking(&binding).expect("returns current v1/mining/hashrate/pools/[:timePeriod]");
         let get_mining_hashrate_pools = api("mining_hashrate_pools", "1m");
         wait("1");
           [1m, 3m, 6m, 1y, 2y, 3y]
         let binding = format!("v1/mining/hashrate/pools/1m").clone();
         let get_mining_hashrate_pools: &str =
-            blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+            blocking(&binding).expect("returns current v1/mining/hashrate/pools/[:timePeriod]");
         let get_mining_hashrate_pools = api("mining_hashrate_pools", "1m");
         wait("1");
         let binding = format!("v1/mining/hashrate/pools/3m").clone();
         let get_mining_hashrate_pools: &str =
-            blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+            blocking(&binding).expect("returns current v1/mining/hashrate/pools/[:timePeriod]");
         let get_mining_hashrate_pools = api("mining_hashrate_pools", "3m");
         wait("1");
         let binding = format!("v1/mining/hashrate/pools/6m").clone();
         let get_mining_hashrate_pools: &str =
-            blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+            blocking(&binding).expect("returns current v1/mining/hashrate/pools/[:timePeriod]");
         let get_mining_hashrate_pools = api("mining_hashrate_pools", "6m");
         wait("1");
         let binding = format!("v1/mining/hashrate/pools/1y").clone();
         let get_mining_hashrate_pools: &str =
-            blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+            blocking(&binding).expect("returns current v1/mining/hashrate/pools/[:timePeriod]");
         let get_mining_hashrate_pools = api("mining_hashrate_pools", "1y");
         wait("1");
         let binding = format!("v1/mining/hashrate/pools/2y").clone();
         let get_mining_hashrate_pools: &str =
-            blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+            blocking(&binding).expect("returns current v1/mining/hashrate/pools/[:timePeriod]");
         let get_mining_hashrate_pools = api("mining_hashrate_pools", "2y");
         wait("1");
         let binding = format!("v1/mining/hashrate/pools/3y").clone();
         let get_mining_hashrate_pools: &str =
-            blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
+            blocking(&binding).expect("returns current v1/mining/hashrate/pools/[:timePeriod]");
         let get_mining_hashrate_pools = api("mining_hashrate_pools", "3y");
         wait("1");
     }
@@ -825,7 +829,8 @@ mod tests {
         use crate::args::mining_pool_blocks;
         ###  luxor
         let binding = format!("v1/mining/pool/luxor/blocks/730000").clone();
-        let get_mining_pool_blocks: &str = blocking(&binding).expect("returns v1/mining/pool/:slug/hashrate");
+        let get_mining_pool_blocks: &str =
+            blocking(&binding).expect("returns v1/mining/pool/:slug/blocks/[:blockHeight]");
         let get_mining_pool_blocks = mining_pool_blocks("luxor", "730000");
         wait("1");
 
@@ -833,7 +838,8 @@ mod tests {
 
         ###  antpool
         let binding = format!("v1/mining/pool/antpool/blocks/730000").clone();
-        let get_mining_pool_blocks: &str = blocking(&binding).expect("returns v1/mining/pool/:slug/hashrate");
+        let get_mining_pool_blocks: &str =
+            blocking(&binding).expect("returns v1/mining/pool/:slug/blocks/[:blockHeight]");
         let get_mining_pool_blocks = mining_pool_blocks("antpool", "730000");
         wait("1");
     }
@@ -873,6 +879,64 @@ mod tests {
         let binding = format!("v1/mining/hashrate/all").clone();
         let get_mining_hashrate: &str = blocking(&binding).expect("returns v1/mining/hashrate/[:timePeriod]");
         let get_mining_hashrate = api("mining_hashrate", "all");
+        wait("1");
+    }
+    #[test]
+    fn test_mining_difficulty_adjustments() {
+        ###  1m
+        let binding = format!("v1/mining/difficulty-adjustments/1m").clone();
+        let get_mining_difficulty_adjustment: &str =
+            blocking(&binding).expect("returns v1/mining/difficulty-adjustments/[:interval]");
+        let get_mining_hashrate = api("mining_hashrate", "1m");
+        wait("1");
+        ###  3m
+        let binding = format!("v1/mining/difficulty-adjustments/3m").clone();
+        let get_mining_difficulty_adjustment: &str =
+            blocking(&binding).expect("returns v1/mining/difficulty-adjustments/[:interval]");
+        let get_mining_hashrate = api("mining_hashrate", "3m");
+        wait("1");
+        ###  6m
+        let binding = format!("v1/mining/difficulty-adjustments/6m").clone();
+        let get_mining_difficulty_adjustment: &str =
+            blocking(&binding).expect("returns v1/mining/difficulty-adjustments/[:interval]");
+        let get_mining_hashrate = api("mining_hashrate", "6m");
+        wait("1");
+        ###  1y
+        let binding = format!("v1/mining/difficulty-adjustments/1y").clone();
+        let get_mining_difficulty_adjustment: &str =
+            blocking(&binding).expect("returns v1/mining/difficulty-adjustments/[:interval]");
+        let get_mining_hashrate = api("mining_hashrate", "1y");
+        wait("1");
+        ###  2y
+        let binding = format!("v1/mining/difficulty-adjustments/2y").clone();
+        let get_mining_difficulty_adjustment: &str =
+            blocking(&binding).expect("returns v1/mining/difficulty-adjustments/[:interval]");
+        let get_mining_hashrate = api("mining_hashrate", "2y");
+        wait("1");
+        ###  3y
+        let binding = format!("v1/mining/difficulty-adjustments/3y").clone();
+        let get_mining_difficulty_adjustment: &str =
+            blocking(&binding).expect("returns v1/mining/difficulty-adjustments/[:interval]");
+        let get_mining_hashrate = api("mining_hashrate", "3y");
+        wait("1");
+        ###  all
+        let binding = format!("v1/mining/difficulty-adjustments").clone();
+        let get_mining_difficulty_adjustment: &str =
+            blocking(&binding).expect("returns v1/mining/difficulty-adjustments/[:interval]");
+        let get_mining_hashrate = api("mining_hashrate", "all");
+        wait("1");
+    }
+    #[test]
+    fn test_mining_reward_stats() {
+        ###  GET /api/v1/mining/reward-stats/:blockCount
+        let blockCount = "100";
+        let binding = format!("v1/mining/reward-stats/{blockCount}").clone();
+        let mining_reward_stats: &str =
+            blocking(&binding).expect("returns current v1/mining/reward-stats/:blockCount");
+        let mining_reward_stats = api(
+            "mining_reward_stats",
+            "100",
+        );
         wait("1");
     }
 
