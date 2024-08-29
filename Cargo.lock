@@ -69,14 +69,14 @@ dependencies = [
 
 [[package]]
 name = "async_usage"
-version = "0.0.38"
+version = "0.0.39"
 dependencies = [
  "mempool_space",
 ]
 
 [[package]]
 name = "async_usage_custom_target"
-version = "0.0.38"
+version = "0.0.39"
 dependencies = [
  "mempool_space",
 ]
@@ -817,7 +817,7 @@ dependencies = [
 
 [[package]]
 name = "lightning-search"
-version = "0.0.38"
+version = "0.0.39"
 dependencies = [
  "mempool_space",
 ]
@@ -861,7 +861,7 @@ checksum = "78ca9ab1a0babb1e7d5695e3530886289c18cf2f87ec19a575a0abdce112e3a3"
 
 [[package]]
 name = "mempool_space"
-version = "0.0.38"
+version = "0.0.39"
 dependencies = [
  "anyhow",
  "ascii",
@@ -1963,7 +1963,7 @@ dependencies = [
 
 [[package]]
 name = "usage"
-version = "0.0.38"
+version = "0.0.39"
 dependencies = [
  "mempool_space",
 ]
