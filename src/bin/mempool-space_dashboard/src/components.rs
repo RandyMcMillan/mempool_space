@@ -12,7 +12,7 @@ use crate::{
 pub mod fps;
 pub mod home;
 
-//// ANCHOR: component
+/// ANCHOR: component
 pub trait Component {
   #[allow(unused_variables)]
   fn register_action_handler(&mut self, tx: UnboundedSender<Action>) -> Result<()> {

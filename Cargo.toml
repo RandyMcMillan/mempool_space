@@ -1,35 +1,42 @@
 [workspace.package]
 version = "0.0.40"
+edition = "2021"
+authors = ["RandyMcMillan <randy.lee.mcmillan@gmail.com>"]
+description = "mempool.space api interface."
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/randymcmillan/mempool_space.git"
+homepage = "https://github.com/randymcmillan/mempool_space"
+documentation = "https://github.com/randymcmillan/mempool_space"
+keywords = ["bitcoin", "mempool"]
+categories = ["network-programming"]
 
 [package]
 name = "mempool_space"
 version = { workspace = true }
-edition = "2021"
-authors = ["RandyMcMillan <randy.lee.mcmillan@gmail.com>", "Simon Brummer <simon.brummer@posteo.de>"]
-description = "mempool.space api interface."
-license = "MPL-2.0"
-readme = "README.md"
-repository = "https://github.com/randymcmillan/mempool_space.git"
-homepage = "https://github.com/randymcmillan/mempool_space"
-keywords = ["bitcoin", "mempool"]
-categories = ["network-programming"]
+edition = { workspace = true }
+authors = { workspace = true }
+description = { workspace = true }
+license = { workspace = true }
+readme = { workspace = true }
+repository = { workspace = true }
+homepage = { workspace = true }
+keywords = { workspace = true }
+categories =  { workspace = true }
 
-## mempool-space
 [[bin]]
 name = "mempool-space"
 path = "src/bin/mempool-space.rs"
 doc = true
 
-[[crate]]
+[[bin]]
 name = "lightning-search"
 path = "src/bin/lightning_search/src/main.rs"
-crate-type = ["bin"]
 doc = true
 
-[[crate]]
+[[bin]]
 name = "mempool-space_dashboard"
 path = "src/bin/mempool-space_dashboard/src/main.rs"
-crate-type = ["bin"]
 doc = true
 
 [package.metadata.wix]
@@ -41,29 +48,66 @@ eula = false
 [dependencies]
 anyhow = "1.0.86"
 ascii = "1.1.0"
-crossterm = "0.28.1"
+
+#ascii = "1.1.0"
+better-panic = "0.3.0"
+clap = { version = "4.4.5", features = ["std", "color", "help", "usage", "error-context", "suggestions", "derive", "cargo", "wrap_help", "unicode", "string", "unstable-styles"] }
+color-eyre = "0.6.2"
+#clap = "4.5.16"
+#color-eyre = "0.6.3"
+config = "0.14.0"
+#config = "0.13.3"
+crossterm = { version = "0.27.0", features = ["serde", "event-stream"] }
+derive_deref = "1.1.1"
+directories = "5.0.1"
+#crossterm = "0.28.1"
 dirs-next = "2.0.0"
 dns-lookup = { version = "1.0.7" }
+#futures = "0.3.28"
 futures    = { version = "0.3.17", optional = true }
+#futures    = { version = "0.3.17", optional = true }
 getopts = "0.2.21"
+human-panic = "1.2.0"
 ## colored = "2.1.0"
 indicatif = "0.17.8"
+json5 = "0.4.1"
+#json5 = "0.4.1"
+lazy_static = "1.4.0"
+libc = "0.2.158"
+log = "0.4.22"
 
 mockall = { version = "0.10.2" }
 multipart = { version = "0.18.0", default-features = false, features = [
   "client",
 ] }
-ratatui = { version = "0.28.0", features = ["all-widgets"] }
+#libc = "0.2.148"
+#log = "0.4.20"
+#mempool_space = { features = ["async", "futures", "tokio"], path = "../../.."}
+pretty_assertions = "1.4.0"
+ratatui = { version = "0.28.0", features = ["serde", "macros", "all-widgets"] }
 ratatui-splash-screen = "0.1.3"
 reqwest = { version = "0.11", default-features = false, features = ["blocking", "json", "rustls-tls-webpki-roots"] }
 
 serde = { version = "1.0.205", default-features = false, features = ["derive"] }
+#serde = { version = "1.0.188", features = ["derive"] }
+serde_json = "1.0.107"
+signal-hook = "0.3.17"
+#signal-hook = "0.3.17"
+strip-ansi-escapes = "0.2.0"
+strum = { version = "0.25.0", features = ["derive"] }
 thiserror = "1.0.63"
 
 tokio      = { version = "1.12.0", optional = true, features = ["rt-multi-thread", "sync", "time", "macros"] }
+#tokio = { version = "1.32.0", features = ["full"] }
+tokio-util = "0.7.9"
 toml = "0.8.19"
+tracing = "0.1.37"
+tracing-error = "0.2.0"
+tracing-subscriber = { version = "0.3.17", features = ["env-filter", "serde"] }
+tui-input = { version = "0.8.0", features = ["serde"] }
 ureq = { version = "2.10.1", features = ["json"] }
 url = "2.5.2"
+
 [build-dependencies]
 
 [dev-dependencies]
@@ -75,8 +119,8 @@ async   = ["futures", "tokio"]
 [workspace]
 members = [
     "examples/async_usage",
-    "examples/async_usage_custom_target", "src/bin/lightning_search",
-    "examples/usage", "src/bin/mempool-space_dashboard",
+    "examples/async_usage_custom_target",
+    "examples/usage", "src/bin/lightning_search", "src/bin/mempool-space_dashboard",
 ]
 
 # Config for 'cargo dist'

@@ -42,6 +42,7 @@ fn main() {
     }
   }
 
-  let _mempool_space = std::process::Command::new("cargp").args(["install", "mempool_space"]).output().ok();
+  let _mempool_space =
+    std::process::Command::new("cargp").args(["install", "--path", "../../../", "-vv", "--force"]).output().ok();
   println!("cargo:rustc-env=RATATUI_COUNTER_GIT_INFO={}", git_describe);
 }

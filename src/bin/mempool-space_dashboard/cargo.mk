@@ -28,10 +28,14 @@ cargo-build:### 	cargo build
 	@. $(HOME)/.cargo/env
 	@RUST_BACKTRACE=all cargo b $(QUIET)
 cargo-i:cargo-install
-cargo-install:### 	cargo install --path jj
+cargo-install:### 	cargo install --path .
 	@. $(HOME)/.cargo/env
-	@cargo build --release
 	@cargo install --path . $(FORCE)
+	@cargo install --path ./src/bin/lightning_search
+	@cargo install --path ./src/bin/mempool-space_dashboard
+cargo-bench:### 	cargo-bench
+	@. $(HOME)/.cargo/env
+	@cargo bench
 cargo-br:cargo-build-release### 	cargo-br
 ## 	cargo-br q=true
 cargo-build-release:### 	cargo-build-release
@@ -42,14 +46,28 @@ cargo-c:cargo-check
 cargo-check:### 	cargo-check
 	@. $(HOME)/.cargo/env
 	@cargo c
-cargo-bench:### 	cargo-bench
+cargo-clippy:### 	cargo-clippy
+	@cargo clippy --fix --bins --allow-dirty --allow-staged || true
+cargo-docs:cargo-doc
+cargo-doc:### 	cargo-check
 	@. $(HOME)/.cargo/env
-	@cargo bench
+	@cargo test --doc
+	@cargo doc --no-deps --all-features
+	@cat src/lib.rs | sed 's/\/\/! //g' | sed 's/\/\/!//g' | sed 's/\/\/\//### /g' | sed 's/\/\///g' > README.temp
+	@cat README.temp | sed 's/\\-/-/g' > README.temp2
+#cat LIB.temp2
+	@cat README.temp2 | sed 's/unwrap_used/unwrap\\_used/g' > README.md
+	git diff doc/README.md
+
 cargo-t:cargo-test
-cargo-test:### 	cargo-test
+cargo-test:cargo-clippy### 	cargo-test
 	@. $(HOME)/.cargo/env
-	#@cargo test
-	@cargo test -p jj-cli --test runner
+	#FORCE=--force $(MAKE) cargo-br cargo-install
+	cargo t -vv -- --nocapture
+cargo-test-ignored:### 	cargo-test-ignored
+	@. $(HOME)/.cargo/env
+	#@cargo test -- --ignored
+	@cargo test -- --ignored
 cargo-report:### 	cargo-report
 	@. $(HOME)/.cargo/env
 	cargo report future-incompatibilities --id 1
@@ -75,8 +93,7 @@ cargo-dist:### 	cargo-dist -h
 	cargo dist -h
 cargo-dist-build:### 	cargo-dist-build
 	RUSTFLAGS="--cfg tokio_unstable" cargo dist build
-cargo-dist-manifest-global:### 	cargo dist manifest --artifacts=all
-	cargo dist manifest --artifacts=all
+cargo-dist-manifest-global:### 	cargo dist manifest --artifacts=global
+	cargo dist manifest --artifacts=global
 # vim: set noexpandtab:
 # vim: set setfiletype make
-#

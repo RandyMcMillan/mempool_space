@@ -30,9 +30,9 @@ cargo-build:### 	cargo build
 cargo-i:cargo-install
 cargo-install:### 	cargo install --path .
 	@. $(HOME)/.cargo/env
-	@cargo install --path . $(FORCE)
-	@cargo install --path ./src/bin/lightning_search
-	@cargo install --path ./src/bin/mempool-space_dashboard
+	@cargo install --force --path .
+	@cargo install --force --path ./src/bin/lightning_search
+	@cargo install --force --path ./src/bin/mempool-space_dashboard
 cargo-bench:### 	cargo-bench
 	@. $(HOME)/.cargo/env
 	@cargo bench
@@ -45,14 +45,16 @@ cargo-build-release:### 	cargo-build-release
 cargo-c:cargo-check
 cargo-check:### 	cargo-check
 	@. $(HOME)/.cargo/env
-	@cargo c
+	cargo check --manifest-path ./src/bin/mempool-space_dashboard/Cargo.toml
+	cargo check --manifest-path ./src/bin/lightning_search/Cargo.toml
+	cargo check --manifest-path ./Cargo.toml
 cargo-clippy:### 	cargo-clippy
 	@cargo clippy --fix --bins --allow-dirty --allow-staged || true
 cargo-docs:cargo-doc
 cargo-doc:### 	cargo-check
 	@. $(HOME)/.cargo/env
-	@cargo test --doc
-	@cargo doc --no-deps --all-features
+	@cargo test --doc $(VERBOSE)
+	@cargo doc --no-deps --all-features $(VERBOSE)
 	@cat src/lib.rs | sed 's/\/\/! //g' | sed 's/\/\/!//g' | sed 's/\/\/\//### /g' | sed 's/\/\///g' > README.temp
 	@cat README.temp | sed 's/\\-/-/g' > README.temp2
 #cat LIB.temp2
@@ -62,9 +64,10 @@ cargo-doc:### 	cargo-check
 cargo-t:cargo-test
 cargo-test:cargo-clippy### 	cargo-test
 	@. $(HOME)/.cargo/env
-	FORCE=--force $(MAKE) cargo-br cargo-install
-	#@cargo test
-	cargo test -- $(NOCAPTURE)
+	FORCE=--force $(MAKE) cargo-i
+	cargo test --bin lightning-search
+	cargo test --bin mempool-space_dashboard
+	cargo test --bins
 cargo-test-ignored:### 	cargo-test-ignored
 	@. $(HOME)/.cargo/env
 	#@cargo test -- --ignored

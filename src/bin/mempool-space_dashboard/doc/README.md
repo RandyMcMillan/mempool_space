@@ -1,3 +1,5 @@
+use ratatui::style::Color::*;
+
 pub fn add(left: usize, right: usize) -> usize {
   left + right
 }

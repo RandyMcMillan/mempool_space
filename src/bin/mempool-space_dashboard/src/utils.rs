@@ -1,4 +1,4 @@
-use std::path::PathBuf;
+use std::{env, path::PathBuf};
 
 use color_eyre::eyre::Result;
 use directories::ProjectDirs;
@@ -7,7 +7,7 @@ use tracing::error;
 use tracing_error::ErrorLayer;
 use tracing_subscriber::{self, prelude::__tracing_subscriber_SubscriberExt, util::SubscriberInitExt, Layer};
 
-pub static GIT_COMMIT_HASH: &'static str = env!("RATATUI_COUNTER_GIT_INFO");
+pub static GIT_COMMIT_HASH: &str = std::env!("RATATUI_COUNTER_GIT_INFO");
 
 lazy_static! {
   pub static ref PROJECT_NAME: String = env!("CARGO_CRATE_NAME").to_uppercase().to_string();
@@ -66,6 +66,7 @@ pub fn initialize_panic_handler() -> Result<()> {
         .create_panic_handler()(panic_info);
     }
 
+    use libc::EXIT_FAILURE;
     std::process::exit(libc::EXIT_FAILURE);
   }));
   Ok(())
@@ -144,7 +145,7 @@ macro_rules! trace_dbg {
 pub fn version() -> String {
   let author = clap::crate_authors!();
 
-  let commit_hash = GIT_COMMIT_HASH.clone();
+  let commit_hash = GIT_COMMIT_HASH;
 
   // let current_exe_path = PathBuf::from(clap::crate_name!()).display().to_string();
   let config_dir_path = get_config_dir().display().to_string();

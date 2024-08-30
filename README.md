@@ -931,12 +931,8 @@ mod tests {
         ###  GET /api/v1/mining/reward-stats/:blockCount
         let blockCount = "100";
         let binding = format!("v1/mining/reward-stats/{blockCount}").clone();
-        let mining_reward_stats: &str =
-            blocking(&binding).expect("returns current v1/mining/reward-stats/:blockCount");
-        let mining_reward_stats = api(
-            "mining_reward_stats",
-            "100",
-        );
+        let mining_reward_stats: &str = blocking(&binding).expect("returns current v1/mining/reward-stats/:blockCount");
+        let mining_reward_stats = api("mining_reward_stats", "100");
         wait("1");
     }
 

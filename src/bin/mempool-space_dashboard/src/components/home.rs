@@ -99,7 +99,7 @@ impl Component for Home {
   }
 
   fn handle_key_events(&mut self, key: KeyEvent) -> Result<Option<Action>> {
-    self.last_events.push(key.clone());
+    self.last_events.push(key);
     let action = match self.mode {
       Mode::Normal | Mode::Processing => return Ok(None),
       Mode::Insert => {
@@ -218,7 +218,7 @@ impl Component for Home {
     }
 
     if self.show_help {
-      let rect = rect.inner(&Margin { horizontal: 4, vertical: 2 });
+      let rect = rect.inner(Margin { horizontal: 4, vertical: 2 });
       f.render_widget(Clear, rect);
       let block = Block::default()
         .title(Line::from(vec![Span::styled("Key Bindings", Style::default().add_modifier(Modifier::BOLD))]))
@@ -234,11 +234,11 @@ impl Component for Home {
         Row::new(vec!["Ctrl-q", "Quit"]), // interferes with text input
         Row::new(vec!["?", "Open Help"]),
       ];
-      let table = Table::new(rows)
+      let widths = [Constraint::Percentage(10), Constraint::Percentage(90)];
+      let table = Table::new(rows, widths)
         .header(Row::new(vec!["Key", "Action"]).bottom_margin(1).style(Style::default().add_modifier(Modifier::BOLD)))
-        .widths(&[Constraint::Percentage(10), Constraint::Percentage(90)])
         .column_spacing(1);
-      f.render_widget(table, rect.inner(&Margin { vertical: 4, horizontal: 2 }));
+      f.render_widget(table, rect.inner(Margin { vertical: 4, horizontal: 2 }));
     };
 
     f.render_widget(
@@ -246,7 +246,7 @@ impl Component for Home {
         .title(
           ratatui::widgets::block::Title::from(format!(
             "{:?}",
-            &self.last_events.iter().map(|k| key_event_to_string(k)).collect::<Vec<_>>()
+            &self.last_events.iter().map(key_event_to_string).collect::<Vec<_>>()
           ))
           .alignment(Alignment::Right),
         )
