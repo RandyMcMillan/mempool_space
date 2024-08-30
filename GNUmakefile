@@ -181,7 +181,7 @@ more:## 	more help
 .PHONY:docs
 docs:cargo-docs## 	docs
 lightning-search:## 	lightning-search
-	@cargo install --path ./examples/lightning_search
+	@cargo install --path ./src/bin/lightning_search
 tests:## 	tests
 	rm $(shell which mempool-space_tests)
 	install scripts/mempool-space_tests /usr/local/bin/ && mempool-space_tests

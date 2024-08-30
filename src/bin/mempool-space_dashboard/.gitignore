@@ -1,0 +1,26 @@
+/target
+
+
+## vendor/color
+vendor/color/Cargo.lock
+vendor/color/target/
+## vendor/*
+vendor/angle/
+vendor/autocfg/
+vendor/fuchsia-cprng/
+vendor/libc/
+vendor/num-bigint/
+vendor/num-complex/
+vendor/num-integer/
+vendor/num-iter/
+vendor/num-rational/
+vendor/num-traits/
+vendor/num/
+vendor/rand/
+vendor/rand_core-0.3.1/
+vendor/rand_core/
+vendor/rdrand/
+vendor/rustc-serialize/
+vendor/winapi-i686-pc-windows-gnu/
+vendor/winapi-x86_64-pc-windows-gnu/
+vendor/winapi/

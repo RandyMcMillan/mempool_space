@@ -20,9 +20,15 @@ name = "mempool-space"
 path = "src/bin/mempool-space.rs"
 doc = true
 
-[[example]]
+[[crate]]
 name = "lightning-search"
-path = "examples/lightning_search/src/main.rs"
+path = "src/bin/lightning_search/src/main.rs"
+crate-type = ["bin"]
+doc = true
+
+[[crate]]
+name = "mempool-space_dashboard"
+path = "src/bin/mempool-space_dashboard/src/main.rs"
 crate-type = ["bin"]
 doc = true
 
@@ -69,8 +75,8 @@ async   = ["futures", "tokio"]
 [workspace]
 members = [
     "examples/async_usage",
-    "examples/async_usage_custom_target", "examples/lightning_search",
-    "examples/usage",
+    "examples/async_usage_custom_target", "src/bin/lightning_search",
+    "examples/usage", "src/bin/mempool-space_dashboard",
 ]
 
 # Config for 'cargo dist'
