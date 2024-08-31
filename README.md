@@ -308,11 +308,6 @@ use std::io::Read;
 use std::io::{self};
 
 
-#[allow(dead_code)]
-const URL: &str = "https:mempool.space/api";
-#[allow(dead_code)]
-const TOR_URL: &str = "http:mempoolhqx4isw62xs7abwphsq7ldayuidyx2v2oethdhhj6mlo2r6ad.onion/api";
-
 ###  const CONFIG_FILE: &str = "config.toml";
 
 const CONFIG_FILE: &str = "config.toml";
