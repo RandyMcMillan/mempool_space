@@ -149,7 +149,7 @@ impl Target for IcmpTarget {
             if addr.is_ipv6() {
                 Command::new("ping")
                     .stdout(Stdio::null())
-                    .arg("-c 1")
+                    .args(["-c", "1"])
                     .arg("-6")
                     .arg(addr.to_string())
                     .status()
@@ -158,7 +158,7 @@ impl Target for IcmpTarget {
             } else {
                 Command::new("ping")
                     .stdout(Stdio::null())
-                    .arg("-c 1")
+                    .args(["-c", "1"])
                     .arg(addr.to_string())
                     .status()
                     .unwrap()
