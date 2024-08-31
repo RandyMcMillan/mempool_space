@@ -25,8 +25,6 @@ pub struct Home {
   pub counter: usize,
   pub app_ticker: usize,
 
-
-
   /// GENERAL
   pub app_difficulty_adjustment: String,
   pub app_prices: String,
@@ -36,9 +34,6 @@ pub struct Home {
 
   /// BLOCKS
   pub app_blocks_tip_height: usize,
-
-
-
 
   pub render_ticker: usize,
   pub mode: Mode,
@@ -63,7 +58,6 @@ impl Home {
     log::info!("Tick");
     self.app_ticker = self.app_ticker.saturating_add(1);
 
-
     /// GENERAL
     let binding = String::from("difficulty_adjustment");
     let api_string = mempool_space::api::api(&binding, "");
@@ -80,16 +74,11 @@ impl Home {
     let int_blockheight = api_string.parse::<String>();
     self.app_historical_price = int_blockheight.unwrap();
 
-
-
     /// BLOCKS
     let binding = String::from("blocks_tip_height");
     let api_string = mempool_space::api::api(&binding, "");
     let int_blockheight = api_string.parse::<i32>().unwrap_or(0);
     self.app_blocks_tip_height = int_blockheight.try_into().unwrap();
-
-
-
 
     self.last_events.drain(..);
   }
@@ -195,18 +184,18 @@ impl Component for Home {
     let rects = Layout::default().constraints([Constraint::Percentage(100), Constraint::Min(3)].as_ref()).split(rect);
 
     let mut text: Vec<Line> = self.text.clone().iter().map(|l| Line::from(l.clone())).collect();
-    //text.insert(0, "".into());
-    //text.insert(0, "Type into input and hit enter to display here".dim().into());
+    // text.insert(0, "".into());
+    // text.insert(0, "Type into input and hit enter to display here".dim().into());
     text.insert(0, "".into());
-    //text.insert(0, format!("Render Ticker: {}", self.render_ticker).into());
-    //text.insert(0, format!("App Ticker: {}", self.app_ticker).into());
+    // text.insert(0, format!("Render Ticker: {}", self.render_ticker).into());
+    // text.insert(0, format!("App Ticker: {}", self.app_ticker).into());
     text.insert(0, format!("mempool.space/api/v1/historical-price: {}", self.app_historical_price).into());
     text.insert(0, format!("mempool.space/api/v1/prices: {}", self.app_prices).into());
     text.insert(0, format!("mempool.space/api/difficulty-adjustment: {}", self.app_difficulty_adjustment).into());
     text.insert(0, format!("mempool.space/api/blocks/tip/height: {}", self.app_blocks_tip_height).into());
-    //text.insert(0, format!("Counter: {}", self.counter).into());
+    // text.insert(0, format!("Counter: {}", self.counter).into());
     text.insert(0, "".into());
-    //text.insert(
+    // text.insert(
     //  0,
     //  Line::from(vec![
     //    "Press ".into(),
