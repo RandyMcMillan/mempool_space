@@ -178,10 +178,16 @@ more:## 	more help
 
 -include Makefile
 
-.PHONY:docs
-docs:cargo-docs## 	docs
 lightning-search:## 	lightning-search
-	@cargo install --path ./src/bin/lightning_search
+	cargo build --release --manifest-path ./src/bin/lightning_search/Cargo.toml
+	cargo install --path ./src/bin/lightning_search
+
+mempool-space_dashboard:## 	mempool-space_dashboard
+	cargo build --release --manifest-path ./src/bin/mempool-space_dashboard/Cargo.toml
+	cargo install --path ./src/bin/mempool-space_dashboard
+
+.PHONY:docs
+docs:cargo-docs lightning-search mempool-space_dashboard## 	docs
 tests:## 	tests
 	rm $(shell which mempool-space_tests)
 	install scripts/mempool-space_tests /usr/local/bin/ && mempool-space_tests
