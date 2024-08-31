@@ -129,16 +129,16 @@ dependencies = [
 
 [[package]]
 name = "async_usage"
-version = "0.0.40"
+version = "0.0.41"
 dependencies = [
- "mempool_space 0.0.40",
+ "mempool_space 0.0.41",
 ]
 
 [[package]]
 name = "async_usage_custom_target"
-version = "0.0.40"
+version = "0.0.41"
 dependencies = [
- "mempool_space 0.0.40",
+ "mempool_space 0.0.41",
 ]
 
 [[package]]
@@ -1188,9 +1188,9 @@ dependencies = [
 
 [[package]]
 name = "lightning-search"
-version = "0.0.40"
+version = "0.0.41"
 dependencies = [
- "mempool_space 0.0.40 (registry+https://github.com/rust-lang/crates.io-index)",
+ "mempool_space 0.0.40",
 ]
 
 [[package]]
@@ -1247,7 +1247,7 @@ checksum = "78ca9ab1a0babb1e7d5695e3530886289c18cf2f87ec19a575a0abdce112e3a3"
 
 [[package]]
 name = "mempool-space_dashboard"
-version = "0.0.40"
+version = "0.0.41"
 dependencies = [
  "better-panic",
  "clap",
@@ -1262,7 +1262,7 @@ dependencies = [
  "lazy_static",
  "libc",
  "log",
- "mempool_space 0.0.40",
+ "mempool_space 0.0.41",
  "pretty_assertions",
  "ratatui",
  "serde",
@@ -1281,6 +1281,33 @@ dependencies = [
 [[package]]
 name = "mempool_space"
 version = "0.0.40"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "eddc4a4792531060db04aa9a0edbee453d486e1360206608835fedf7dede7723"
+dependencies = [
+ "anyhow",
+ "ascii",
+ "crossterm 0.28.1",
+ "dirs-next",
+ "dns-lookup",
+ "futures",
+ "getopts",
+ "indicatif",
+ "mockall",
+ "multipart",
+ "ratatui",
+ "ratatui-splash-screen",
+ "reqwest",
+ "serde",
+ "thiserror",
+ "tokio",
+ "toml 0.8.19",
+ "ureq",
+ "url",
+]
+
+[[package]]
+name = "mempool_space"
+version = "0.0.41"
 dependencies = [
  "anyhow",
  "ascii",
@@ -1320,33 +1347,6 @@ dependencies = [
  "tracing-error",
  "tracing-subscriber",
  "tui-input",
- "ureq",
- "url",
-]
-
-[[package]]
-name = "mempool_space"
-version = "0.0.40"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "eddc4a4792531060db04aa9a0edbee453d486e1360206608835fedf7dede7723"
-dependencies = [
- "anyhow",
- "ascii",
- "crossterm 0.28.1",
- "dirs-next",
- "dns-lookup",
- "futures",
- "getopts",
- "indicatif",
- "mockall",
- "multipart",
- "ratatui",
- "ratatui-splash-screen",
- "reqwest",
- "serde",
- "thiserror",
- "tokio",
- "toml 0.8.19",
  "ureq",
  "url",
 ]
@@ -2783,9 +2783,9 @@ dependencies = [
 
 [[package]]
 name = "usage"
-version = "0.0.40"
+version = "0.0.41"
 dependencies = [
- "mempool_space 0.0.40",
+ "mempool_space 0.0.41",
 ]
 
 [[package]]
