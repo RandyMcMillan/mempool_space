@@ -1,7 +1,10 @@
-use std::{env, path::PathBuf};
+use std::{
+  env,
+  path::{Path, PathBuf},
+};
 
 use color_eyre::eyre::Result;
-use directories::ProjectDirs;
+use directories::{ProjectDirs, UserDirs};
 use lazy_static::lazy_static;
 use tracing::error;
 use tracing_error::ErrorLayer;
@@ -92,6 +95,10 @@ pub fn get_config_dir() -> PathBuf {
     PathBuf::from(".").join(".config")
   };
   directory
+}
+
+pub fn get_user_dirs() -> Option<UserDirs> {
+  UserDirs::new()
 }
 
 pub fn initialize_logging() -> Result<()> {

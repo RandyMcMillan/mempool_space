@@ -48,8 +48,8 @@ pub struct Tui {
 
 impl Tui {
   pub fn new() -> Result<Self> {
-    let tick_rate = 4.0;
-    let frame_rate = 60.0;
+    let tick_rate = 0.07692307692;
+    let frame_rate = 13.0;
     let terminal = ratatui::Terminal::new(Backend::new(std::io::stderr()))?;
     let (event_tx, event_rx) = mpsc::unbounded_channel();
     let cancellation_token = CancellationToken::new();

@@ -36,6 +36,7 @@ pub struct Config {
 impl Config {
   pub fn new() -> Result<Self, config::ConfigError> {
     let default_config: Config = json5::from_str(CONFIG).unwrap();
+    let user_dirs = crate::utils::get_user_dirs();
     let data_dir = crate::utils::get_data_dir();
     let config_dir = crate::utils::get_config_dir();
     let mut builder = config::Config::builder()
