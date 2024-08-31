@@ -16,7 +16,7 @@ cargo-publish-all:### 	cargo-publish-all
 ## 	cargo-publish-all 	recursively publish rust projects
 ## 	CARGO_REGISTRY_TOKEN=<token> make cargo-publish-all
 	for t in Cargo.toml;  do echo $$t; cargo publish -vv --manifest-path $$t; done
-	for t in src/bin/**/Cargo.toml;  do echo $$t; cargo publish -vv --manifest-path $$t; done
+	#for t in src/bin/**/Cargo.toml;  do echo $$t; cargo publish -vv --manifest-path $$t; done
 ## 	:
 
 cargo-install-bins:### 	cargo-install-bins
