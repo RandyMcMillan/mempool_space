@@ -94,12 +94,20 @@ cargo-dist-init:### 	cargo-dist-init
 	RUSTFLAGS="--cfg tokio_unstable" cargo dist init
 cargo-dist-build:### 	cargo-dist-build
 ##cargo-dist-build
-##	RUSTFLAGS="--cfg tokio_unstable" cargo dist build
-	RUSTFLAGS="--cfg tokio_unstable" cargo dist build
+##	RUSTFLAGS="--cfg tokio_unstable" cargo dist build --artifacts=global
+	RUSTFLAGS="--cfg tokio_unstable" cargo dist build --artifacts=global
+cargo-dist-generate:### 	cargo-dist-generate
+##cargo-dist-generate
+##	RUSTFLAGS="--cfg tokio_unstable" cargo dist generate
+	RUSTFLAGS="--cfg tokio_unstable" cargo dist generate
 cargo-dist-manifest-global:### 	cargo dist manifest --artifacts=global
 ##cargo-dist-manifest-global
 ##	RUSTFLAGS="--cfg tokio_unstable" cargo dist manifest --artifacts=global
 	RUSTFLAGS="--cfg tokio_unstable" cargo dist manifest --artifacts=global
+cargo-dist-plan:### 	cargo-dist-plan
+##cargo-dist-plan
+##	RUSTFLAGS="--cfg tokio_unstable" cargo dist plan
+	RUSTFLAGS="--cfg tokio_unstable" cargo dist plan
 
 # vim: set noexpandtab:
 # vim: set setfiletype make

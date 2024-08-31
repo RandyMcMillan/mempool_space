@@ -1,5 +1,6 @@
 [package]
 name = "mempool-space_dashboard"
+authors = { workspace = true }
 version = { workspace = true }
 edition = { workspace = true }
 license = { workspace = true }
@@ -7,6 +8,13 @@ homepage = { workspace = true }
 repository = { workspace = true }
 documentation = { workspace = true }
 keywords = { workspace = true }
+description = { workspace = true }
+
+[package.metadata.wix]
+upgrade-guid = "5CDC4316-4461-4742-8F2A-6B03F81C849D"
+path-guid = "D2881A8C-8596-467D-AD8E-B8AFA2C4C306"
+license = false
+eula = false
 
 
 [[bin]]

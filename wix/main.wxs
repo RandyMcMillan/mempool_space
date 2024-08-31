@@ -62,7 +62,7 @@
         Id='*'
         Name='mempool_space'
         UpgradeCode='5D3A3DB4-15D1-47AF-BE84-D3A6F541BB8B'
-        Manufacturer='RandyMcMillan; Simon Brummer'
+        Manufacturer='RandyMcMillan'
         Language='1033'
         Codepage='1252'
         Version='$(var.Version)'>
@@ -70,7 +70,7 @@
         <Package Id='*'
             Keywords='Installer'
             Description='mempool.space api interface.'
-            Manufacturer='RandyMcMillan; Simon Brummer'
+            Manufacturer='RandyMcMillan'
             InstallerVersion='450'
             Languages='1033'
             Compressed='yes'
@@ -123,193 +123,193 @@
                         <Component Id='binary0' Guid='*'>
                             <File
                                 Id='exe0'
-                                Name='mempool-space.exe'
+                                Name='lightning-search.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space.exe'
+                                Source='$(var.CargoTargetBinDir)\lightning-search.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary1' Guid='*'>
                             <File
                                 Id='exe1'
-                                Name='mempool-space_address.exe'
+                                Name='mempool-space.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_address.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary2' Guid='*'>
                             <File
                                 Id='exe2'
-                                Name='mempool-space_address_txs.exe'
+                                Name='mempool-space_address.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_address_txs.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_address.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary3' Guid='*'>
                             <File
                                 Id='exe3'
-                                Name='mempool-space_address_txs_chain.exe'
+                                Name='mempool-space_address_txs.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_address_txs_chain.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_address_txs.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary4' Guid='*'>
                             <File
                                 Id='exe4'
-                                Name='mempool-space_address_txs_mempool.exe'
+                                Name='mempool-space_address_txs_chain.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_address_txs_mempool.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_address_txs_chain.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary5' Guid='*'>
                             <File
                                 Id='exe5'
-                                Name='mempool-space_address_utxo.exe'
+                                Name='mempool-space_address_txs_mempool.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_address_utxo.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_address_txs_mempool.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary6' Guid='*'>
                             <File
                                 Id='exe6'
-                                Name='mempool-space_block.exe'
+                                Name='mempool-space_address_utxo.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_block.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_address_utxo.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary7' Guid='*'>
                             <File
                                 Id='exe7'
-                                Name='mempool-space_block_audit_score.exe'
+                                Name='mempool-space_block.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_block_audit_score.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_block.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary8' Guid='*'>
                             <File
                                 Id='exe8'
-                                Name='mempool-space_block_audit_scores.exe'
-                                DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_block_audit_scores.exe'
-                                KeyPath='yes'/>
-                        </Component>
-                        <Component Id='binary9' Guid='*'>
-                            <File
-                                Id='exe9'
                                 Name='mempool-space_block_audit_summary.exe'
                                 DiskId='1'
                                 Source='$(var.CargoTargetBinDir)\mempool-space_block_audit_summary.exe'
                                 KeyPath='yes'/>
                         </Component>
-                        <Component Id='binary10' Guid='*'>
+                        <Component Id='binary9' Guid='*'>
                             <File
-                                Id='exe10'
+                                Id='exe9'
                                 Name='mempool-space_block_feerates.exe'
                                 DiskId='1'
                                 Source='$(var.CargoTargetBinDir)\mempool-space_block_feerates.exe'
                                 KeyPath='yes'/>
                         </Component>
-                        <Component Id='binary11' Guid='*'>
+                        <Component Id='binary10' Guid='*'>
                             <File
-                                Id='exe11'
+                                Id='exe10'
                                 Name='mempool-space_block_header.exe'
                                 DiskId='1'
                                 Source='$(var.CargoTargetBinDir)\mempool-space_block_header.exe'
                                 KeyPath='yes'/>
                         </Component>
-                        <Component Id='binary12' Guid='*'>
+                        <Component Id='binary11' Guid='*'>
                             <File
-                                Id='exe12'
+                                Id='exe11'
                                 Name='mempool-space_block_height.exe'
                                 DiskId='1'
                                 Source='$(var.CargoTargetBinDir)\mempool-space_block_height.exe'
                                 KeyPath='yes'/>
                         </Component>
-                        <Component Id='binary13' Guid='*'>
+                        <Component Id='binary12' Guid='*'>
                             <File
-                                Id='exe13'
+                                Id='exe12'
                                 Name='mempool-space_block_predictions.exe'
                                 DiskId='1'
                                 Source='$(var.CargoTargetBinDir)\mempool-space_block_predictions.exe'
                                 KeyPath='yes'/>
                         </Component>
-                        <Component Id='binary14' Guid='*'>
+                        <Component Id='binary13' Guid='*'>
                             <File
-                                Id='exe14'
+                                Id='exe13'
                                 Name='mempool-space_block_raw.exe'
                                 DiskId='1'
                                 Source='$(var.CargoTargetBinDir)\mempool-space_block_raw.exe'
                                 KeyPath='yes'/>
                         </Component>
-                        <Component Id='binary15' Guid='*'>
+                        <Component Id='binary14' Guid='*'>
                             <File
-                                Id='exe15'
+                                Id='exe14'
                                 Name='mempool-space_block_rewards.exe'
                                 DiskId='1'
                                 Source='$(var.CargoTargetBinDir)\mempool-space_block_rewards.exe'
                                 KeyPath='yes'/>
                         </Component>
-                        <Component Id='binary16' Guid='*'>
+                        <Component Id='binary15' Guid='*'>
                             <File
-                                Id='exe16'
+                                Id='exe15'
                                 Name='mempool-space_block_sizes_and_weights.exe'
                                 DiskId='1'
                                 Source='$(var.CargoTargetBinDir)\mempool-space_block_sizes_and_weights.exe'
                                 KeyPath='yes'/>
                         </Component>
-                        <Component Id='binary17' Guid='*'>
+                        <Component Id='binary16' Guid='*'>
                             <File
-                                Id='exe17'
+                                Id='exe16'
                                 Name='mempool-space_block_status.exe'
                                 DiskId='1'
                                 Source='$(var.CargoTargetBinDir)\mempool-space_block_status.exe'
                                 KeyPath='yes'/>
                         </Component>
-                        <Component Id='binary18' Guid='*'>
+                        <Component Id='binary17' Guid='*'>
                             <File
-                                Id='exe18'
-                                Name='mempool-space_block_timestamp.exe'
-                                DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_block_timestamp.exe'
-                                KeyPath='yes'/>
-                        </Component>
-                        <Component Id='binary19' Guid='*'>
-                            <File
-                                Id='exe19'
+                                Id='exe17'
                                 Name='mempool-space_block_txid.exe'
                                 DiskId='1'
                                 Source='$(var.CargoTargetBinDir)\mempool-space_block_txid.exe'
                                 KeyPath='yes'/>
                         </Component>
-                        <Component Id='binary20' Guid='*'>
+                        <Component Id='binary18' Guid='*'>
                             <File
-                                Id='exe20'
+                                Id='exe18'
                                 Name='mempool-space_block_txids.exe'
                                 DiskId='1'
                                 Source='$(var.CargoTargetBinDir)\mempool-space_block_txids.exe'
                                 KeyPath='yes'/>
                         </Component>
-                        <Component Id='binary21' Guid='*'>
+                        <Component Id='binary19' Guid='*'>
                             <File
-                                Id='exe21'
-                                Name='mempool-space_blockheight.exe'
+                                Id='exe19'
+                                Name='mempool-space_block_txs.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_blockheight.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_block_txs.exe'
                                 KeyPath='yes'/>
                         </Component>
-                        <Component Id='binary22' Guid='*'>
+                        <Component Id='binary20' Guid='*'>
                             <File
-                                Id='exe22'
+                                Id='exe20'
                                 Name='mempool-space_blocks.exe'
                                 DiskId='1'
                                 Source='$(var.CargoTargetBinDir)\mempool-space_blocks.exe'
                                 KeyPath='yes'/>
                         </Component>
+                        <Component Id='binary21' Guid='*'>
+                            <File
+                                Id='exe21'
+                                Name='mempool-space_blocks_audit_score.exe'
+                                DiskId='1'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_blocks_audit_score.exe'
+                                KeyPath='yes'/>
+                        </Component>
+                        <Component Id='binary22' Guid='*'>
+                            <File
+                                Id='exe22'
+                                Name='mempool-space_blocks_audit_scores.exe'
+                                DiskId='1'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_blocks_audit_scores.exe'
+                                KeyPath='yes'/>
+                        </Component>
                         <Component Id='binary23' Guid='*'>
                             <File
                                 Id='exe23'
-                                Name='mempool-space_blocks_height.exe'
+                                Name='mempool-space_blocks_bulk.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_blocks_height.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_blocks_bulk.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary24' Guid='*'>
@@ -323,33 +323,33 @@
                         <Component Id='binary25' Guid='*'>
                             <File
                                 Id='exe25'
-                                Name='mempool-space_blocks_tip.exe'
-                                DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_blocks_tip.exe'
-                                KeyPath='yes'/>
-                        </Component>
-                        <Component Id='binary26' Guid='*'>
-                            <File
-                                Id='exe26'
                                 Name='mempool-space_blocks_tip_hash.exe'
                                 DiskId='1'
                                 Source='$(var.CargoTargetBinDir)\mempool-space_blocks_tip_hash.exe'
                                 KeyPath='yes'/>
                         </Component>
-                        <Component Id='binary27' Guid='*'>
+                        <Component Id='binary26' Guid='*'>
                             <File
-                                Id='exe27'
+                                Id='exe26'
                                 Name='mempool-space_blocks_tip_height.exe'
                                 DiskId='1'
                                 Source='$(var.CargoTargetBinDir)\mempool-space_blocks_tip_height.exe'
                                 KeyPath='yes'/>
                         </Component>
-                        <Component Id='binary28' Guid='*'>
+                        <Component Id='binary27' Guid='*'>
                             <File
-                                Id='exe28'
+                                Id='exe27'
                                 Name='mempool-space_children_pay_for_parent.exe'
                                 DiskId='1'
                                 Source='$(var.CargoTargetBinDir)\mempool-space_children_pay_for_parent.exe'
+                                KeyPath='yes'/>
+                        </Component>
+                        <Component Id='binary28' Guid='*'>
+                            <File
+                                Id='exe28'
+                                Name='mempool-space_dashboard.exe'
+                                DiskId='1'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_dashboard.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary29' Guid='*'>
@@ -371,366 +371,414 @@
                         <Component Id='binary31' Guid='*'>
                             <File
                                 Id='exe31'
-                                Name='mempool-space_hashrate.exe'
+                                Name='mempool-space_fees_mempool_blocks.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_hashrate.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_fees_mempool_blocks.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary32' Guid='*'>
                             <File
                                 Id='exe32'
-                                Name='mempool-space_historical_price.exe'
+                                Name='mempool-space_fees_recommended.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_historical_price.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_fees_recommended.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary33' Guid='*'>
                             <File
                                 Id='exe33'
-                                Name='mempool-space_lighting_channel.exe'
+                                Name='mempool-space_historical_price.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_lighting_channel.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_historical_price.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary34' Guid='*'>
                             <File
                                 Id='exe34'
-                                Name='mempool-space_lighting_channel_geodata.exe'
+                                Name='mempool-space_lightning_channels.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_lighting_channel_geodata.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_lightning_channels.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary35' Guid='*'>
                             <File
                                 Id='exe35'
-                                Name='mempool-space_lighting_channel_geodata_for_node.exe'
+                                Name='mempool-space_lightning_channels_from_node_pubkey.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_lighting_channel_geodata_for_node.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_lightning_channels_from_node_pubkey.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary36' Guid='*'>
                             <File
                                 Id='exe36'
-                                Name='mempool-space_lighting_channels_from_node_pubkey.exe'
+                                Name='mempool-space_lightning_channels_from_txid.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_lighting_channels_from_node_pubkey.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_lightning_channels_from_txid.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary37' Guid='*'>
                             <File
                                 Id='exe37'
-                                Name='mempool-space_lighting_channels_from_txid.exe'
+                                Name='mempool-space_lightning_channels_geo.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_lighting_channels_from_txid.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_lightning_channels_geo.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary38' Guid='*'>
                             <File
                                 Id='exe38'
-                                Name='mempool-space_lighting_isp_nodes.exe'
+                                Name='mempool-space_lightning_channels_geodata.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_lighting_isp_nodes.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_lightning_channels_geodata.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary39' Guid='*'>
                             <File
                                 Id='exe39'
-                                Name='mempool-space_lighting_network_status.exe'
+                                Name='mempool-space_lightning_node_stats.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_lighting_network_status.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_lightning_node_stats.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary40' Guid='*'>
                             <File
                                 Id='exe40'
-                                Name='mempool-space_lighting_node_stats.exe'
+                                Name='mempool-space_lightning_node_stats_per_country.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_lighting_node_stats.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_lightning_node_stats_per_country.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary41' Guid='*'>
                             <File
                                 Id='exe41'
-                                Name='mempool-space_lighting_node_stats_per_country.exe'
+                                Name='mempool-space_lightning_nodes.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_lighting_node_stats_per_country.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_lightning_nodes.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary42' Guid='*'>
                             <File
                                 Id='exe42'
-                                Name='mempool-space_lighting_nodes_channels.exe'
+                                Name='mempool-space_lightning_nodes_channels.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_lighting_nodes_channels.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_lightning_nodes_channels.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary43' Guid='*'>
                             <File
                                 Id='exe43'
-                                Name='mempool-space_lighting_nodes_in_country.exe'
+                                Name='mempool-space_lightning_nodes_in_country.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_lighting_nodes_in_country.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_lightning_nodes_in_country.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary44' Guid='*'>
                             <File
                                 Id='exe44'
-                                Name='mempool-space_lighting_nodes_stats_per_isp.exe'
+                                Name='mempool-space_lightning_nodes_isp_ranking.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_lighting_nodes_stats_per_isp.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_lightning_nodes_isp_ranking.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary45' Guid='*'>
                             <File
                                 Id='exe45'
-                                Name='mempool-space_lighting_top_nodes.exe'
+                                Name='mempool-space_lightning_nodes_ranking.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_lighting_top_nodes.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_lightning_nodes_ranking.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary46' Guid='*'>
                             <File
                                 Id='exe46'
-                                Name='mempool-space_lighting_top_nodes_by_connectivity.exe'
+                                Name='mempool-space_lightning_nodes_ranking_age.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_lighting_top_nodes_by_connectivity.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_lightning_nodes_ranking_age.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary47' Guid='*'>
                             <File
                                 Id='exe47'
-                                Name='mempool-space_lighting_top_nodes_by_liquidity.exe'
+                                Name='mempool-space_lightning_nodes_ranking_connectivity.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_lighting_top_nodes_by_liquidity.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_lightning_nodes_ranking_connectivity.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary48' Guid='*'>
                             <File
                                 Id='exe48'
-                                Name='mempool-space_lighting_top_oldests_nodes.exe'
+                                Name='mempool-space_lightning_nodes_ranking_liquidity.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_lighting_top_oldests_nodes.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_lightning_nodes_ranking_liquidity.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary49' Guid='*'>
                             <File
                                 Id='exe49'
-                                Name='mempool-space_mempool.exe'
+                                Name='mempool-space_lightning_nodes_statistics.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_mempool.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_lightning_nodes_statistics.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary50' Guid='*'>
                             <File
                                 Id='exe50'
-                                Name='mempool-space_mempool_blocks_fees.exe'
+                                Name='mempool-space_lightning_nodes_stats_per_isp.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_mempool_blocks_fees.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_lightning_nodes_stats_per_isp.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary51' Guid='*'>
                             <File
                                 Id='exe51'
-                                Name='mempool-space_mempool_full_rbf_transactions.exe'
+                                Name='mempool-space_lightning_search.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_mempool_full_rbf_transactions.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_lightning_search.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary52' Guid='*'>
                             <File
                                 Id='exe52'
-                                Name='mempool-space_mempool_rbf_transactions.exe'
+                                Name='mempool-space_lightning_statistics.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_mempool_rbf_transactions.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_lightning_statistics.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary53' Guid='*'>
                             <File
                                 Id='exe53'
-                                Name='mempool-space_mempool_recent.exe'
+                                Name='mempool-space_lightning_top_nodes_by_connectivity.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_mempool_recent.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_lightning_top_nodes_by_connectivity.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary54' Guid='*'>
                             <File
                                 Id='exe54'
-                                Name='mempool-space_mining_blocks_timestamp.exe'
+                                Name='mempool-space_lightning_top_nodes_by_liquidity.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_mining_blocks_timestamp.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_lightning_top_nodes_by_liquidity.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary55' Guid='*'>
                             <File
                                 Id='exe55'
-                                Name='mempool-space_mining_pool.exe'
+                                Name='mempool-space_lightning_top_oldests_nodes.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_mining_pool.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_lightning_top_oldests_nodes.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary56' Guid='*'>
                             <File
                                 Id='exe56'
-                                Name='mempool-space_mining_pool_blocks.exe'
+                                Name='mempool-space_mempool.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_mining_pool_blocks.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_mempool.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary57' Guid='*'>
                             <File
                                 Id='exe57'
-                                Name='mempool-space_mining_pool_hashrate.exe'
+                                Name='mempool-space_mempool_full_rbf_transactions.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_mining_pool_hashrate.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_mempool_full_rbf_transactions.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary58' Guid='*'>
                             <File
                                 Id='exe58'
-                                Name='mempool-space_mining_pool_hashrates.exe'
+                                Name='mempool-space_mempool_rbf_transactions.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_mining_pool_hashrates.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_mempool_rbf_transactions.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary59' Guid='*'>
                             <File
                                 Id='exe59'
-                                Name='mempool-space_mining_pools.exe'
+                                Name='mempool-space_mempool_recent.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_mining_pools.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_mempool_recent.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary60' Guid='*'>
                             <File
                                 Id='exe60'
-                                Name='mempool-space_post_transaction.exe'
+                                Name='mempool-space_mining_blocks_timestamp.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_post_transaction.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_mining_blocks_timestamp.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary61' Guid='*'>
                             <File
                                 Id='exe61'
-                                Name='mempool-space_prices.exe'
+                                Name='mempool-space_mining_hashrate.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_prices.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_mining_hashrate.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary62' Guid='*'>
                             <File
                                 Id='exe62'
-                                Name='mempool-space_reachable.exe'
+                                Name='mempool-space_mining_hashrate_pools.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_reachable.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_mining_hashrate_pools.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary63' Guid='*'>
                             <File
                                 Id='exe63'
-                                Name='mempool-space_recomended_fees.exe'
+                                Name='mempool-space_mining_pool.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_recomended_fees.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_mining_pool.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary64' Guid='*'>
                             <File
                                 Id='exe64'
-                                Name='mempool-space_reward_stats.exe'
+                                Name='mempool-space_mining_pool_blocks.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_reward_stats.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_mining_pool_blocks.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary65' Guid='*'>
                             <File
                                 Id='exe65'
-                                Name='mempool-space_splash.exe'
+                                Name='mempool-space_mining_pool_hashrate.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_splash.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_mining_pool_hashrate.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary66' Guid='*'>
                             <File
                                 Id='exe66'
-                                Name='mempool-space_transaction.exe'
+                                Name='mempool-space_mining_pools.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_transaction.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_mining_pools.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary67' Guid='*'>
                             <File
                                 Id='exe67'
-                                Name='mempool-space_transaction_hex.exe'
+                                Name='mempool-space_mining_reward_stats.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_transaction_hex.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_mining_reward_stats.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary68' Guid='*'>
                             <File
                                 Id='exe68'
-                                Name='mempool-space_transaction_merkle_block_proof.exe'
+                                Name='mempool-space_post_transaction.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_transaction_merkle_block_proof.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_post_transaction.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary69' Guid='*'>
                             <File
                                 Id='exe69'
-                                Name='mempool-space_transaction_merkle_proof.exe'
+                                Name='mempool-space_prices.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_transaction_merkle_proof.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_prices.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary70' Guid='*'>
                             <File
                                 Id='exe70'
-                                Name='mempool-space_transaction_outspend.exe'
+                                Name='mempool-space_reachable.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_transaction_outspend.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_reachable.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary71' Guid='*'>
                             <File
                                 Id='exe71'
-                                Name='mempool-space_transaction_outspends.exe'
+                                Name='mempool-space_splash.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_transaction_outspends.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_splash.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary72' Guid='*'>
                             <File
                                 Id='exe72'
-                                Name='mempool-space_transaction_raw.exe'
+                                Name='mempool-space_transaction.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_transaction_raw.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_transaction.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary73' Guid='*'>
                             <File
                                 Id='exe73'
-                                Name='mempool-space_transaction_rbf_timeline.exe'
+                                Name='mempool-space_transaction_hex.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_transaction_rbf_timeline.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_transaction_hex.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary74' Guid='*'>
                             <File
                                 Id='exe74'
-                                Name='mempool-space_transaction_status.exe'
+                                Name='mempool-space_transaction_merkle_block_proof.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_transaction_status.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_transaction_merkle_block_proof.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary75' Guid='*'>
                             <File
                                 Id='exe75'
-                                Name='mempool-space_transaction_times.exe'
+                                Name='mempool-space_transaction_merkle_proof.exe'
                                 DiskId='1'
-                                Source='$(var.CargoTargetBinDir)\mempool-space_transaction_times.exe'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_transaction_merkle_proof.exe'
                                 KeyPath='yes'/>
                         </Component>
                         <Component Id='binary76' Guid='*'>
                             <File
                                 Id='exe76'
+                                Name='mempool-space_transaction_outspend.exe'
+                                DiskId='1'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_transaction_outspend.exe'
+                                KeyPath='yes'/>
+                        </Component>
+                        <Component Id='binary77' Guid='*'>
+                            <File
+                                Id='exe77'
+                                Name='mempool-space_transaction_outspends.exe'
+                                DiskId='1'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_transaction_outspends.exe'
+                                KeyPath='yes'/>
+                        </Component>
+                        <Component Id='binary78' Guid='*'>
+                            <File
+                                Id='exe78'
+                                Name='mempool-space_transaction_raw.exe'
+                                DiskId='1'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_transaction_raw.exe'
+                                KeyPath='yes'/>
+                        </Component>
+                        <Component Id='binary79' Guid='*'>
+                            <File
+                                Id='exe79'
+                                Name='mempool-space_transaction_rbf_timeline.exe'
+                                DiskId='1'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_transaction_rbf_timeline.exe'
+                                KeyPath='yes'/>
+                        </Component>
+                        <Component Id='binary80' Guid='*'>
+                            <File
+                                Id='exe80'
+                                Name='mempool-space_transaction_status.exe'
+                                DiskId='1'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_transaction_status.exe'
+                                KeyPath='yes'/>
+                        </Component>
+                        <Component Id='binary81' Guid='*'>
+                            <File
+                                Id='exe81'
+                                Name='mempool-space_transaction_times.exe'
+                                DiskId='1'
+                                Source='$(var.CargoTargetBinDir)\mempool-space_transaction_times.exe'
+                                KeyPath='yes'/>
+                        </Component>
+                        <Component Id='binary82' Guid='*'>
+                            <File
+                                Id='exe82'
                                 Name='mempool-space_validate_address.exe'
                                 DiskId='1'
                                 Source='$(var.CargoTargetBinDir)\mempool-space_validate_address.exe'
@@ -834,6 +882,12 @@
             <ComponentRef Id='binary74'/>
             <ComponentRef Id='binary75'/>
             <ComponentRef Id='binary76'/>
+            <ComponentRef Id='binary77'/>
+            <ComponentRef Id='binary78'/>
+            <ComponentRef Id='binary79'/>
+            <ComponentRef Id='binary80'/>
+            <ComponentRef Id='binary81'/>
+            <ComponentRef Id='binary82'/>
 
             <Feature
                 Id='Environment'

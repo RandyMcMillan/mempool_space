@@ -2,12 +2,19 @@
 name = "lightning-search"
 edition = "2021"
 version.workspace = true
+authors.workspace = true
 description = "lightning-search <searchText>"
 homepage = "https://github.com/randymcmillan/mempool_space.git"
 repository = "https://github.com/randymcmillan/mempool_space.git"
 keywords = ["bitcoin", "mempool"]
 categories = ["network-programming"]
 license = "MIT"
+
+[package.metadata.wix]
+upgrade-guid = "9398A34D-38B7-406B-AAA6-ED9EBD495611"
+path-guid = "D15D5BCF-DD11-4CE9-8229-A6CD4E457473"
+license = false
+eula = false
 
 [dependencies]
 mempool_space = { version = "0.0.40", features = ["async", "futures", "tokio"]}

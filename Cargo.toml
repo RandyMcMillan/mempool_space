@@ -1,5 +1,5 @@
 [workspace.package]
-version = "0.0.42"
+version = "0.0.45"
 edition = "2021"
 authors = ["RandyMcMillan <randy.lee.mcmillan@gmail.com>"]
 description = "mempool.space api interface."
@@ -131,7 +131,7 @@ cargo-dist-version = "0.21.1"
 # CI backends to support
 ci = "github"
 # The installers to generate for each app
-installers = ["shell", "powershell", "homebrew"]
+installers = ["shell", "powershell", "homebrew", "msi"]
 # A GitHub repo to push Homebrew formulas to
 tap = "randymcmillan/homebrew-randymcmillan"
 # Target platforms to build apps for (Rust target-triple syntax)
