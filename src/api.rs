@@ -1,3 +1,7 @@
+const URL: &str = "https://mempool.space/api";
+#[allow(dead_code)]
+const TOR_URL: &str = "http://mempoolhqx4isw62xs7abwphsq7ldayuidyx2v2oethdhhj6mlo2r6ad.onion/api";
+
 /// const API_VERSION: &str = "v1";
 ///
 /// pub fn api(option: &str, sub_string: &str) -> String
@@ -19,10 +23,9 @@ pub fn api(option: &str, sub_string: &str) -> String {
     let result = String::from_utf8(output.stdout)
         .map_err(|non_utf8| String::from_utf8_lossy(non_utf8.as_bytes()).into_owned())
         .unwrap();
-    println!("{}", result);
+
     result
 }
-use crate::URL;
 /// pub fn blocking(api: &String) -> Result<&str, ascii::AsciiChar>
 /// a formatted ureq::get(&call)
 pub fn blocking(api: &String) -> Result<&str, ascii::AsciiChar> {
