@@ -24,7 +24,22 @@ pub struct Home {
   pub show_help: bool,
   pub counter: usize,
   pub app_ticker: usize,
-  pub app_blocker: usize,
+
+
+
+  /// GENERAL
+  pub app_difficulty_adjustment: String,
+  pub app_prices: String,
+  pub app_historical_price: String,
+  pub app_usd: String,
+  pub app_timestamp: String,
+
+  /// BLOCKS
+  pub app_blocks_tip_height: usize,
+
+
+
+
   pub render_ticker: usize,
   pub mode: Mode,
   pub input: Input,
@@ -47,10 +62,35 @@ impl Home {
   pub fn tick(&mut self) {
     log::info!("Tick");
     self.app_ticker = self.app_ticker.saturating_add(1);
+
+
+    /// GENERAL
+    let binding = String::from("difficulty_adjustment");
+    let api_string = mempool_space::api::api(&binding, "");
+    let int_blockheight = api_string.parse::<String>();
+    self.app_difficulty_adjustment = int_blockheight.unwrap();
+
+    let binding = String::from("prices");
+    let api_string = mempool_space::api::api(&binding, "");
+    let int_blockheight = api_string.parse::<String>();
+    self.app_prices = int_blockheight.unwrap();
+
+    let binding = String::from("historical_price");
+    let api_string = mempool_space::api::api(&binding, "");
+    let int_blockheight = api_string.parse::<String>();
+    self.app_historical_price = int_blockheight.unwrap();
+
+
+
+    /// BLOCKS
     let binding = String::from("blocks_tip_height");
     let api_string = mempool_space::api::api(&binding, "");
     let int_blockheight = api_string.parse::<i32>().unwrap_or(0);
-    self.app_blocker = int_blockheight.try_into().unwrap();
+    self.app_blocks_tip_height = int_blockheight.try_into().unwrap();
+
+
+
+
     self.last_events.drain(..);
   }
 
@@ -155,35 +195,38 @@ impl Component for Home {
     let rects = Layout::default().constraints([Constraint::Percentage(100), Constraint::Min(3)].as_ref()).split(rect);
 
     let mut text: Vec<Line> = self.text.clone().iter().map(|l| Line::from(l.clone())).collect();
+    //text.insert(0, "".into());
+    //text.insert(0, "Type into input and hit enter to display here".dim().into());
     text.insert(0, "".into());
-    text.insert(0, "Type into input and hit enter to display here".dim().into());
+    //text.insert(0, format!("Render Ticker: {}", self.render_ticker).into());
+    //text.insert(0, format!("App Ticker: {}", self.app_ticker).into());
+    text.insert(0, format!("mempool.space/api/v1/historical-price: {}", self.app_historical_price).into());
+    text.insert(0, format!("mempool.space/api/v1/prices: {}", self.app_prices).into());
+    text.insert(0, format!("mempool.space/api/difficulty-adjustment: {}", self.app_difficulty_adjustment).into());
+    text.insert(0, format!("mempool.space/api/blocks/tip/height: {}", self.app_blocks_tip_height).into());
+    //text.insert(0, format!("Counter: {}", self.counter).into());
     text.insert(0, "".into());
-    // text.insert(0, format!("Render Ticker: {}", self.render_ticker).into());
-    // text.insert(0, format!("App Ticker: {}", self.app_ticker).into());
-    text.insert(0, format!("mempool.space/api/blocks/tip/height: {}", self.app_blocker).into());
-    // text.insert(0, format!("Counter: {}", self.counter).into());
-    text.insert(0, "".into());
-    text.insert(
-      0,
-      Line::from(vec![
-        "Press ".into(),
-        Span::styled("j", Style::default().fg(Color::Red)),
-        " or ".into(),
-        Span::styled("k", Style::default().fg(Color::Red)),
-        " to ".into(),
-        Span::styled("increment", Style::default().fg(Color::Yellow)),
-        " or ".into(),
-        Span::styled("decrement", Style::default().fg(Color::Yellow)),
-        ".".into(),
-      ]),
-    );
+    //text.insert(
+    //  0,
+    //  Line::from(vec![
+    //    "Press ".into(),
+    //    Span::styled("j", Style::default().fg(Color::Red)),
+    //    " or ".into(),
+    //    Span::styled("k", Style::default().fg(Color::Red)),
+    //    " to ".into(),
+    //    Span::styled("increment", Style::default().fg(Color::Yellow)),
+    //    " or ".into(),
+    //    Span::styled("decrement", Style::default().fg(Color::Yellow)),
+    //    ".".into(),
+    //  ]),
+    //);
     text.insert(0, "".into());
 
     f.render_widget(
       Paragraph::new(text)
         .block(
           Block::default()
-            .title("─── gnostr ─")
+            .title("─── mempool_space ─")
             .title_alignment(Alignment::Left)
             .borders(Borders::ALL)
             .border_style(match self.mode {
@@ -193,7 +236,7 @@ impl Component for Home {
             .border_type(BorderType::Rounded),
         )
         .style(Style::default().fg(Color::Reset))
-        .alignment(Alignment::Center),
+        .alignment(Alignment::Left),
       rects[0],
     );
     let width = rects[1].width.max(3) - 3; // keep 2 for borders and 1 for cursor
