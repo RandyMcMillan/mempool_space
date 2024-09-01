@@ -1,6 +1,8 @@
-const URL: &str = "https://mempool.space/api";
+/// pub const URL: &str = "https://mempool.space/api";
+pub const URL: &str = "https://mempool.space/api";
 #[allow(dead_code)]
-const TOR_URL: &str = "http://mempoolhqx4isw62xs7abwphsq7ldayuidyx2v2oethdhhj6mlo2r6ad.onion/api";
+/// pub const TOR_URL: &str = "http://mempoolhqx4isw62xs7abwphsq7ldayuidyx2v2oethdhhj6mlo2r6ad.onion/api";
+pub const TOR_URL: &str = "http://mempoolhqx4isw62xs7abwphsq7ldayuidyx2v2oethdhhj6mlo2r6ad.onion/api";
 
 /// const API_VERSION: &str = "v1";
 ///
@@ -27,13 +29,12 @@ pub fn api(option: &str, sub_string: &str) -> String {
     result
 }
 /// pub fn blocking(api: &String) -> Result<&str, ascii::AsciiChar>
-/// a formatted ureq::get(&call)
+/// prints to terminal
 pub fn blocking(api: &String) -> Result<&str, ascii::AsciiChar> {
-    //print!("api={}", api);
     let call = format!("{}/{}", URL, api);
     let mut body = ureq::get(&call)
         .call()
-        .expect("calls to blocking(api: &String) needs to include /v1/<api_endpoint> in some cases.")
+        .expect("blocking(api: &String) GET {URL}/{api} OR GET {URL}/v1/{api}")
         .into_reader();
     let mut buf = Vec::new();
     body.read_to_end(&mut buf).unwrap();
