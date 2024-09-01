@@ -17,4 +17,4 @@ license = false
 eula = false
 
 [dependencies]
-mempool_space = { version = "0.0.40", features = ["async", "futures", "tokio"]}
+mempool_space = { path = "../../..", features = ["async", "futures", "tokio"] }
