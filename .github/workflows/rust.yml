@@ -16,20 +16,28 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: cargo build/install sequence
+    - name: brew setup
       run: |
-        sudo apt-get install build-essential
+        sudo apt-get install build-essential make
         bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/runner/.bashrc
         eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
         brew install gcc
         brew tap randymcmillan/homebrew-randymcmillan
+    - name: cargo install cargo-binstall mempool_space
+      run: |
         cargo install --force cargo-binstall
         cargo install --force mempool_space
+    - name: cargo install --git sequence
+      run: |
         cargo install --force --git https://github.com/RandyMcMillan/mempool_space.git mempool_space
         cargo install --force --git https://github.com/RandyMcMillan/mempool_space.git lightning-search
         cargo install --force --git https://github.com/RandyMcMillan/mempool_space.git mempool-space_dashboard
+    - name: cargo build/install/test commit
+      run: |
         cargo build --release --verbose
         cargo install --path . --verbose --force
         cargo test -- --nocapture
+    - name: make sequence
+      run: |
         make || true
