@@ -246,7 +246,8 @@ impl Component for Home {
       ])));
     f.render_widget(input, rects[1]);
     if self.mode == Mode::Insert {
-      f.set_cursor((rects[1].x + 1 + self.input.cursor() as u16).min(rects[1].x + rects[1].width - 2), rects[1].y + 1)
+      f.set_cursor_position(
+      Position::new((rects[1].x + 1 + self.input.cursor() as u16).min(rects[1].x + rects[1].width - 2), rects[1].y + 1))
     }
 
     if self.show_help {
