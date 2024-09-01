@@ -25,14 +25,14 @@ pub struct Home {
   pub counter: usize,
   pub app_ticker: usize,
 
-  /// GENERAL
+  // GENERAL
   pub app_difficulty_adjustment: String,
   pub app_prices: String,
   pub app_historical_price: String,
   pub app_usd: String,
   pub app_timestamp: String,
 
-  /// BLOCKS
+  // BLOCKS
   pub app_blocks_tip_height: usize,
 
   pub render_ticker: usize,
@@ -58,7 +58,7 @@ impl Home {
     log::info!("Tick");
     self.app_ticker = self.app_ticker.saturating_add(1);
 
-    /// GENERAL
+    // GENERAL
     let binding = String::from("difficulty_adjustment");
     let api_string = mempool_space::api::api(&binding, "");
     let int_blockheight = api_string.parse::<String>();
@@ -74,7 +74,7 @@ impl Home {
     let int_blockheight = api_string.parse::<String>();
     self.app_historical_price = int_blockheight.unwrap();
 
-    /// BLOCKS
+    // BLOCKS
     let binding = String::from("blocks_tip_height");
     let api_string = mempool_space::api::api(&binding, "");
     let int_blockheight = api_string.parse::<i32>().unwrap_or(0);
