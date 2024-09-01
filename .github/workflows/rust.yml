@@ -18,8 +18,10 @@ jobs:
     - uses: actions/checkout@v4
     - name: cargo build/install sequence
       run: |
+        brew tap randymcmillan/homebrew-randymcmillan
+        cargo install --force cargo-binstall
         cargo install --force mempool_space
-        cargo install --force --git https://github.com/RandyMcMillan/mempool_space.git mempool-space
+        cargo install --force --git https://github.com/RandyMcMillan/mempool_space.git mempool_space
         cargo install --force --git https://github.com/RandyMcMillan/mempool_space.git lightning-search
         cargo install --force --git https://github.com/RandyMcMillan/mempool_space.git mempool-space_dashboard
         cargo build --release --verbose
