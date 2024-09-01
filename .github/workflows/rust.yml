@@ -16,9 +16,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Build
-      run: cargo build --verbose
-    - name: Install
-      run: cargo install --path . --verbose
-    - name: Run tests
-      run: cargo test -- --nocapture
+    - name: cargo build/install sequence
+      run: |
+        cargo install --force mempool_space
+        cargo install --force --git https://github.com/RandyMcMillan/mempool_space.git mempool-space
+        cargo install --force --git https://github.com/RandyMcMillan/mempool_space.git lightning-search
+        cargo install --force --git https://github.com/RandyMcMillan/mempool_space.git mempool-space_dashboard
+        cargo build --release --verbose
+        cargo install --path . --verbose --force
+        cargo test -- --nocapture
+        make || true
