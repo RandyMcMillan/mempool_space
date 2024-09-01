@@ -416,6 +416,21 @@ pub fn run(args: Args) -> Result<()> {
     Ok(())
 }
 
+###  pub fn reachable()
+pub fn reachable() {
+    use std::time::Instant;
+    use api::{api, blocking};
+    let start = Instant::now();
+    let blocks_tip_height = String::from("blocks/tip/height");
+    let res = blocking(&blocks_tip_height);
+    println!("\nblocking {:?} {:?} bytes", start.elapsed(), res);
+    let start = Instant::now();
+    let blocks_tip_height = String::from("blocks_tip_height");
+    let res = api(&blocks_tip_height, "");
+    println!("\napi {:?} {:?} bytes", start.elapsed(), res);
+    wait("1");
+}
+
 ###  pub fn wait(sleep: &str)
 
 pub fn wait(sleep: &str) {
@@ -446,16 +461,7 @@ mod tests {
 
     #[test]
     fn test_reachable() {
-        use std::time::Instant;
-         use mempool_space::api::{api, blocking};
-        let start = Instant::now();
-        let blocks_tip_height = String::from("blocks/tip/height");
-        let res = blocking(&blocks_tip_height);
-        println!("\nblocking {:?} {:?} bytes", start.elapsed(), res);
-        let start = Instant::now();
-        let blocks_tip_height = String::from("blocks_tip_height");
-        let res = api(&blocks_tip_height, "");
-        println!("\napi {:?} {:?} bytes", start.elapsed(), res);
+        let _reachable = reachable();
         wait("1");
     }
 
