@@ -18,9 +18,11 @@ jobs:
     - uses: actions/checkout@v4
     - name: cargo build/install sequence
       run: |
+        sudo apt-get install build-essential
         bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/runner/.bashrc
         eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+        brew install gcc
         brew tap randymcmillan/homebrew-randymcmillan
         cargo install --force cargo-binstall
         cargo install --force mempool_space
