@@ -27,6 +27,7 @@ jobs:
     - name: cargo install cargo-binstall mempool_space
       run: |
         cargo install --force cargo-binstall
+        cargo install --force cargo-clippy
         cargo install --force mempool_space
     - name: cargo install --git sequence
       run: |
@@ -41,3 +42,5 @@ jobs:
     - name: make sequence
       run: |
         make || true
+        make cargo-clippy || true
+        make cargo-test-ignored || true
