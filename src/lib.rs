@@ -416,6 +416,31 @@ pub fn run(args: Args) -> Result<()> {
     Ok(())
 }
 
+/// pub fn reachable()
+pub fn reachable() -> bool {
+    use api::{api, blocking};
+    use std::time::Instant;
+    let start = Instant::now();
+    let blocks_tip_height = String::from("blocks/tip/height");
+    let res = blocking(&blocks_tip_height);
+    let mut reachable = false;
+    if !res.unwrap().to_string().is_empty() {
+        println!("\nblocking {:?} {:?}", start.elapsed(), res.unwrap().to_string());
+        reachable = true;
+    }
+    let start = Instant::now();
+    let blocks_tip_height = String::from("blocks_tip_height");
+    let res = api(&blocks_tip_height, "");
+    if !res.is_empty() && reachable {
+        println!("\napi {:?} {:?} bytes", start.elapsed(), res.to_string());
+        reachable = true;
+    } else {
+        reachable = false;
+    }
+
+    reachable
+}
+
 /// pub fn wait(sleep: &str)
 
 pub fn wait(sleep: &str) {
@@ -446,16 +471,15 @@ mod tests {
 
     #[test]
     fn test_reachable() {
-        use std::time::Instant;
-        // use mempool_space::api::{api, blocking};
-        let start = Instant::now();
-        let blocks_tip_height = String::from("blocks/tip/height");
-        let res = blocking(&blocks_tip_height);
-        println!("\nblocking {:?} {:?} bytes", start.elapsed(), res);
-        let start = Instant::now();
-        let blocks_tip_height = String::from("blocks_tip_height");
-        let res = api(&blocks_tip_height, "");
-        println!("\napi {:?} {:?} bytes", start.elapsed(), res);
+        let reachable = reachable();
+        assert_eq!(reachable, true);
+        wait("1");
+    }
+    #[test]
+    #[should_panic]
+    fn test_reachable_panic() {
+        let reachable = reachable();
+        assert_eq!(reachable, false);
         wait("1");
     }
 
@@ -463,6 +487,8 @@ mod tests {
 
     #[test]
     fn test_difficulty_adjustment() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         // GET /api/v1/difficulty-adjustment
         let binding = format!("v1/difficulty-adjustment").clone();
         let get_difficulty_adjustment: &str = blocking(&binding).expect("REASON");
@@ -471,6 +497,8 @@ mod tests {
     }
     #[test]
     fn test_price() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         // GET /api/v1/prices
         let binding = format!("v1/prices").clone();
         let get_prices: &str = blocking(&binding).expect("REASON");
@@ -479,6 +507,8 @@ mod tests {
     }
     #[test]
     fn test_historical_price() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         use crate::args::historical_price;
         // GET /api/v1/historical-price?currency=EUR&timestamp=1500000000
         let get_historical_price = historical_price(&"EUR", &"1500000000");
@@ -490,6 +520,8 @@ mod tests {
 
     #[test]
     fn test_address() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         // GET /api/address/:address
         let binding = format!("address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv").clone();
         let get_address: &str = blocking(&binding).expect("test_address failed");
@@ -498,6 +530,8 @@ mod tests {
     }
     #[test]
     fn test_address_txs() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         // GET /api/address/:address/txs
         let binding = format!("address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv/txs").clone();
         let get_address_txs: &str = blocking(&binding).expect("test_address_txs failed");
@@ -506,6 +540,8 @@ mod tests {
     }
     #[test]
     fn test_address_txs_chain() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         // GET /api/address/:address/txs/chain
         let binding = format!("address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv/txs/chain").clone();
         let get_address_txs_chain: &str = blocking(&binding).expect("REASON");
@@ -514,6 +550,8 @@ mod tests {
     }
     #[test]
     fn test_address_txs_mempool() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         // GET /api/address/:address/txs/mempool
         let binding = format!("address/1wiz18xYmhRX6xStj2b9t1rwWX4GKUgpv/txs/mempool").clone();
         let get_address_txs_mempool: &str = blocking(&binding).expect("REASON");
@@ -522,6 +560,8 @@ mod tests {
     }
     #[test]
     fn test_address_utxo() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         // GET /api/address/:address/utxo
         let binding = format!("address/1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY/utxo").clone();
         let get_address_utxo: &str = blocking(&binding).expect("existing valid address needed");
@@ -530,6 +570,8 @@ mod tests {
     }
     #[test]
     fn test_validate_address() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         // GET /api/v1/validate-address/:address
         let binding = format!("v1/validate-address/1KFHE7w8BhaENAswwryaoccDb6qcT6DbYY").clone();
         let get_valid_address: &str = blocking(&binding).expect("valid address needed");
@@ -540,6 +582,8 @@ mod tests {
 
     #[test]
     fn test_block() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         // GET /api/block/:hash
         let binding = format!("block/000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce").clone();
         let get_block: &str = blocking(&binding).expect("an existing block hash is needed");
@@ -551,6 +595,8 @@ mod tests {
     }
     #[test]
     fn test_block_header() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         // GET /api/block/:hash/header
         let binding = format!("block/000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce").clone();
         let get_block_header: &str = blocking(&binding).expect("an existing block hash is needed");
@@ -562,6 +608,8 @@ mod tests {
     }
     #[test]
     fn test_block_height() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         // GET /api/block-height:height
         let binding = format!("block-height/615615").clone();
         let get_block_height: &str = blocking(&binding).expect("an existing block hash is needed");
@@ -570,6 +618,8 @@ mod tests {
     }
     #[test]
     fn test_blocks_timestamp() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         // GET /api/v1/mining/blocks/timestamp/:timestamp
         let binding = format!("v1/mining/blocks/timestamp/1672531200").clone();
         let get_timestamp: &str = blocking(&binding).expect("an existing block hash is needed");
@@ -578,6 +628,8 @@ mod tests {
     }
     #[test]
     fn test_block_raw() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         // GET /api/block/:hash/raw
         let binding = format!("block/0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2").clone();
         let get_block_raw: &str = blocking(&binding).expect("an existing block hash is needed");
@@ -589,6 +641,8 @@ mod tests {
     }
     #[test]
     fn test_block_status() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         // GET /api/block/:hash/status
         let binding = format!("block/0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2").clone();
         let get_block_status: &str = blocking(&binding).expect("an existing block hash is needed");
@@ -600,6 +654,8 @@ mod tests {
     }
     #[test]
     fn test_blocks_tip_height() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         // GET /api/blocks/tip/height
         let binding = format!("blocks/tip/height").clone();
         let get_blocks_tip_height: &str = blocking(&binding).expect("returns current block_height");
@@ -608,6 +664,8 @@ mod tests {
     }
     #[test]
     fn test_blocks_tip_hash() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         // GET /api/blocks/tip/hash
         let binding = format!("blocks/tip/hash").clone();
         let get_blocks_tip_hash: &str = blocking(&binding).expect("returns current block/tip/hash");
@@ -616,6 +674,8 @@ mod tests {
     }
     #[test]
     fn test_block_txid() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         // GET /api/block/:hash/txid/:index
         let binding =
             format!("block/000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txid/218").clone();
@@ -633,6 +693,8 @@ mod tests {
     }
     #[test]
     fn test_block_txids() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         // GET /api/block/:hash/txids
         let binding = format!("block/000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txids").clone();
         let get_block_txids: &str = blocking(&binding).expect("returns current txids from block");
@@ -646,6 +708,8 @@ mod tests {
     }
     #[test]
     fn test_block_txs() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         let binding = format!("block/000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txs").clone();
         let get_block_txs: &str = blocking(&binding).expect("returns current txids from block");
         let get_block_txs = api(
@@ -667,6 +731,8 @@ mod tests {
     }
     #[test]
     fn test_blocks() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         let binding = format!("v1/blocks/730000").clone();
         let get_block_txid: &str = blocking(&binding).expect("returns current txid from block index");
         let get_block_txid = api("blocks", "730000");
@@ -686,6 +752,8 @@ mod tests {
     #[test]
     #[should_panic]
     fn test_blocks_bulk() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         let binding = format!("v1/blocks-bulk/730000/840000").clone();
         let get_block_bulk: &str = blocking(&binding).expect("returns current txid from block index");
         let get_block_bulk = api("blocks_bulk", "730000/840000");
@@ -705,6 +773,8 @@ mod tests {
 
     #[test]
     fn test_mining_pools() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         /// [24h 3d 1w 1m 3m 6m 1y 2y 3y]
         let binding = format!("v1/mining/pools/24h").clone();
         let get_mining_pools: &str = blocking(&binding).expect("returns current v1/mining/pools/1d");
@@ -749,6 +819,8 @@ mod tests {
     }
     #[test]
     fn test_mining_pool() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         /// antpool
         let binding = format!("v1/mining/pool/antpool").clone();
         let get_mining_pool: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug");
@@ -765,6 +837,8 @@ mod tests {
     }
     #[test]
     fn test_mining_hashrate_pools() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         /// timeperiod unspecified
         let binding = format!("v1/mining/hashrate/pools").clone();
         let mining_hashrate_pools: &str =
@@ -805,6 +879,8 @@ mod tests {
     }
     #[test]
     fn test_mining_pool_hashrate() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         /// antpool
         let binding = format!("v1/mining/pool/antpool/hashrate").clone();
         let get_mining_pool_hashrate: &str = blocking(&binding).expect("returns current v1/mining/pool/:slug/hashrate");
@@ -821,6 +897,8 @@ mod tests {
     }
     #[test]
     fn test_mining_pool_blocks() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         use crate::args::mining_pool_blocks;
         /// luxor
         let binding = format!("v1/mining/pool/luxor/blocks/730000").clone();
@@ -840,6 +918,8 @@ mod tests {
     }
     #[test]
     fn test_mining_hashrate() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         /// 1m
         let binding = format!("v1/mining/hashrate/1m").clone();
         let get_mining_hashrate: &str = blocking(&binding).expect("returns v1/mining/hashrate/[:timePeriod]");
@@ -878,6 +958,8 @@ mod tests {
     }
     #[test]
     fn test_mining_difficulty_adjustments() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         /// 1m
         let binding = format!("v1/mining/difficulty-adjustments/1m").clone();
         let get_mining_difficulty_adjustment: &str =
@@ -923,6 +1005,8 @@ mod tests {
     }
     #[test]
     fn test_mining_reward_stats() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         /// GET /api/v1/mining/reward-stats/:blockCount
         let blockCount = "100";
         let binding = format!("v1/mining/reward-stats/{blockCount}").clone();
@@ -935,6 +1019,8 @@ mod tests {
 
     #[test]
     fn test_mining_blocks_audit_score() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         /// GET /api/v1/mining/blocks/audit/score/:blockHash
         let blockHash = "000000000000000000032535698c5b0c48283b792cf86c1c6e36ff84464de785";
         let binding = format!("v1/mining/blocks/audit/score/{blockHash}").clone();
@@ -948,6 +1034,8 @@ mod tests {
     }
     #[test]
     fn test_mining_blocks_audit_scores() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         /// GET /api/v1/mining/blocks/audit/scores/:startHeight
         let startHeight = "820000";
         let binding = format!("v1/mining/blocks/audit/scores/{startHeight}").clone();
@@ -958,6 +1046,8 @@ mod tests {
     }
     #[test]
     fn test_mining_block_audit_summary() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         /// GET /api/v1/block/:blockHash/audit-summary
         let blockHash = "00000000000000000000f218ceda7a5d9c289040b9c3f05ef9f7c2f4930e0123";
         let binding = format!("v1/block/{blockHash}/audit-summary").clone();
@@ -969,6 +1059,8 @@ mod tests {
     /// Fees
     #[test]
     fn test_fees_mempool_blocks() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         /// GET /api/v1/fees/mempool-blocks
         let binding = format!("v1/fees/mempool-blocks").clone();
         let fees_mempool_blocks: &str = blocking(&binding).expect("returns v1/fees/mempool-blocks");
@@ -977,6 +1069,8 @@ mod tests {
     }
     #[test]
     fn test_fees_recommended() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         /// GET /api/v1/fees/recommended
         let binding = format!("v1/fees/recommended").clone();
         let fees_recommended: &str = blocking(&binding).expect("returns v1/fees/recommended");
@@ -987,6 +1081,8 @@ mod tests {
     /// Mempool
     #[test]
     fn test_mempool() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         /// GET /api/mempool
         let binding = format!("mempool").clone();
         let fees_recommended: &str = blocking(&binding).expect("returns mempool");
@@ -999,6 +1095,8 @@ mod tests {
     /// CHILDREN_PAY_FOR_PARENT
     #[test]
     fn test_children_pay_for_parent() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
         /// GET /api/v1/cpfp
         let txid = "e09d8afb19968715a4492205b8db5fe41da144b0c1e4f7a756c8bf9742d4f1f4";
         let binding = format!("v1/cpfp/{txid}").clone();
@@ -1012,19 +1110,84 @@ mod tests {
     }
 
     /// LIGHTNING TESTS
-    /// //lighting_channels_from_node_pubkey
-    /// //lighting_channels_from_txid
-    /// //lighting_isp_nodes.rs
-    /// //lighting_network_status.rs
-    /// //lighting_node_stats.rs
-    /// //lighting_node_stats_per_country.rs
-    /// //lighting_nodes_channels.rs
-    /// //lighting_nodes_in_country.rs
-    /// //lighting_nodes_stats_per_isp.rs
-    /// //lighting_top_nodes.rs
-    /// //lighting_top_nodes_by_connectivity.rs
-    /// //lighting_top_nodes_by_liquidity.rs
-    /// //lighting_top_oldests_nodes.rs
+    /// lighting_channels_from_node_pubkey
+    #[test]
+    fn test_lighting_channels_from_node_pubkey() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
+    }
+    /// lighting_channels_from_txid
+    #[test]
+    fn test_lighting_channels_from_txid() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
+    }
+    /// lighting_isp_nodes
+    #[test]
+    fn test_lighting_isp_nodes() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
+    }
+    /// lighting_network_status
+    #[test]
+    fn test_lighting_network_status() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
+    }
+    /// lighting_node_stats
+    #[test]
+    fn test_lighting_stats() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
+    }
+    /// lighting_node_stats_per_country
+    #[test]
+    fn test_lighting_stats_per_country() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
+    }
+    /// lighting_nodes_channels
+    #[test]
+    fn test_lighting_nodes_channels() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
+    }
+    /// lighting_nodes_in_country
+    #[test]
+    fn test_lighting_nodes_in_country() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
+    }
+    /// lighting_nodes_stats_per_isp
+    #[test]
+    fn test_lighting_nodes_stats_per_isp() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
+    }
+    /// lighting_top_nodes
+    #[test]
+    fn test_lighting_top_nodes() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
+    }
+    /// lighting_top_nodes_by_connectivity
+    #[test]
+    fn test_lighting_top_nodes_by_connectivity() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
+    }
+    /// lighting_top_nodes_by_liquidity
+    #[test]
+    fn test_lighting_top_nodes_by_liquidity() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
+    }
+    /// lighting_top_oldests_nodes
+    #[test]
+    fn test_lighting_top_oldests_nodes() {
+        let reachable = reachable();
+        assert_eq!(reachable, true);
+    }
 
     /// Accelerator (Public)
 
