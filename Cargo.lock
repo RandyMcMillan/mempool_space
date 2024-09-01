@@ -1173,10 +1173,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "lightning-search"
+name = "lightning-search_dashboard"
 version = "0.0.47"
 dependencies = [
- "mempool_space 0.0.40",
+ "mempool_space",
 ]
 
 [[package]]
@@ -1248,7 +1248,7 @@ dependencies = [
  "lazy_static",
  "libc",
  "log",
- "mempool_space 0.0.47",
+ "mempool_space",
  "pretty_assertions",
  "ratatui",
  "serde",
@@ -1262,33 +1262,6 @@ dependencies = [
  "tracing-error",
  "tracing-subscriber",
  "tui-input",
-]
-
-[[package]]
-name = "mempool_space"
-version = "0.0.40"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "eddc4a4792531060db04aa9a0edbee453d486e1360206608835fedf7dede7723"
-dependencies = [
- "anyhow",
- "ascii",
- "crossterm 0.28.1",
- "dirs-next",
- "dns-lookup",
- "futures",
- "getopts",
- "indicatif",
- "mockall",
- "multipart",
- "ratatui",
- "ratatui-splash-screen",
- "reqwest",
- "serde",
- "thiserror",
- "tokio",
- "toml 0.8.19",
- "ureq",
- "url",
 ]
 
 [[package]]

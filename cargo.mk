@@ -43,7 +43,7 @@ cargo-i:cargo-install
 cargo-install:### 	cargo install --path .
 	@. $(HOME)/.cargo/env
 	@cargo install --force --path .
-	@cargo install --force --path ./src/bin/lightning_search
+	@cargo install --force --path ./src/bin/lightning-search_dashboard
 	@cargo install --force --path ./src/bin/mempool-space_dashboard
 ##===============================================================================
 cargo-bench:### 	cargo-bench

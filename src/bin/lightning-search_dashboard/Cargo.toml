@@ -1,5 +1,5 @@
 [package]
-name = "lightning-search"
+name = "lightning-search_dashboard"
 edition = "2021"
 version.workspace = true
 authors.workspace = true
