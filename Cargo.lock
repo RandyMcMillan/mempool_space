@@ -1174,7 +1174,7 @@ dependencies = [
 
 [[package]]
 name = "lightning-search_dashboard"
-version = "0.0.48"
+version = "0.0.49"
 dependencies = [
  "mempool_space",
 ]
@@ -1233,7 +1233,7 @@ checksum = "78ca9ab1a0babb1e7d5695e3530886289c18cf2f87ec19a575a0abdce112e3a3"
 
 [[package]]
 name = "mempool-space_dashboard"
-version = "0.0.48"
+version = "0.0.49"
 dependencies = [
  "better-panic",
  "clap",
@@ -1266,7 +1266,7 @@ dependencies = [
 
 [[package]]
 name = "mempool_space"
-version = "0.0.48"
+version = "0.0.49"
 dependencies = [
  "anyhow",
  "ascii",
