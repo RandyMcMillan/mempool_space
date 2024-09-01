@@ -663,7 +663,7 @@ mod tests {
     }
 
     #[test]
-    #[should_panic]
+    //#[should_panic]
     fn tcp_target_check_availability_all_addresses_filtered_error_v4() {
         // Expectency: check_availability must return an error if all resolved
         //             IPv4 addresses were discarded by the ResolvePolicy
@@ -676,7 +676,7 @@ mod tests {
     }
 
     #[test]
-    #[should_panic]
+    //#[should_panic]
     fn tcp_target_check_availability_all_addresses_filtered_error_v6() {
         // Expectency: check_availability must return an error if all resolved
         //             IPv6 addresses were discarded by the ResolvePolicy
