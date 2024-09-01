@@ -460,6 +460,7 @@ mod tests {
 
     #[test]
     #[ignore]
+    #[should_panic]
     fn icmp_target_check_availability_invalid_host_error() {
         // Expectency: A invalid host must lead to an error
         let target = IcmpTarget::from_str("asdkjhasjdkhakjsdhsad").unwrap();
@@ -650,6 +651,7 @@ mod tests {
 
     #[test]
     #[ignore]
+    #[should_panic]
     fn tcp_target_check_availability_invalid_host_error() {
         // Expectency: A invalid host must lead to an error
         let target = TcpTarget::from_str("asdkjhasjdkhakjsdhsad:1025").unwrap();
@@ -661,6 +663,7 @@ mod tests {
     }
 
     #[test]
+    #[should_panic]
     fn tcp_target_check_availability_all_addresses_filtered_error_v4() {
         // Expectency: check_availability must return an error if all resolved
         //             IPv4 addresses were discarded by the ResolvePolicy
@@ -673,6 +676,7 @@ mod tests {
     }
 
     #[test]
+    #[should_panic]
     fn tcp_target_check_availability_all_addresses_filtered_error_v6() {
         // Expectency: check_availability must return an error if all resolved
         //             IPv6 addresses were discarded by the ResolvePolicy

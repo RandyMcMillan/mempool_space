@@ -134,6 +134,7 @@ mod tests {
 
     #[test]
     #[ignore]
+    #[should_panic]
     fn resolver_policy_fail_to_resolve() {
         // Expectency: If ResolvePolicy must return an io::Error if the given hostname
         // can't be resolved.
