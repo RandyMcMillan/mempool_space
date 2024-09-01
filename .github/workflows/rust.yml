@@ -27,8 +27,11 @@ jobs:
     - name: cargo install cargo-binstall mempool_space
       run: |
         cargo install --force cargo-binstall
-        cargo install --force cargo-clippy
         cargo install --force mempool_space
+    - name: rustup component add clippy
+      run: |
+        rustup update
+        rustup component add clippy
     - name: cargo install --git sequence
       run: |
         cargo install --force --git https://github.com/RandyMcMillan/mempool_space.git mempool_space
