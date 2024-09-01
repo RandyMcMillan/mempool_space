@@ -418,21 +418,27 @@ pub fn run(args: Args) -> Result<()> {
 
 /// pub fn reachable()
 pub fn reachable() -> bool {
-    use api::{api, blocking};
+    use api::{api, blocking, URL};
     use std::time::Instant;
     let start = Instant::now();
     let blocks_tip_height = String::from("blocks/tip/height");
     let res = blocking(&blocks_tip_height);
     let mut reachable = false;
     if !res.unwrap().to_string().is_empty() {
-        println!("\nblocking {:?} {:?}", start.elapsed(), res.unwrap().to_string());
+        println!(
+            "\n\n{:?}:\nGET {}/{:} {:?}\n\n",
+            start,
+            URL,
+            res.unwrap(),
+            start.elapsed()
+        );
         reachable = true;
     }
     let start = Instant::now();
     let blocks_tip_height = String::from("blocks_tip_height");
     let res = api(&blocks_tip_height, "");
     if !res.is_empty() && reachable {
-        println!("\napi {:?} {:?} bytes", start.elapsed(), res.to_string());
+        println!("\n\n{:?}:\nAPI {}/{:} {:?}\n\n", start, URL, res, start.elapsed());
         reachable = true;
     } else {
         reachable = false;
@@ -442,20 +448,13 @@ pub fn reachable() -> bool {
 }
 
 /// pub fn wait(sleep: &str)
-
 pub fn wait(sleep: &str) {
-    //
     use std::process::Command;
-
     let sleep_cmd = Command::new("sleep").arg(sleep).output().expect("wait:sleep failed");
-
-    let result = String::from_utf8(sleep_cmd.stdout)
+    let _result = String::from_utf8(sleep_cmd.stdout)
         .map_err(|non_utf8| String::from_utf8_lossy(non_utf8.as_bytes()).into_owned())
         .unwrap();
-
-    eprintln!("\nwait(sleep: &{:?})", sleep);
-
-    eprintln!("\nresult={}", result);
+    println!();
 }
 
 /// cargo test -- --nocapture
