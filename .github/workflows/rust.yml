@@ -35,7 +35,7 @@ jobs:
     - name: cargo install --git sequence
       run: |
         cargo install --force --git https://github.com/RandyMcMillan/mempool_space.git mempool_space
-        cargo install --force --git https://github.com/RandyMcMillan/mempool_space.git lightning-search
+        cargo install --force --git https://github.com/RandyMcMillan/mempool_space.git lightning-search_dashboard
         cargo install --force --git https://github.com/RandyMcMillan/mempool_space.git mempool-space_dashboard
     - name: cargo build/install/test commit
       run: |
