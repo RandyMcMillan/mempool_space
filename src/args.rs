@@ -83,6 +83,12 @@ pub fn mining_pool_blocks(slug: &str, blockheight: &str) {
 ///
 /// - Flags invoke the installed executable
 ///
+/// DASHBOARD TUI INTERFACE (WIP)
+///
+/// ``mempool-space --dashboard (flagged)``
+///
+/// ``mempool-space_dashboard (executable)``
+///
 ///
 /// <https://mempool.space/docs/api/rest>
 /// - [API/REST](https://mempool.space/docs/api/rest)
@@ -268,6 +274,9 @@ pub fn mining_pool_blocks(slug: &str, blockheight: &str) {
 pub struct Args {
     /// `mempool-space --version`
     pub version: Option<String>,
+    /// `mempool-space --dashboard`
+    /// invoke the tui (WIP)
+    pub dashboard: Option<String>,
     /// `https://mempool.space/api/v1/difficulty-adjustment`
     pub difficulty_adjustment: Option<String>,
     /// `https://mempool.space/api/v1/prices`
@@ -404,7 +413,10 @@ impl Args {
         opts.optflag("o", "oneshot", "generates one shot links");
         opts.optflag("p", "pretty", "prettifies the output");
 
-        //mempool api intercepts
+        // mempool-space_dashboard
+        opts.optflag("", "dashboard", "invoke the tui (WIP)");
+
+        // mempool api intercepts
         // VERSION
         // premeptive support v1,v2 etc...
         // opts.optopt("", "version", "api call version path (v1/...)", "VERSION");
@@ -461,8 +473,7 @@ impl Args {
         opts.optopt("", "min_height", "block txids api call", "MIN_HEIGHT");
         opts.optopt("", "max_height", "block txids api call", "MAX_HEIGHT");
 
-        //MINING
-        //
+        // MINING
         opts.optflag("", "mining_pools", "mining_pools api call");
         opts.optopt("", "timeperiod", "mining_pools api call", "TIMEPERIOD");
 
@@ -491,7 +502,7 @@ impl Args {
         opts.optflag("", "block_audit_summary", "block_audit_summary api call");
         opts.optopt("", "blockhash", "block_audit_summary api call", "BLOCKHASH");
 
-        //OPTOPT
+        // OPTOPT
         opts.optopt("c", "config", "sets the configuration file", "CONFIG");
         opts.optopt("s", "server", "sets the address of the rustypaste server", "SERVER");
         opts.optopt("a", "auth", "sets the authentication or delete token", "TOKEN");
@@ -509,6 +520,11 @@ impl Args {
             }
         };
 
+        //invoke the dashboard
+        // DASHBOARD
+        if matches.opt_present("dashboard") {
+            api("dashboard", &"");
+        };
         //mempool api intercepts
         // VERSION
         // GENERAL
@@ -720,6 +736,9 @@ impl Args {
                 .ok()
                 .or_else(|| matches.opt_str("c"))
                 .map(PathBuf::from),
+
+            // invoke mempool-space_dashboard
+            dashboard: matches.opt_str("dashboard"),
 
             // mempool api intercepts
             // mempool api version

@@ -8,15 +8,36 @@ pub const TOR_URL: &str = "http://mempoolhqx4isw62xs7abwphsq7ldayuidyx2v2oethdhh
 ///
 /// pub fn api(option: &str, sub_string: &str) -> String
 pub fn api(option: &str, sub_string: &str) -> String {
-    use std::process::Command;
+    if option.ends_with("dashboard") {
+        print!("api:invoke dashboard {:}", option);
+        let _ = if cfg!(target_os = "windows") {
+            std::process::Command::new(format!("mempool-space_{}", option))
+                //.args(["/C", sub_string])
+                .spawn()
+                .expect("failed to execute process")
+        } else {
+            std::process::Command::new(format!("mempool-space_{}", option))
+                //.arg(sub_string)
+                .spawn()
+                .expect("failed to execute process")
+        };
+        //let result = String::from_utf8(output.stdout)
+        //    .map_err(|non_utf8| String::from_utf8_lossy(non_utf8.as_bytes()).into_owned())
+        //    .unwrap();
+
+        //return result;
+        loop {}
+
+        //std::process::exit(0);
+    }
 
     let output = if cfg!(target_os = "windows") {
-        Command::new(format!("mempool-space_{}", option))
+        std::process::Command::new(format!("mempool-space_{}", option))
             .args(["/C", sub_string])
             .output()
             .expect("failed to execute process")
     } else {
-        Command::new(format!("mempool-space_{}", option))
+        std::process::Command::new(format!("mempool-space_{}", option))
             .arg(sub_string)
             .output()
             .expect("failed to execute process")
@@ -31,6 +52,10 @@ pub fn api(option: &str, sub_string: &str) -> String {
 /// pub fn blocking(api: &String) -> Result<&str, ascii::AsciiChar>
 /// prints to terminal
 pub fn blocking(api: &String) -> Result<&str, ascii::AsciiChar> {
+    if api.ends_with("dashboard") {
+        print!("blocking:invoke dashboard {:?}", api);
+        std::process::exit(0);
+    }
     let call = format!("{}/{}", URL, api);
     let mut body = ureq::get(&call)
         .call()
@@ -46,6 +71,9 @@ pub fn blocking(api: &String) -> Result<&str, ascii::AsciiChar> {
         };
         print!("{}", text);
     } else {
+        if api.ends_with("dashboard") {
+            print!("invoke dashboard {:?}", &buf);
+        }
         if api.ends_with("raw") {
             //print!("api.ends_with raw");
             print!("{:?}", &buf);
