@@ -1,5 +1,5 @@
 [workspace.package]
-version = "0.0.48"
+version = "0.0.50"
 edition = "2021"
 authors = ["RandyMcMillan <randy.lee.mcmillan@gmail.com>"]
 description = "mempool.space api interface."
@@ -30,12 +30,12 @@ path = "src/bin/mempool-space.rs"
 doc = true
 
 [[bin]]
-name = "lightning-search-dashboard"
+name = "lightning-search_dashboard"
 path = "src/bin/lightning-search_dashboard/src/main.rs"
 doc = true
 
 [[bin]]
-name = "mempool-space-dashboard"
+name = "mempool-space_dashboard"
 path = "src/bin/mempool-space_dashboard/src/main.rs"
 doc = true
 
@@ -116,7 +116,7 @@ cargo-dist-version = "0.21.1"
 # CI backends to support
 ci = "github"
 # The installers to generate for each app
-installers = ["shell", "powershell", "homebrew", "msi"]
+installers = ["shell", "powershell", "homebrew"]
 # A GitHub repo to push Homebrew formulas to
 tap = "randymcmillan/homebrew-randymcmillan"
 # Target platforms to build apps for (Rust target-triple syntax)

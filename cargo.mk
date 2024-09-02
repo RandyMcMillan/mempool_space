@@ -67,7 +67,7 @@ cargo-check:### 	cargo-check
 ## 	cargo check --manifest-path ./src/bin/mempool-space_dashboard/Cargo.toml
 	cargo check --manifest-path ./src/bin/mempool-space_dashboard/Cargo.toml
 ## 	cargo check --manifest-path ./src/bin/lightning_search/Cargo.toml
-	cargo check --manifest-path ./src/bin/lightning_search/Cargo.toml
+	cargo check --manifest-path ./src/bin/lightning-search_dashboard/Cargo.toml
 ## 	cargo check --manifest-path ./Cargo.toml
 	cargo check --manifest-path ./Cargo.toml
 ## 	:
