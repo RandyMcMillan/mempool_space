@@ -26,7 +26,7 @@ async fn tokio_main() -> Result<()> {
   initialize_panic_handler()?;
 
   let args = Cli::parse();
-  let mut app = App::new(args.tick_rate, args.frame_rate)?;
+  let mut app = App::new(args.tick_rate, args.frame_rate, args.dashboard)?;
   app.run().await?;
 
   Ok(())
@@ -35,7 +35,7 @@ async fn tokio_main() -> Result<()> {
 #[tokio::main]
 async fn main() -> Result<()> {
   if let Err(e) = tokio_main().await {
-    eprintln!("{} error: Something went wrong", env!("CARGO_PKG_NAME"));
+    eprintln!("{} error: tokio_main().await", env!("CARGO_PKG_NAME"));
     Err(e)
   } else {
     Ok(())

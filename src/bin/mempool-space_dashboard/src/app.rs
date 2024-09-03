@@ -21,6 +21,7 @@ pub struct App {
   pub config: Config,
   pub tick_rate: f64,
   pub frame_rate: f64,
+  pub dashboard: bool,
   pub components: Vec<Box<dyn Component>>,
   pub should_quit: bool,
   pub should_suspend: bool,
@@ -29,7 +30,7 @@ pub struct App {
 }
 
 impl App {
-  pub fn new(tick_rate: f64, frame_rate: f64) -> Result<Self> {
+  pub fn new(tick_rate: f64, frame_rate: f64, dashboard: bool) -> Result<Self> {
     let home = Home::new();
     let fps = FpsCounter::new();
     let config = Config::new()?;
@@ -37,6 +38,7 @@ impl App {
     Ok(Self {
       tick_rate,
       frame_rate,
+      dashboard,
       components: vec![Box::new(home), Box::new(fps)],
       should_quit: false,
       should_suspend: false,

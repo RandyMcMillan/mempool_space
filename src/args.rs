@@ -523,7 +523,7 @@ impl Args {
         //invoke the dashboard
         // DASHBOARD
         if matches.opt_present("dashboard") {
-            api("dashboard", &"");
+            api("dashboard", "");
         };
         //mempool api intercepts
         // VERSION

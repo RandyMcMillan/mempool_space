@@ -1,6 +1,6 @@
 use std::path::PathBuf;
 
-use clap::Parser;
+use clap::{ArgAction, Parser};
 
 use crate::utils::version;
 
@@ -24,4 +24,13 @@ pub struct Cli {
     default_value_t = 13.0
   )]
   pub frame_rate: f64,
+  #[arg(
+    short,
+    long,
+    value_name = "DASHBOARD",
+    help = "Invoked from mempool-space --dashboard",
+    default_value_t = false,
+    action=ArgAction::SetTrue
+  )]
+  pub dashboard: bool,
 }

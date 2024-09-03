@@ -8,27 +8,41 @@ pub const TOR_URL: &str = "http://mempoolhqx4isw62xs7abwphsq7ldayuidyx2v2oethdhh
 ///
 /// pub fn api(option: &str, sub_string: &str) -> String
 pub fn api(option: &str, sub_string: &str) -> String {
+    let mut once: bool = false;
+    let mut dashboard: std::process::Child;
     if option.ends_with("dashboard") {
-        print!("api:invoke dashboard {:}", option);
-        let _ = if cfg!(target_os = "windows") {
-            std::process::Command::new(format!("mempool-space_{}", option))
-                //.args(["/C", sub_string])
-                .spawn()
-                .expect("failed to execute process")
-        } else {
-            std::process::Command::new(format!("mempool-space_{}", option))
-                //.arg(sub_string)
-                .spawn()
-                .expect("failed to execute process")
-        };
-        //let result = String::from_utf8(output.stdout)
-        //    .map_err(|non_utf8| String::from_utf8_lossy(non_utf8.as_bytes()).into_owned())
-        //    .unwrap();
+        loop {
+            if !once {
+                info!("api({:}, {:})", option, sub_string);
+                dashboard = if cfg!(target_os = "windows") {
+                    std::process::Command::new(format!("mempool-space_{}", option))
+                        .args(["/C", "--dashboard"])
+                        .spawn()
+                        .expect("failed to execute process")
+                } else {
+                    std::process::Command::new(format!("mempool-space_{}", option))
+                        .arg("--dashboard")
+                        .spawn()
+                        .expect("failed to execute process")
+                };
 
-        //return result;
-        loop {}
-
-        //std::process::exit(0);
+                let stdin = dashboard.stdin.take();
+                let stdout = dashboard.stdout.take();
+                let stderr = dashboard.stderr.take();
+                let result = dashboard.wait();
+                use log::info; //, warn};
+                info!("{:?}", stdin);
+                info!("{:?}", stdout);
+                info!("{:?}", stderr);
+                info!("{:?}", result);
+                once = true;
+            } else {
+                std::process::exit(0);
+            }
+        }
+    }
+    if once {
+        std::process::exit(0);
     }
 
     let output = if cfg!(target_os = "windows") {
