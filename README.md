@@ -589,7 +589,7 @@ mod tests {
         let get_block = api(
             "block",
             "000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce",
-            true
+            true,
         );
         wait("1");
     }
@@ -603,7 +603,7 @@ mod tests {
         let get_block_header = api(
             "block_header",
             "000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce",
-            true
+            true,
         );
         wait("1");
     }
@@ -637,7 +637,7 @@ mod tests {
         let get_block_raw = api(
             "block_raw",
             "0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2",
-            true
+            true,
         );
         wait("1");
     }
@@ -651,7 +651,7 @@ mod tests {
         let get_block_status = api(
             "block_status",
             "0000000000000000000065bda8f8a88f2e1e00d9a6887a43d640e52a4c7660f2",
-            true
+            true,
         );
         wait("1");
     }
@@ -686,7 +686,7 @@ mod tests {
         let get_block_txid = api(
             "block_txid",
             "000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txid/218",
-            true
+            true,
         );
         use crate::args::block_txid;
         block_txid(
@@ -705,7 +705,7 @@ mod tests {
         let get_block_txids = api(
             "block_txid",
             "000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txids",
-            true
+            true,
         );
         use crate::args::block_txids;
         block_txids(&"000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce");
@@ -720,22 +720,22 @@ mod tests {
         let get_block_txs = api(
             "block_txs",
             "000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txs",
-            true
+            true,
         );
         let get_block_txs = api(
             "block_txs",
             "000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txs/0",
-            true
+            true,
         );
         let get_block_txs = api(
             "block_txs",
             "000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txs/1", test if start_index_int % 25 == 0
-            true
+            true,
         );
         let get_block_txs = api(
             "block_txs",
             "000000000000000015dc777b3ff2611091336355d3f0ee9766a2cf3be8e4b1ce/txs/25",
-            true
+            true,
         );
     }
     #[test]
@@ -1038,7 +1038,7 @@ mod tests {
         let block_audit_score = api(
             "blocks_audit_score",
             "000000000000000000032535698c5b0c48283b792cf86c1c6e36ff84464de785",
-            true
+            true,
         );
         wait("1");
     }
@@ -1115,7 +1115,7 @@ mod tests {
         let children_pay_for_parent = api(
             "children_pay_for_parent",
             "e09d8afb19968715a4492205b8db5fe41da144b0c1e4f7a756c8bf9742d4f1f4",
-            true
+            true,
         );
         wait("1");
     }

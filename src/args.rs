@@ -38,8 +38,8 @@ pub fn block_txs(block_hash: &str, start_index: &str) {
 }
 /// GET /api/v1/blocks[/:startHeight]
 /// <https://mempool.space/docs/api/rest#get-blocks>
-pub fn blocks(start_height: &str, print: bool) {
-    let blocks_tip_height = api::api("blocks_tip_height", "extraneous_arg", print);
+pub fn blocks(start_height: &str, _print: bool) {
+    let blocks_tip_height = api::api("blocks_tip_height", "extraneous_arg", /*print*/false);
     let blocks_tip_height_int = blocks_tip_height.parse::<i32>().unwrap_or(0);
     let start_height_int = start_height.parse::<i32>().unwrap_or(0);
     if start_height_int >= 0 && start_height_int <= blocks_tip_height_int {
