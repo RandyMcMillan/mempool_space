@@ -60,23 +60,23 @@ impl Home {
 
     // GENERAL
     let binding = String::from("difficulty_adjustment");
-    let api_string = mempool_space::api::api(&binding, "");
+    let api_string = mempool_space::api::api(&binding, "", false);
     let int_blockheight = api_string.parse::<String>();
     self.app_difficulty_adjustment = int_blockheight.unwrap();
 
     let binding = String::from("prices");
-    let api_string = mempool_space::api::api(&binding, "");
+    let api_string = mempool_space::api::api(&binding, "", false);
     let int_blockheight = api_string.parse::<String>();
     self.app_prices = int_blockheight.unwrap();
 
     let binding = String::from("historical_price");
-    let api_string = mempool_space::api::api(&binding, "");
+    let api_string = mempool_space::api::api(&binding, "", false);
     let int_blockheight = api_string.parse::<String>();
     self.app_historical_price = int_blockheight.unwrap();
 
     // BLOCKS
     let binding = String::from("blocks_tip_height");
-    let api_string = mempool_space::api::api(&binding, "");
+    let api_string = mempool_space::api::api(&binding, "", false);
     let int_blockheight = api_string.parse::<i32>().unwrap_or(0);
     self.app_blocks_tip_height = int_blockheight.try_into().unwrap();
 

@@ -11,7 +11,7 @@ fn main() {
         println!("\nblocking {:?} {:?} bytes", start.elapsed(), res);
         let start = Instant::now();
         let blocks_tip_height = String::from("blocks_tip_height");
-        let res = api(&blocks_tip_height, "");
+        let res = api(&blocks_tip_height, "", false);
         println!("\napi {:?} {:?} bytes", start.elapsed(), res);
     }
 }

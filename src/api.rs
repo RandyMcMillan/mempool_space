@@ -1,16 +1,22 @@
-/// pub const URL: &str = "https://mempool.space/api";
+/// mempool.space api
+/// <https://mempool.space/api>
 pub const URL: &str = "https://mempool.space/api";
 #[allow(dead_code)]
-/// pub const TOR_URL: &str = "http://mempoolhqx4isw62xs7abwphsq7ldayuidyx2v2oethdhhj6mlo2r6ad.onion/api";
+/// mempool.space onion api
+/// <http://mempoolhqx4isw62xs7abwphsq7ldayuidyx2v2oethdhhj6mlo2r6ad.onion/api>
 pub const TOR_URL: &str = "http://mempoolhqx4isw62xs7abwphsq7ldayuidyx2v2oethdhhj6mlo2r6ad.onion/api";
 
 /// const API_VERSION: &str = "v1";
 ///
-/// pub fn api(option: &str, sub_string: &str) -> String
-pub fn api(option: &str, sub_string: &str) -> String {
+/// the print boolean is set to false in the mempool-space_dashboard
+/// the print boolean is set to true when called from the command line utilities
+///
+/// pub fn api(option: &str, sub_string: &str, print: bool) -> String
+pub fn api(option: &str, sub_string: &str, print: bool) -> String {
     let mut once: bool = false;
     let mut dashboard: std::process::Child;
-    if option.ends_with("dashboard") {
+    // detect if mempool-space --dashboard
+    if option.contains("dashboard") {
         loop {
             if !once {
                 info!("api({:}, {:})", option, sub_string);
@@ -41,9 +47,6 @@ pub fn api(option: &str, sub_string: &str) -> String {
             }
         }
     }
-    if once {
-        std::process::exit(0);
-    }
 
     let output = if cfg!(target_os = "windows") {
         std::process::Command::new(format!("mempool-space_{}", option))
@@ -61,14 +64,20 @@ pub fn api(option: &str, sub_string: &str) -> String {
         .map_err(|non_utf8| String::from_utf8_lossy(non_utf8.as_bytes()).into_owned())
         .unwrap();
 
+    if print {
+        print!("{}", result);
+    }
     result
 }
 /// pub fn blocking(api: &String) -> Result<&str, ascii::AsciiChar>
 /// prints to terminal
 pub fn blocking(api: &String) -> Result<&str, ascii::AsciiChar> {
-    if api.ends_with("dashboard") {
+    if api.contains("dashboard") {
         print!("blocking:invoke dashboard {:?}", api);
         std::process::exit(0);
+    }
+    if api.contains("address") {
+        //print!("api={:?}", api);
     }
     let call = format!("{}/{}", URL, api);
     let mut body = ureq::get(&call)
@@ -77,6 +86,11 @@ pub fn blocking(api: &String) -> Result<&str, ascii::AsciiChar> {
         .into_reader();
     let mut buf = Vec::new();
     body.read_to_end(&mut buf).unwrap();
+    //let text = match std::str::from_utf8(&buf) {
+    //    Ok(s) => s,
+    //    Err(_) => panic!("Invalid ASCII data"),
+    //};
+    //print!("{}", text);
     if !api.ends_with("raw") {
         //print!("!api.ends_with raw");
         let text = match std::str::from_utf8(&buf) {

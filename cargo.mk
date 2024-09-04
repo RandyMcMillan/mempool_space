@@ -96,9 +96,9 @@ cargo-test:cargo-clippy### 	cargo-test
 	@. $(HOME)/.cargo/env
 	FORCE=--force $(MAKE) cargo-i
 ##cargo test --bin lightning-search
-	cargo test --bin lightning-search_dashboard
+	cargo test --manifest-path src/bin/lightning-search_dashboard/Cargo.toml
 ##cargo test --bin mempool-space_dashboard
-	cargo test --bin mempool-space_dashboard
+	cargo test --manifest-path src/bin/mempool-space_dashboard/Cargo.toml
 ##cargo test --bins
 	cargo test --bins
 ##cargo test

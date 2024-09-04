@@ -1,5 +1,5 @@
 [workspace.package]
-version = "0.0.51"
+version = "0.0.52"
 edition = "2021"
 authors = ["RandyMcMillan <randy.lee.mcmillan@gmail.com>"]
 description = "mempool.space api interface."
@@ -28,7 +28,6 @@ categories =  { workspace = true }
 name = "mempool-space"
 path = "src/bin/mempool-space.rs"
 doc = true
-
 ## [[bin]]
 ## name = "lightning-search_dashboard"
 ## path = "src/bin/lightning-search_dashboard/src/main.rs"
