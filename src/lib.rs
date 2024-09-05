@@ -428,7 +428,7 @@ pub fn reachable() -> bool {
         println!(
             "\n\n{:?}:\nGET {}/{:} {:?}\n\n",
             start,
-            URL,
+            URL[0],
             res.unwrap(),
             start.elapsed()
         );
@@ -438,7 +438,7 @@ pub fn reachable() -> bool {
     let blocks_tip_height = String::from("blocks_tip_height");
     let res = api::api(&blocks_tip_height, "", false);
     if !res.is_empty() && reachable {
-        println!("\n\n{:?}:\nAPI {}/{:} {:?}\n\n", start, URL, res, start.elapsed());
+        println!("\n\n{:?}:\nAPI {}/{:} {:?}\n\n", start, URL[0], res, start.elapsed());
         reachable = true;
     } else {
         reachable = false;
