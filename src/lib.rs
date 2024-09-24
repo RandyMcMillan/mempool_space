@@ -169,9 +169,15 @@
 //!
 //!	mempool-space_mining_hashrate_pools 1m
 //!
-//!	mempool-space \--mining_pool_hashrate \--slug foundaryusa
+//!	mempool-space \--mining_pool_hashrate \--slug foundryusa
 //!
 //!	mempool-space_mining_pool_hashrate foundryusa
+//!
+//!	mempool-space \--mining_pool_hashrate \--slug unknown
+//!
+//!	mempool-space_mining_pool_hashrate unknown
+//!
+//!	more
 //!
 //!	mempool-space \--mining_pool_blocks \--slug luxor \--blockheight 730000
 //!
@@ -191,36 +197,50 @@
 //
 //
 //
-//! FEES
+//! ## FEES
 //
 //
 //
-//! mempool-space_fees_mempool_blocks
+//!	mempool-space_fees_mempool_blocks
 //!
-//! mempool-space_fees_recommended
+//!	mempool-space \--fees_mempool_blocks
+//!
+//!	mempool-space_fees_recommended
+//!
+//!	mempool-space \--fees_recommended
 //
 //
 //
-//! MEMPOOL
+//! ## MEMPOOL
 //
 //
 //
 //!
-//! mempool-space_mempool
+//!	mempool-space_mempool
 //!
-//! mempool-space_mempool_full_rbf_transactions
+//!	mempool_space \--mempool
 //!
-//! mempool-space_mempool_rbf_transactions
+//!	mempool-space_mempool_full_rbf_transactions
 //!
-//! mempool-space_mempool_recent
+//!	mempool-space \--mempool_full_rbf_transactions
 //!
-//! mempool-space_mempool_txids
+//!	mempool-space_mempool_rbf_transactions
+//!
+//!	mempool-space \--mempool_rbf_transactions
+//!
+//!	mempool-space_mempool_recent
+//!
+//!	mempool-space \--mempool_recent
+//!
+//!	mempool-space_mempool_txids
+//!
+//!	mempool-space \--mempool_txids
 //!
 
 //
 //
 //
-//! TRANSACTIONS
+//! ## TRANSACTIONS
 //
 //
 //
@@ -228,7 +248,7 @@
 //
 //
 //
-//! LIGHTNING
+//! ## LIGHTNING
 //
 //
 //
@@ -236,7 +256,7 @@
 //
 //
 //
-//! ACCELERATOR PUBLIC
+//! ## ACCELERATOR PUBLIC
 //
 //
 //
@@ -244,7 +264,7 @@
 //
 //
 //
-//! ACCELERATOR AUTHENTICATED
+//! ## ACCELERATOR AUTHENTICATED
 //
 //
 //

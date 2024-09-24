@@ -72,6 +72,14 @@ pub fn mining_pool_blocks(slug: &str, blockheight: &str) {
         &(&blockheight).to_string()
     ));
 }
+/// GET /api/v1/mining/hashrate/pools/\[:timePeriod]
+/// <https://mempool.space/docs/api/rest#get-mining-pool-hashrates>
+pub fn mining_pool_hashrates(timeperiod: &str) {
+    let _res = blocking(&format!(
+        "v1/mining/hashrate/pools/{}",
+        &(&timeperiod).to_string(),
+    ));
+}
 
 /// USAGE
 ///
@@ -345,6 +353,16 @@ pub struct Args {
     pub mining_pool: Option<String>,
     /// slug
     pub slug: Option<String>,
+
+    /// `https://mempool.space/api/v1/mining/hashrate/pools/:<TIMEPERIOD>`
+    pub mining_hashrate_pools: Option<String>,
+    /// `https://mempool.space/api/v1/mining/hashrate/pools/:<TIMEPERIOD>`
+    /// REUSE pub timeperiod: Option\<String\>,
+
+    /// `https://mempool.space/api/v1/mining/pool/:<SLUG>/hashrate`
+    pub mining_pool_hashrate: Option<String>,
+    /// `https://mempool.space/api/v1/mining/pool/:slug/hashrate`
+    /// REUSE pub slug: Option\<String\>,
 
     /// `https://mempool.space/api/v1/mining/difficulty-adjustments/[:interval]`
     pub difficulty_adjustments: Option<String>,
@@ -674,7 +692,7 @@ impl Args {
         }
         if matches.opt_present("mining_pool_hashrate") {
             let arg_slug = matches.opt_str("slug");
-            api("mining_hashrate_pool", &arg_slug.unwrap(), true);
+            api("mining_pool_hashrate", &arg_slug.unwrap(), true);
             std::process::exit(0);
         }
         if matches.opt_present("mining_pool_blocks") {
@@ -771,21 +789,24 @@ impl Args {
             // https://mempool.space/api/block-height/615615
             block_height: matches.opt_str("block_height"),
 
-            // V1 MINING BLOCKS TIMESTAMP
+            // V1 MINING BLOCKS_TIMESTAMP
             // https://mempool.space/api/v1/mining/blocks/timestamp/<UTC_SECS>"
             blocks_timestamp: matches.opt_str("blocks_timestamp"),
 
-            // BLOCK
+            // BLOCK_RAW
             // https://mempool.space/api/block/<block_hash>/raw
             block_raw: matches.opt_str("block_raw"),
+
+            // BLOCK_STATUS
             // https://mempool.space/api/block/<block_hash>/status
             block_status: matches.opt_str("block_status"),
 
             // BLOCKS
-            // BLOCKS TIP HEIGHT
+            // BLOCKS_TIP_HEIGHT
             // https://mempool.space/api/blocks/tip/height
             blocks_tip_height: matches.opt_str("blocks_tip_height"),
-            // BLOCKS TIP HASH
+
+            // BLOCKS_TIP_HASH
             // https://mempool.space/api/blocks/tip/hash
             blocks_tip_hash: matches.opt_str("blocks_tip_hash"),
 
@@ -812,6 +833,7 @@ impl Args {
             min_height: matches.opt_str("min_height"),
             max_height: matches.opt_str("max_height"),
 
+        
             // MINING
             // V1 MINING POOLS TIMEPERIOD
             mining_pools: matches.opt_str("mining_pools"),
@@ -820,6 +842,16 @@ impl Args {
             // V1 MINING POOL SLUG
             mining_pool: matches.opt_str("mining_pool"),
             slug: matches.opt_str("slug"),
+
+            // V1 MINING HASHRATE_POOLS TIMEPERIOD
+            mining_hashrate_pools: matches.opt_str("mining_hashrate_pools"),
+            // REUSE timeperiod: matches.opt_str("timeperiod"),
+//mining_pool_hashrate
+
+            // V1 MINING POOL HASHRATE SLUG
+            mining_pool_hashrate: matches.opt_str("mining_pool_hashrate"),
+            // REUSE slug: matches.opt_str("slug"),
+
 
             // V1 MINING DIFFICULTY_ADJUSTMENTS INTERVAL
             difficulty_adjustments: matches.opt_str("difficulty_adjustments"),

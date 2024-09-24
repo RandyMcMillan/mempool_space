@@ -169,9 +169,15 @@
 
 	mempool-space_mining_hashrate_pools 1m
 
-	mempool-space --mining_pool_hashrate --slug foundaryusa
+	mempool-space --mining_pool_hashrate --slug foundryusa
 
 	mempool-space_mining_pool_hashrate foundryusa
+
+	mempool-space --mining_pool_hashrate --slug unknown
+
+	mempool-space_mining_pool_hashrate unknown
+
+	more
 
 	mempool-space --mining_pool_blocks --slug luxor --blockheight 730000
 
@@ -191,60 +197,74 @@
 
 
 
-FEES
+## FEES
 
 
 
-mempool-space_fees_mempool_blocks
+	mempool-space_fees_mempool_blocks
 
-mempool-space_fees_recommended
+	mempool-space --fees_mempool_blocks
 
+	mempool-space_fees_recommended
 
-
-MEMPOOL
-
-
+	mempool-space --fees_recommended
 
 
-mempool-space_mempool
 
-mempool-space_mempool_full_rbf_transactions
-
-mempool-space_mempool_rbf_transactions
-
-mempool-space_mempool_recent
-
-mempool-space_mempool_txids
+## MEMPOOL
 
 
 
 
+	mempool-space_mempool
 
-TRANSACTIONS
+	mempool_space --mempool
+
+	mempool-space_mempool_full_rbf_transactions
+
+	mempool-space --mempool_full_rbf_transactions
+
+	mempool-space_mempool_rbf_transactions
+
+	mempool-space --mempool_rbf_transactions
+
+	mempool-space_mempool_recent
+
+	mempool-space --mempool_recent
+
+	mempool-space_mempool_txids
+
+	mempool-space --mempool_txids
 
 
 
 
 
-
-
-LIGHTNING
-
-
-
-
-
-
-
-ACCELERATOR PUBLIC
-
+## TRANSACTIONS
 
 
 
 
 
 
-ACCELERATOR AUTHENTICATED
+
+## LIGHTNING
+
+
+
+
+
+
+
+## ACCELERATOR PUBLIC
+
+
+
+
+
+
+
+## ACCELERATOR AUTHENTICATED
 
 
 
@@ -428,7 +448,7 @@ pub fn reachable() -> bool {
         println!(
             "\n\n{:?}:\nGET {}/{:} {:?}\n\n",
             start,
-            URL,
+            URL[0],
             res.unwrap(),
             start.elapsed()
         );
@@ -438,7 +458,7 @@ pub fn reachable() -> bool {
     let blocks_tip_height = String::from("blocks_tip_height");
     let res = api::api(&blocks_tip_height, "", false);
     if !res.is_empty() && reachable {
-        println!("\n\n{:?}:\nAPI {}/{:} {:?}\n\n", start, URL, res, start.elapsed());
+        println!("\n\n{:?}:\nAPI {}/{:} {:?}\n\n", start, URL[0], res, start.elapsed());
         reachable = true;
     } else {
         reachable = false;
