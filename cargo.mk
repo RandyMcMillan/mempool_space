@@ -90,6 +90,11 @@ cargo-doc:### 	cargo-doc
 	@cat README.temp2 | sed 's/unwrap_used/unwrap\\_used/g' > README.md
 	git diff doc/README.md
 
+cargo-fmt:### cargo +nightly fmt
+	cargo +nightly fmt
+cargo-sort:### cargo +nightly sort
+	cargo +nightly sort
+
 ##===============================================================================
 cargo-t:cargo-test
 cargo-test:cargo-clippy### 	cargo-test
