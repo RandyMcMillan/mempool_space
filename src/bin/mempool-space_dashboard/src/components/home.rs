@@ -34,6 +34,7 @@ pub struct Home {
 
   // BLOCKS
   pub app_blocks_tip_height: usize,
+  pub app_blocks_tip_hash: String,
 
   pub render_ticker: usize,
   pub mode: Mode,
@@ -74,11 +75,18 @@ impl Home {
     let hist_price_json = api_string.parse::<String>();
     self.app_historical_price = hist_price_json.expect("hist_price_json");
 
+    // ADDRESSES TODO
+
     // BLOCKS
     let binding = String::from("blocks_tip_height");
     let api_string = mempool_space::api::api(&binding, "", false);
     let int_blocks_tip_height = api_string.parse::<i32>().unwrap_or(0);
     self.app_blocks_tip_height = int_blocks_tip_height.try_into().expect("int_blocks_tip_height");
+
+    let binding = String::from("blocks_tip_hash");
+    let api_string = mempool_space::api::api(&binding, "", false);
+    let blocks_tip_hash = api_string.parse::<String>();
+    self.app_blocks_tip_hash = blocks_tip_hash.expect("blocks_tip_hash");
 
     self.last_events.drain(..);
   }
@@ -192,6 +200,7 @@ impl Component for Home {
     text.insert(0, format!("mempool.space/api/v1/historical-price: {}", self.app_historical_price).into());
     text.insert(0, format!("mempool.space/api/v1/prices: {}", self.app_prices).into());
     text.insert(0, format!("mempool.space/api/difficulty-adjustment: {}", self.app_difficulty_adjustment).into());
+    text.insert(0, format!("mempool.space/api/blocks/tip/hash: {}", self.app_blocks_tip_hash).into());
     text.insert(0, format!("mempool.space/api/blocks/tip/height: {}", self.app_blocks_tip_height).into());
     // text.insert(0, format!("Counter: {}", self.counter).into());
     text.insert(0, "".into());
