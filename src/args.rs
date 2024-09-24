@@ -642,7 +642,7 @@ impl Args {
         if matches.opt_present("block_txs") {
             let arg_block_txs = matches.opt_str("block_txs");
             let arg_start_index = matches.opt_str("start_index");
-            block_txs(&arg_block_txs.unwrap(), &arg_start_index.unwrap());
+            block_txs(&arg_block_txs.unwrap(), &arg_start_index.unwrap_or(String::from("0")));
             std::process::exit(0);
         }
         if matches.opt_present("blocks") {

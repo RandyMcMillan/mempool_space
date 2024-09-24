@@ -9,8 +9,7 @@ pub const URL: &[&str] = &[
 #[allow(dead_code)]
 /// mempool.space onion api
 /// <http://mempoolhqx4isw62xs7abwphsq7ldayuidyx2v2oethdhhj6mlo2r6ad.onion/api>
-pub const TOR_URL: &[&str] =
-    &["http://mempoolhqx4isw62xs7abwphsq7ldayuidyx2v2oethdhhj6mlo2r6ad.onion/api"];
+pub const TOR_URL: &[&str] = &["http://mempoolhqx4isw62xs7abwphsq7ldayuidyx2v2oethdhhj6mlo2r6ad.onion/api"];
 
 /// const API_VERSION: &str = "v1";
 ///
