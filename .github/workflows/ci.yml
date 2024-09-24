@@ -1,0 +1,146 @@
+name: CI
+
+on:
+  workflow_call:
+  push:
+
+env:
+  RUST_BACKTRACE: 1
+  SECRET_KEY: "${{ secrets.SECRET_KEY }}"
+  PUBLIC_KEY: "${{ secrets.PUBLIC_KEY }}"
+  RELAY_URL: "${{ secrets.RELAY_URL }}"
+
+jobs:
+  ci-pass:
+    name: CI is green
+    runs-on: ubuntu-latest
+    needs:
+      - style
+      - test
+      - docs
+    steps:
+      - run: exit 0
+
+  style:
+    name: Check Style
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          set-safe-directory: ''
+          submodules: 'true'
+          ref: ${{ github.ref }}
+        if: github.event_name == 'pull_request_target'
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          set-safe-directory: ''
+          submodules: 'true'
+        if: github.event_name != 'pull_request_target'
+
+      - name: Install toolchain stable
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          components: rustfmt
+          profile: minimal
+          override: false
+
+      - name: Install toolchain nightly
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          components: rustfmt
+          profile: minimal
+          override: true
+
+      - name: cargo fmt -- --check
+        uses: actions-rs/cargo@v1
+        with:
+          command: fmt
+          args: -- --check
+
+      #- name: temporary workaround - fmt all files under src
+         #run: cargo fmt -- --check $(find ./src -name '*.rs' -print)
+
+  test:
+    name: ${{ matrix.name }}
+    needs: [style]
+
+    runs-on: ${{ matrix.os || 'ubuntu-latest' }}
+
+    strategy:
+      matrix:
+        name:
+          - linux / stable
+          - linux / nightly
+          #- macOS / stable
+          #- macOS / nightly
+
+        include:
+          - name: linux / stable
+          - name: linux / nightly
+          #- name: macOS / stable
+          #- name: macOS / nightly
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Install rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ matrix.rust || 'stable' }}
+          target: ${{ matrix.target }}
+          profile: minimal
+          override: true
+
+      - name: Install rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: ${{ matrix.rust || 'nightly' }}
+          target: ${{ matrix.target }}
+          profile: minimal
+          override: false
+
+      #- name: Test with async feature enabled
+      #  uses: actions-rs/cargo@v1
+      #  with:
+      #    command: test
+      #    args: --features async -- --test-threads=1
+
+      #- name: Test with async feature disabled
+      #  uses: actions-rs/cargo@v1
+      #  with:
+      #    command: test
+      #    args: -- --test-threads=1
+
+      - run: make cargo-i cargo-test
+
+  docs:
+    name: Docs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          profile: minimal
+          override: true
+
+      - name: Check documentation
+        env:
+          RUSTDOCFLAGS: -D warnings
+        uses: actions-rs/cargo@v1
+        with:
+          command: doc
+          args: --no-deps --document-private-items --all-features
