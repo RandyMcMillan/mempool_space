@@ -61,24 +61,24 @@ impl Home {
     // GENERAL
     let binding = String::from("difficulty_adjustment");
     let api_string = mempool_space::api::api(&binding, "", false);
-    let int_blockheight = api_string.parse::<String>();
-    self.app_difficulty_adjustment = int_blockheight.unwrap();
+    let diff_adj_json = api_string.parse::<String>();
+    self.app_difficulty_adjustment = diff_adj_json.expect("diff_adj_json");
 
     let binding = String::from("prices");
     let api_string = mempool_space::api::api(&binding, "", false);
-    let int_blockheight = api_string.parse::<String>();
-    self.app_prices = int_blockheight.unwrap();
+    let prices_json = api_string.parse::<String>();
+    self.app_prices = prices_json.expect("prices_json");
 
     let binding = String::from("historical_price");
     let api_string = mempool_space::api::api(&binding, "", false);
-    let int_blockheight = api_string.parse::<String>();
-    self.app_historical_price = int_blockheight.unwrap();
+    let hist_price_json = api_string.parse::<String>();
+    self.app_historical_price = hist_price_json.expect("hist_price_json");
 
     // BLOCKS
     let binding = String::from("blocks_tip_height");
     let api_string = mempool_space::api::api(&binding, "", false);
-    let int_blockheight = api_string.parse::<i32>().unwrap_or(0);
-    self.app_blocks_tip_height = int_blockheight.try_into().unwrap();
+    let int_blocks_tip_height = api_string.parse::<i32>().unwrap_or(0);
+    self.app_blocks_tip_height = int_blocks_tip_height.try_into().expect("int_blocks_tip_height");
 
     self.last_events.drain(..);
   }
