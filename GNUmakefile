@@ -176,6 +176,15 @@ more:## 	more help
 	@sed -n 's/^##//p' ${MAKEFILE_LIST} | column -t -s ':' |  sed -e 's/^/	/'
 	#$(MAKE) -f Makefile help
 
+dashboard: dashboard-install## 	dashboard: dashboard-install
+	mempool-space --dashboard
+dashboard-build:## 	dashboard-build
+	cargo b --manifest-path ./src/bin/mempool-space_dashboard/Cargo.toml
+dashboard-build-release:## 	dashboard-build-release
+	cargo b -r --manifest-path ./src/bin/mempool-space_dashboard/Cargo.toml
+dashboard-install:## 	dashboard-install
+	cargo install --path ./src/bin/mempool-space_dashboard
+
 -include Makefile
 
 lightning-search:## 	lightning-search
