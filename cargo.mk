@@ -77,6 +77,8 @@ cargo-clippy:### 	cargo-clippy
 ## 	:
 ##===============================================================================
 cargo-docs:cargo-doc
+cargo-d:cargo-doc
+docs:cargo-doc
 cargo-doc:### 	cargo-doc
 ## 	:
 	@. $(HOME)/.cargo/env
