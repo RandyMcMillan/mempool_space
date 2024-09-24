@@ -75,10 +75,7 @@ pub fn mining_pool_blocks(slug: &str, blockheight: &str) {
 /// GET /api/v1/mining/hashrate/pools/\[:timePeriod]
 /// <https://mempool.space/docs/api/rest#get-mining-pool-hashrates>
 pub fn mining_pool_hashrates(timeperiod: &str) {
-    let _res = blocking(&format!(
-        "v1/mining/hashrate/pools/{}",
-        &(&timeperiod).to_string(),
-    ));
+    let _res = blocking(&format!("v1/mining/hashrate/pools/{}", &(&timeperiod).to_string(),));
 }
 
 /// USAGE
@@ -708,6 +705,12 @@ impl Args {
             std::process::exit(0);
         }
 
+        if matches.opt_present("blocks_audit_score") {
+            let arg_blockhash = matches.opt_str("blockhash");
+            api("blocks_audit_score", &arg_blockhash.unwrap(), true);
+            std::process::exit(0);
+        }
+
         if matches.opt_present("blocks_audit_scores") {
             let arg_blockheight = matches.opt_str("blockheight");
             api("blocks_audit_scores", &arg_blockheight.unwrap(), true);
@@ -833,7 +836,6 @@ impl Args {
             min_height: matches.opt_str("min_height"),
             max_height: matches.opt_str("max_height"),
 
-        
             // MINING
             // V1 MINING POOLS TIMEPERIOD
             mining_pools: matches.opt_str("mining_pools"),
@@ -846,12 +848,11 @@ impl Args {
             // V1 MINING HASHRATE_POOLS TIMEPERIOD
             mining_hashrate_pools: matches.opt_str("mining_hashrate_pools"),
             // REUSE timeperiod: matches.opt_str("timeperiod"),
-//mining_pool_hashrate
+            //mining_pool_hashrate
 
             // V1 MINING POOL HASHRATE SLUG
             mining_pool_hashrate: matches.opt_str("mining_pool_hashrate"),
             // REUSE slug: matches.opt_str("slug"),
-
 
             // V1 MINING DIFFICULTY_ADJUSTMENTS INTERVAL
             difficulty_adjustments: matches.opt_str("difficulty_adjustments"),
