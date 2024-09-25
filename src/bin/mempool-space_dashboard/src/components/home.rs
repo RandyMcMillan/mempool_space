@@ -189,21 +189,77 @@ impl Component for Home {
   }
 
   fn draw(&mut self, f: &mut Frame<'_>, rect: Rect) -> Result<()> {
-    let rects = Layout::default().constraints([Constraint::Percentage(100), Constraint::Min(3)].as_ref()).split(rect);
+    let rects = Layout::vertical(
+      [
+        Constraint::Percentage(8),  // header rects[0]
+        Constraint::Percentage(25), // block canvas rects[1]
+        Constraint::Percentage(8),  // blockheight rects[2]
+        Constraint::Percentage(8),  // blockhash rects[3]
+        Constraint::Percentage(8),  // blockhash rects[3]
+        Constraint::Percentage(8),  // blockhash rects[3]
+        Constraint::Percentage(8),  // blockhash rects[3]
+        Constraint::Percentage(8),  // blockhash rects[3]
+        Constraint::Percentage(8),  // blockhash rects[3]
+        Constraint::Min(0),         // rects[last]
+      ]
+      .as_ref(),
+    )
+    .split(rect);
 
-    let mut text: Vec<Line> = self.text.clone().iter().map(|l| Line::from(l.clone())).collect();
+    let mut blockheight: Vec<Line> = self.text.clone().iter().map(|l| Line::from(l.clone())).collect();
+    blockheight.insert(0, format!("height: {} {}", self.app_blocks_tip_height, self.app_blocks_tip_hash).into());
+    f.render_widget(
+      Paragraph::new(blockheight)
+        .wrap(Wrap { trim: true })
+        .scroll((0, 0))
+        .block(
+          Block::default()
+            .title("─── api/blocks/tip/height ─")
+            .title_alignment(Alignment::Left)
+            .borders(Borders::ALL)
+            .border_style(match self.mode {
+              Mode::Processing => Style::default().fg(Color::Yellow),
+              _ => Style::default(),
+            })
+            .border_type(BorderType::Rounded),
+        )
+        .style(Style::default().fg(Color::Reset))
+        .alignment(Alignment::Left),
+      rects[2],
+    );
+    let mut blockhash: Vec<Line> = self.text.clone().iter().map(|l| Line::from(l.clone())).collect();
+    blockhash.insert(0, format!("mempool.space/api/blocks/tip/hash: {}", self.app_blocks_tip_hash).into());
+    f.render_widget(
+      Paragraph::new(blockhash)
+        .wrap(Wrap { trim: true })
+        .scroll((0, 0))
+        .block(
+          Block::default()
+            .title("─── api/blocks/tip/hash ─")
+            .title_alignment(Alignment::Left)
+            .borders(Borders::ALL)
+            .border_style(match self.mode {
+              Mode::Processing => Style::default().fg(Color::Yellow),
+              _ => Style::default(),
+            })
+            .border_type(BorderType::Rounded),
+        )
+        .style(Style::default().fg(Color::Reset))
+        .alignment(Alignment::Left),
+      rects[3],
+    );
+
     // text.insert(0, "".into());
     // text.insert(0, "Type into input and hit enter to display here".dim().into());
-    text.insert(0, "".into());
     // text.insert(0, format!("Render Ticker: {}", self.render_ticker).into());
     // text.insert(0, format!("App Ticker: {}", self.app_ticker).into());
-    text.insert(0, format!("mempool.space/api/v1/historical-price: {}", self.app_historical_price).into());
-    text.insert(0, format!("mempool.space/api/v1/prices: {}", self.app_prices).into());
-    text.insert(0, format!("mempool.space/api/difficulty-adjustment: {}", self.app_difficulty_adjustment).into());
-    text.insert(0, format!("mempool.space/api/blocks/tip/hash: {}", self.app_blocks_tip_hash).into());
-    text.insert(0, format!("mempool.space/api/blocks/tip/height: {}", self.app_blocks_tip_height).into());
+    // text.insert(0, format!("mempool.space/api/v1/historical-price: {}", self.app_historical_price).into());
+    // blockheight.insert(0, format!("mempool.space/api/v1/prices: {}", self.app_prices).into());
+    // blockheight.insert(0, format!("mempool.space/api/difficulty-adjustment: {}", self.app_difficulty_adjustment).into());
+    // blockheight.insert(0, format!("mempool.space/api/blocks/tip/hash: {}", self.app_blocks_tip_hash).into());
+
     // text.insert(0, format!("Counter: {}", self.counter).into());
-    text.insert(0, "".into());
+    // text.insert(0, "".into());
     // text.insert(
     //  0,
     //  Line::from(vec![
@@ -218,26 +274,58 @@ impl Component for Home {
     //    ".".into(),
     //  ]),
     //);
-    text.insert(0, "".into());
 
     f.render_widget(
-      Paragraph::new(text)
-        .block(
-          Block::default()
-            .title("─── mempool_space ─")
-            .title_alignment(Alignment::Left)
-            .borders(Borders::ALL)
-            .border_style(match self.mode {
-              Mode::Processing => Style::default().fg(Color::Yellow),
-              _ => Style::default(),
-            })
-            .border_type(BorderType::Rounded),
-        )
-        .style(Style::default().fg(Color::Reset))
-        .alignment(Alignment::Left),
+      Tabs::new(vec!["🟠", "🟠", "🟠", "🟠"])
+        .block(Block::bordered().title("─── mempool.space ─"))
+        .style(Style::default().white())
+        .highlight_style(Style::default().yellow())
+        .select(0)
+        .divider(" ")
+        .padding(" ", " "),
       rects[0],
     );
-    let width = rects[1].width.max(3) - 3; // keep 2 for borders and 1 for cursor
+
+    // f.render_widget(
+    // Tabs::new(vec!["Tab1", "Tab2", "Tab3", "Tab4"])
+    //.block(Block::bordered().title("Tabs"))
+    //.style(Style::default().white())
+    //.highlight_style(Style::default().yellow())
+    //.select(2)
+    //.divider(symbols::DOT)
+    //.padding("->", "<-"),
+    // rects[1]);
+    // f.render_widget(
+    // Tabs::new(vec!["Tab1", "Tab2", "Tab3", "Tab4"])
+    //.block(Block::bordered().title("Tabs"))
+    //.style(Style::default().white())
+    //.highlight_style(Style::default().yellow())
+    //.select(2)
+    //.divider(symbols::DOT)
+    //.padding("->", "<-"),
+    // rects[2]);
+
+    // f.render_widget(
+    //  Paragraph::new(blockheight)
+    //  .wrap(Wrap { trim: true })
+    //  .scroll((0, 0))
+    //    .block(
+    //      Block::default()
+    //        .title("─── mempool_space ─")
+    //        .title_alignment(Alignment::Left)
+    //        .borders(Borders::ALL)
+    //        .border_style(match self.mode {
+    //          Mode::Processing => Style::default().fg(Color::Yellow),
+    //          _ => Style::default(),
+    //        })
+    //        .border_type(BorderType::Rounded),
+    //    )
+    //    .style(Style::default().fg(Color::Reset))
+    //    .alignment(Alignment::Left),
+    //  rects[1],
+    //);
+
+    let width = rects[0].width.max(3) - 3; // keep 2 for borders and 1 for cursor
     let scroll = self.input.visual_scroll(width as usize);
     let input = Paragraph::new(self.input.value())
       .style(match self.mode {
@@ -246,6 +334,7 @@ impl Component for Home {
       })
       .scroll((0, scroll as u16))
       .block(Block::default().borders(Borders::ALL).title(Line::from(vec![
+        Span::raw(format!("{} \n", rects.len())),
         Span::raw("Enter Input Mode "),
         Span::styled("(Press ", Style::default().fg(Color::DarkGray)),
         Span::styled("/", Style::default().add_modifier(Modifier::BOLD).fg(Color::Gray)),
@@ -253,7 +342,8 @@ impl Component for Home {
         Span::styled("ESC", Style::default().add_modifier(Modifier::BOLD).fg(Color::Gray)),
         Span::styled(" to finish)", Style::default().fg(Color::DarkGray)),
       ])));
-    f.render_widget(input, rects[1]);
+    f.render_widget(input, rects[3]);
+
     if self.mode == Mode::Insert {
       f.set_cursor_position(Position::new(
         (rects[1].x + 1 + self.input.cursor() as u16).min(rects[1].x + rects[1].width - 2),
@@ -285,6 +375,7 @@ impl Component for Home {
       f.render_widget(table, rect.inner(Margin { vertical: 4, horizontal: 2 }));
     };
 
+    // key pressed logger
     f.render_widget(
       Block::default()
         .title(
