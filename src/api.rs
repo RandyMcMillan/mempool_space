@@ -1,14 +1,24 @@
+use rand::Rng;
 /// mempool.space api
+///
 /// <https://mempool.space/api>
+///
+/// <https://bitcoin.gob.sv/api>
+///
+// pull requests welcome
+// add your clear net mempool.space instance here.
 pub const URL: &[&str] = &[
     "https://mempool.space/api",
-    "https://mempool.sweetsats.io/api",
+    "https://bitcoin.gob.sv/api",
+	"https://mempool.sweetsats.io/api",
     "http:://localhost", //TODO support local instance
 ];
 
 #[allow(dead_code)]
 /// mempool.space onion api
 /// <http://mempoolhqx4isw62xs7abwphsq7ldayuidyx2v2oethdhhj6mlo2r6ad.onion/api>
+// pull requests welcome
+// add your tor net mempool.space instance here.
 pub const TOR_URL: &[&str] = &["http://mempoolhqx4isw62xs7abwphsq7ldayuidyx2v2oethdhhj6mlo2r6ad.onion/api"];
 
 /// const API_VERSION: &str = "v1";
@@ -84,10 +94,11 @@ pub fn blocking(api: &String) -> Result<&str, ascii::AsciiChar> {
     if api.contains("address") {
         //print!("api={:?}", api);
     }
-    let call = format!("{}/{}", URL[0], api);
+    let call = format!("{}/{}", URL[rand::thread_rng().gen_range(0..2)], api);
+	//println!("{}", call.clone());
     let mut body = ureq::get(&call)
         .call()
-        .expect("blocking(api: &String) GET {URL[0]}/{api} OR GET {URL[0]}/v1/{api}")
+        .expect("blocking(api: &String) GET {URL[0..2]}/{api} OR GET {URL[0..2]}/v1/{api}")
         .into_reader();
     let mut buf = Vec::new();
     body.read_to_end(&mut buf).unwrap();

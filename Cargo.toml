@@ -1,5 +1,5 @@
 [workspace.package]
-version = "0.0.57"
+version = "0.0.58"
 edition = "2021"
 authors = ["RandyMcMillan <randy.lee.mcmillan@gmail.com>"]
 description = "mempool.space api interface."
@@ -71,6 +71,7 @@ multipart = { version = "0.18.0", default-features = false, features = [
   "client",
 ] }
 pretty_assertions = "1.4.0"
+rand = "0.8.5"
 ratatui = { version = "0.28.0", features = ["serde", "macros", "all-widgets"] }
 ratatui-splash-screen = "0.1.3"
 reqwest = { version = "0.11", default-features = false, features = ["blocking", "json", "rustls-tls-webpki-roots"] }
