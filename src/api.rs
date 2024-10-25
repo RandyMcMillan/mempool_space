@@ -10,7 +10,7 @@ use rand::Rng;
 pub const URL: &[&str] = &[
     "https://mempool.space/api",
     "https://bitcoin.gob.sv/api",
-	"https://mempool.sweetsats.io/api",
+    "https://mempool.sweetsats.io/api",
     "http:://localhost", //TODO support local instance
 ];
 
@@ -95,7 +95,7 @@ pub fn blocking(api: &String) -> Result<&str, ascii::AsciiChar> {
         //print!("api={:?}", api);
     }
     let call = format!("{}/{}", URL[rand::thread_rng().gen_range(0..2)], api);
-	//println!("{}", call.clone());
+    //println!("{}", call.clone());
     let mut body = ureq::get(&call)
         .call()
         .expect("blocking(api: &String) GET {URL[0..2]}/{api} OR GET {URL[0..2]}/v1/{api}")
