@@ -454,7 +454,7 @@ pub fn reachable() -> bool {
     let mut reachable = false;
     
     if !res.unwrap().to_string().is_empty() {
-    
+        
         println!(
             "\n\n{:?}:\nGET {}/{:} {:?}\n\n",
             start,
