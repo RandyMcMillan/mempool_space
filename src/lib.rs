@@ -436,15 +436,25 @@ pub fn run(args: Args) -> Result<()> {
     Ok(())
 }
 
-/// pub fn reachable()
+//
+///	pub fn reachable
+//
 pub fn reachable() -> bool {
+    //
     use api::{blocking, URL};
+    //
     use std::time::Instant;
+    //
     let start = Instant::now();
+    //
     let blocks_tip_height = String::from("blocks/tip/height");
+    //
     let res = blocking(&blocks_tip_height);
+    //
     let mut reachable = false;
+    //
     if !res.unwrap().to_string().is_empty() {
+    //
         println!(
             "\n\n{:?}:\nGET {}/{:} {:?}\n\n",
             start,
@@ -454,30 +464,43 @@ pub fn reachable() -> bool {
         );
         reachable = true;
     }
+    //
     let start = Instant::now();
+    //
     let blocks_tip_height = String::from("blocks_tip_height");
+    //
     let res = api::api(&blocks_tip_height, "", false);
+    //
     if !res.is_empty() && reachable {
         println!("\n\n{:?}:\nAPI {}/{:} {:?}\n\n", start, URL[0], res, start.elapsed());
         reachable = true;
     } else {
         reachable = false;
     }
-
+    //
+    //
     reachable
 }
 
-/// pub fn wait(sleep: &str)
+//
+///	pub fn wait(sleep: &str)
+//
 pub fn wait(sleep: &str) {
+    //
     use std::process::Command;
+    //
     let sleep_cmd = Command::new("sleep").arg(sleep).output().expect("wait:sleep failed");
+    //
     let _result = String::from_utf8(sleep_cmd.stdout)
         .map_err(|non_utf8| String::from_utf8_lossy(non_utf8.as_bytes()).into_owned())
         .unwrap();
+    //
     println!();
 }
 
-/// cargo test -- --nocapture
+//
+///	cargo test -- --nocapture
+//
 
 #[cfg(test)]
 mod tests {

@@ -190,15 +190,15 @@ dashboard-install:## 	dashboard-install
 lightning-search:## 	lightning-search
 ##lightning-search
 ##	build and install lightning-search
-	cargo build --release --manifest-path ./src/bin/lightning_search/Cargo.toml
-	cargo install --path ./src/bin/lightning_search
+	#cargo build --release --manifest-path ./src/bin/lightning_search/Cargo.toml
+	#cargo install --path ./src/bin/lightning_search
 ## 	:
 
 mempool-space_dashboard:## 	mempool-space_dashboard
 ##mempool-space_dashboard
 ##	build and install mempool-space_dashboard
-	cargo build --release --manifest-path ./src/bin/mempool-space_dashboard/Cargo.toml
-	cargo install --path ./src/bin/mempool-space_dashboard
+	#cargo build --release --manifest-path ./src/bin/mempool-space_dashboard/Cargo.toml
+	#cargo install --path ./src/bin/mempool-space_dashboard
 ## 	:
 
 .PHONY:docs
