@@ -43,8 +43,8 @@ cargo-i:cargo-install
 cargo-install:### 	cargo install --path .
 	@. $(HOME)/.cargo/env
 	@cargo install --force --path .
-	@cargo install --force --path ./src/bin/lightning-search_dashboard
-	@cargo install --force --path ./src/bin/mempool-space_dashboard
+	#@cargo install --force --path ./src/bin/lightning-search_dashboard
+	#@cargo install --force --path ./src/bin/mempool-space_dashboard
 ##===============================================================================
 cargo-bench:### 	cargo-bench
 	@. $(HOME)/.cargo/env
@@ -65,9 +65,9 @@ cargo-check:### 	cargo-check
 ## 	:
 	@. $(HOME)/.cargo/env
 ## 	cargo check --manifest-path ./src/bin/mempool-space_dashboard/Cargo.toml
-	cargo check --manifest-path ./src/bin/mempool-space_dashboard/Cargo.toml
+	#cargo check --manifest-path ./src/bin/mempool-space_dashboard/Cargo.toml
 ## 	cargo check --manifest-path ./src/bin/lightning_search/Cargo.toml
-	cargo check --manifest-path ./src/bin/lightning-search_dashboard/Cargo.toml
+	#cargo check --manifest-path ./src/bin/lightning-search_dashboard/Cargo.toml
 ## 	cargo check --manifest-path ./Cargo.toml
 	cargo check --manifest-path ./Cargo.toml
 ## 	:
