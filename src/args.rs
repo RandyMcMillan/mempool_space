@@ -379,9 +379,117 @@ pub struct Args {
     /// `https://mempool.space/api/v1/mining/block/<BLOCKHASH>/audit-summary`
     pub block_audit_summary: Option<String>,
     // pub blockhash: Option<String>,
-    //
-    //
-    //
+
+    // BLOCKS (additional mining blocks endpoints)
+    /// `https://mempool.space/api/v1/mining/blocks/fee-rates/<TIMEPERIOD>`
+    pub block_feerates: Option<String>,
+    /// `https://mempool.space/api/v1/mining/blocks/predictions/<INTERVAL>`
+    pub block_predictions: Option<String>,
+    /// `https://mempool.space/api/v1/mining/blocks/rewards/<INTERVAL>`
+    pub block_rewards: Option<String>,
+    /// `https://mempool.space/api/v1/mining/blocks/sizes-weights/<INTERVAL>`
+    pub block_sizes_and_weights: Option<String>,
+
+    // FEES
+    /// `https://mempool.space/api/v1/fees/mempool-blocks`
+    pub fees_mempool_blocks: Option<String>,
+    /// `https://mempool.space/api/v1/fees/recommended`
+    pub fees_recommended: Option<String>,
+
+    // MEMPOOL
+    /// `https://mempool.space/api/mempool`
+    pub mempool: Option<String>,
+    /// `https://mempool.space/api/mempool/txids`
+    pub mempool_txids: Option<String>,
+    /// `https://mempool.space/api/v1/fullrbf/replacements`
+    pub mempool_full_rbf_transactions: Option<String>,
+    /// `https://mempool.space/api/v1/replacements`
+    pub mempool_rbf_transactions: Option<String>,
+    /// `https://mempool.space/api/mempool/recent`
+    pub mempool_recent: Option<String>,
+
+    // TRANSACTIONS
+    /// `https://mempool.space/api/v1/cpfp/<TXID>`
+    pub children_pay_for_parent: Option<String>,
+    /// `https://mempool.space/api/tx/<TXID>`
+    pub transaction: Option<String>,
+    /// `https://mempool.space/api/tx/<TXID>/hex`
+    pub transaction_hex: Option<String>,
+    /// `https://mempool.space/api/tx/<TXID>/merkleblock-proof`
+    pub transaction_merkle_block_proof: Option<String>,
+    /// `https://mempool.space/api/tx/<TXID>/merkle-proof`
+    pub transaction_merkle_proof: Option<String>,
+    /// `https://mempool.space/api/tx/<TXID>/outspend/<INDEX>`
+    pub transaction_outspend: Option<String>,
+    /// vout index for transaction_outspend
+    pub outspend_index: Option<String>,
+    /// `https://mempool.space/api/tx/<TXID>/outspends`
+    pub transaction_outspends: Option<String>,
+    /// `https://mempool.space/api/tx/<TXID>/raw`
+    pub transaction_raw: Option<String>,
+    /// `https://mempool.space/api/v1/tx/<TXID>/rbf`
+    pub transaction_rbf_timeline: Option<String>,
+    /// `https://mempool.space/api/tx/<TXID>/status`
+    pub transaction_status: Option<String>,
+    /// `https://mempool.space/api/v1/transaction-times?txId[]=<TXID>`
+    pub transaction_times: Option<String>,
+
+    // LIGHTNING
+    /// `https://mempool.space/api/v1/lightning/channels/<CHANNEL_ID>`
+    pub lightning_channels: Option<String>,
+    /// `https://mempool.space/api/v1/lightning/channels?public_key=<PUBKEY>&status=<STATUS>`
+    pub lightning_channels_from_node_pubkey: Option<String>,
+    /// status filter for lightning_channels_from_node_pubkey (default: active)
+    pub lightning_channel_status: Option<String>,
+    /// `https://mempool.space/api/v1/lightning/channels/txids?txId[]=<TXID>`
+    pub lightning_channels_from_txid: Option<String>,
+    /// `https://mempool.space/api/v1/lightning/channels-geo/<PUBKEY>`
+    pub lightning_channels_geo: Option<String>,
+    /// `https://mempool.space/api/v1/lightning/channels-geo`
+    pub lightning_channels_geodata: Option<String>,
+    /// `https://mempool.space/api/v1/lightning/statistics/<INTERVAL>`
+    pub lightning_node_stats: Option<String>,
+    /// `https://mempool.space/api/v1/lightning/nodes/countries`
+    pub lightning_node_stats_per_country: Option<String>,
+    /// `https://mempool.space/api/v1/lightning/nodes/<PUBKEY>`
+    pub lightning_nodes: Option<String>,
+    /// `https://mempool.space/api/v1/lightning/search?searchText=<QUERY>` (search-based node/channel lookup)
+    pub lightning_nodes_channels: Option<String>,
+    /// `https://mempool.space/api/v1/lightning/nodes/country/<COUNTRY>`
+    pub lightning_nodes_in_country: Option<String>,
+    /// `https://mempool.space/api/v1/lightning/nodes/isp-ranking`
+    pub lightning_nodes_isp_ranking: Option<String>,
+    /// `https://mempool.space/api/v1/lightning/nodes/rankings`
+    pub lightning_nodes_ranking: Option<String>,
+    /// `https://mempool.space/api/v1/lightning/nodes/rankings/age`
+    pub lightning_nodes_ranking_age: Option<String>,
+    /// `https://mempool.space/api/v1/lightning/nodes/rankings/connectivity`
+    pub lightning_nodes_ranking_connectivity: Option<String>,
+    /// `https://mempool.space/api/v1/lightning/nodes/rankings/liquidity`
+    pub lightning_nodes_ranking_liquidity: Option<String>,
+    /// `https://mempool.space/api/v1/lightning/nodes/<PUBKEY>/statistics`
+    pub lightning_nodes_statistics: Option<String>,
+    /// `https://mempool.space/api/v1/lightning/nodes/isp-ranking`
+    pub lightning_nodes_stats_per_isp: Option<String>,
+    /// `https://mempool.space/api/v1/lightning/search?searchText=<QUERY>`
+    pub lightning_search: Option<String>,
+    /// `https://mempool.space/api/v1/lightning/statistics/<INTERVAL>`
+    pub lightning_statistics: Option<String>,
+    /// `https://mempool.space/api/v1/lightning/nodes/rankings/connectivity`
+    pub lightning_top_nodes_by_connectivity: Option<String>,
+    /// `https://mempool.space/api/v1/lightning/nodes/rankings/liquidity`
+    pub lightning_top_nodes_by_liquidity: Option<String>,
+    /// `https://mempool.space/api/v1/lightning/nodes/rankings`
+    pub lightning_top_oldests_nodes: Option<String>,
+
+    // MINING (additional)
+    /// `https://mempool.space/api/v1/mining/hashrate/<TIMEPERIOD>`
+    pub mining_hashrate: Option<String>,
+    /// `https://mempool.space/api/v1/mining/reward-stats/<COUNT>`
+    pub mining_reward_stats: Option<String>,
+    /// `https://mempool.space/api/v1/mining/blocks/timestamp/<UTC_SECS>`
+    pub mining_blocks_timestamp: Option<String>,
+
     //
     //
     /// OPTOPT
@@ -516,6 +624,67 @@ impl Args {
 
         opts.optflag("", "block_audit_summary", "block_audit_summary api call");
         opts.optopt("", "blockhash", "block_audit_summary api call", "BLOCKHASH");
+
+        // BLOCKS (additional mining blocks endpoints)
+        opts.optopt("", "block_feerates", "GET /api/v1/mining/blocks/fee-rates/:timePeriod", "TIMEPERIOD");
+        opts.optopt("", "block_predictions", "GET /api/v1/mining/blocks/predictions/:timePeriod", "INTERVAL");
+        opts.optopt("", "block_rewards", "GET /api/v1/mining/blocks/rewards/:timePeriod", "INTERVAL");
+        opts.optopt("", "block_sizes_and_weights", "GET /api/v1/mining/blocks/sizes-weights/:timePeriod", "INTERVAL");
+
+        // FEES
+        opts.optflag("", "fees_mempool_blocks", "GET /api/v1/fees/mempool-blocks");
+        opts.optflag("", "fees_recommended", "GET /api/v1/fees/recommended");
+
+        // MEMPOOL
+        opts.optflag("", "mempool", "GET /api/mempool");
+        opts.optflag("", "mempool_txids", "GET /api/mempool/txids");
+        opts.optflag("", "mempool_full_rbf_transactions", "GET /api/v1/fullrbf/replacements");
+        opts.optflag("", "mempool_rbf_transactions", "GET /api/v1/replacements");
+        opts.optflag("", "mempool_recent", "GET /api/mempool/recent");
+
+        // TRANSACTIONS
+        opts.optopt("", "children_pay_for_parent", "GET /api/v1/cpfp/:txid", "TXID");
+        opts.optopt("", "transaction", "GET /api/tx/:txid", "TXID");
+        opts.optopt("", "transaction_hex", "GET /api/tx/:txid/hex", "TXID");
+        opts.optopt("", "transaction_merkle_block_proof", "GET /api/tx/:txid/merkleblock-proof", "TXID");
+        opts.optopt("", "transaction_merkle_proof", "GET /api/tx/:txid/merkle-proof", "TXID");
+        opts.optopt("", "transaction_outspend", "GET /api/tx/:txid/outspend/:index", "TXID");
+        opts.optopt("", "outspend_index", "vout index for transaction_outspend", "INDEX");
+        opts.optopt("", "transaction_outspends", "GET /api/tx/:txid/outspends", "TXID");
+        opts.optopt("", "transaction_raw", "GET /api/tx/:txid/raw", "TXID");
+        opts.optopt("", "transaction_rbf_timeline", "GET /api/v1/tx/:txid/rbf", "TXID");
+        opts.optopt("", "transaction_status", "GET /api/tx/:txid/status", "TXID");
+        opts.optopt("", "transaction_times", "GET /api/v1/transaction-times?txId[]=:txid", "TXID");
+
+        // LIGHTNING
+        opts.optopt("", "lightning_channels", "GET /api/v1/lightning/channels/:channelId", "CHANNEL_ID");
+        opts.optopt("", "lightning_channels_from_node_pubkey", "GET /api/v1/lightning/channels?public_key=:pubkey&status=active", "PUBKEY");
+        opts.optopt("", "lightning_channel_status", "status filter for lightning_channels_from_node_pubkey (default: active)", "STATUS");
+        opts.optopt("", "lightning_channels_from_txid", "GET /api/v1/lightning/channels/txids?txId[]=:txid", "TXID");
+        opts.optopt("", "lightning_channels_geo", "GET /api/v1/lightning/channels-geo/:pubkey", "PUBKEY");
+        opts.optflag("", "lightning_channels_geodata", "GET /api/v1/lightning/channels-geo");
+        opts.optopt("", "lightning_node_stats", "GET /api/v1/lightning/statistics/:interval", "INTERVAL");
+        opts.optflag("", "lightning_node_stats_per_country", "GET /api/v1/lightning/nodes/countries");
+        opts.optopt("", "lightning_nodes", "GET /api/v1/lightning/nodes/:pubkey", "PUBKEY");
+        opts.optopt("", "lightning_nodes_channels", "GET /api/v1/lightning/search?searchText=:query", "QUERY");
+        opts.optopt("", "lightning_nodes_in_country", "GET /api/v1/lightning/nodes/country/:country", "COUNTRY");
+        opts.optflag("", "lightning_nodes_isp_ranking", "GET /api/v1/lightning/nodes/isp-ranking");
+        opts.optflag("", "lightning_nodes_ranking", "GET /api/v1/lightning/nodes/rankings");
+        opts.optflag("", "lightning_nodes_ranking_age", "GET /api/v1/lightning/nodes/rankings/age");
+        opts.optflag("", "lightning_nodes_ranking_connectivity", "GET /api/v1/lightning/nodes/rankings/connectivity");
+        opts.optflag("", "lightning_nodes_ranking_liquidity", "GET /api/v1/lightning/nodes/rankings/liquidity");
+        opts.optopt("", "lightning_nodes_statistics", "GET /api/v1/lightning/nodes/:pubkey/statistics", "PUBKEY");
+        opts.optflag("", "lightning_nodes_stats_per_isp", "GET /api/v1/lightning/nodes/isp-ranking");
+        opts.optopt("", "lightning_search", "GET /api/v1/lightning/search?searchText=:query", "QUERY");
+        opts.optopt("", "lightning_statistics", "GET /api/v1/lightning/statistics/:interval", "INTERVAL");
+        opts.optflag("", "lightning_top_nodes_by_connectivity", "GET /api/v1/lightning/nodes/rankings/connectivity");
+        opts.optflag("", "lightning_top_nodes_by_liquidity", "GET /api/v1/lightning/nodes/rankings/liquidity");
+        opts.optflag("", "lightning_top_oldests_nodes", "GET /api/v1/lightning/nodes/rankings");
+
+        // MINING (additional)
+        opts.optopt("", "mining_hashrate", "GET /api/v1/mining/hashrate/:timePeriod (use 'all' for all)", "TIMEPERIOD");
+        opts.optopt("", "mining_reward_stats", "GET /api/v1/mining/reward-stats/:blockCount", "COUNT");
+        opts.optopt("", "mining_blocks_timestamp", "GET /api/v1/mining/blocks/timestamp/:utcSeconds", "UTC_SECS");
 
         // OPTOPT
         opts.optopt("c", "config", "sets the configuration file", "CONFIG");
@@ -722,6 +891,237 @@ impl Args {
             std::process::exit(0);
         }
 
+        // BLOCKS (additional mining blocks endpoints)
+        if matches.opt_present("block_feerates") {
+            let timeperiod = matches.opt_str("block_feerates");
+            api("block_feerates", &timeperiod.unwrap(), true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("block_predictions") {
+            let interval = matches.opt_str("block_predictions");
+            api("block_predictions", &interval.unwrap(), true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("block_rewards") {
+            let interval = matches.opt_str("block_rewards");
+            api("block_rewards", &interval.unwrap(), true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("block_sizes_and_weights") {
+            let interval = matches.opt_str("block_sizes_and_weights");
+            api("block_sizes_and_weights", &interval.unwrap(), true);
+            std::process::exit(0);
+        }
+
+        // FEES
+        if matches.opt_present("fees_mempool_blocks") {
+            api("fees_mempool_blocks", "", true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("fees_recommended") {
+            api("fees_recommended", "", true);
+            std::process::exit(0);
+        }
+
+        // MEMPOOL
+        if matches.opt_present("mempool") {
+            api("mempool", "", true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("mempool_txids") {
+            api("mempool_txids", "", true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("mempool_full_rbf_transactions") {
+            api("mempool_full_rbf_transactions", "", true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("mempool_rbf_transactions") {
+            api("mempool_rbf_transactions", "", true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("mempool_recent") {
+            api("mempool_recent", "", true);
+            std::process::exit(0);
+        }
+
+        // TRANSACTIONS
+        if matches.opt_present("children_pay_for_parent") {
+            let txid = matches.opt_str("children_pay_for_parent");
+            api("children_pay_for_parent", &txid.unwrap(), true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("transaction") {
+            let txid = matches.opt_str("transaction");
+            api("transaction", &txid.unwrap(), true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("transaction_hex") {
+            let txid = matches.opt_str("transaction_hex");
+            api("transaction_hex", &txid.unwrap(), true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("transaction_merkle_block_proof") {
+            let txid = matches.opt_str("transaction_merkle_block_proof");
+            api("transaction_merkle_block_proof", &txid.unwrap(), true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("transaction_merkle_proof") {
+            let txid = matches.opt_str("transaction_merkle_proof");
+            api("transaction_merkle_proof", &txid.unwrap(), true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("transaction_outspend") {
+            let txid = matches.opt_str("transaction_outspend");
+            let index = matches.opt_str("outspend_index").unwrap_or_else(|| "0".to_string());
+            api("transaction_outspend", &format!("{} {}", txid.unwrap(), index), true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("transaction_outspends") {
+            let txid = matches.opt_str("transaction_outspends");
+            api("transaction_outspends", &txid.unwrap(), true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("transaction_raw") {
+            let txid = matches.opt_str("transaction_raw");
+            api("transaction_raw", &txid.unwrap(), true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("transaction_rbf_timeline") {
+            let txid = matches.opt_str("transaction_rbf_timeline");
+            api("transaction_rbf_timeline", &txid.unwrap(), true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("transaction_status") {
+            let txid = matches.opt_str("transaction_status");
+            api("transaction_status", &txid.unwrap(), true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("transaction_times") {
+            let txid = matches.opt_str("transaction_times");
+            api("transaction_times", &txid.unwrap(), true);
+            std::process::exit(0);
+        }
+
+        // LIGHTNING
+        if matches.opt_present("lightning_channels") {
+            let channel_id = matches.opt_str("lightning_channels");
+            api("lightning_channels", &channel_id.unwrap(), true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("lightning_channels_from_node_pubkey") {
+            let pubkey = matches.opt_str("lightning_channels_from_node_pubkey");
+            let status = matches.opt_str("lightning_channel_status").unwrap_or_else(|| "active".to_string());
+            api("lightning_channels_from_node_pubkey", &format!("{} {}", pubkey.unwrap(), status), true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("lightning_channels_from_txid") {
+            let txid = matches.opt_str("lightning_channels_from_txid");
+            api("lightning_channels_from_txid", &txid.unwrap(), true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("lightning_channels_geodata") {
+            api("lightning_channels_geodata", "", true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("lightning_channels_geo") {
+            let pubkey = matches.opt_str("lightning_channels_geo");
+            api("lightning_channels_geo", &pubkey.unwrap(), true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("lightning_node_stats") {
+            let interval = matches.opt_str("lightning_node_stats").unwrap_or_else(|| "latest".to_string());
+            api("lightning_node_stats", &interval, true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("lightning_node_stats_per_country") {
+            api("lightning_node_stats_per_country", "", true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("lightning_nodes") {
+            let pubkey = matches.opt_str("lightning_nodes");
+            api("lightning_nodes", &pubkey.unwrap(), true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("lightning_nodes_channels") {
+            let query = matches.opt_str("lightning_nodes_channels");
+            api("lightning_nodes_channels", &query.unwrap(), true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("lightning_nodes_in_country") {
+            let country = matches.opt_str("lightning_nodes_in_country");
+            api("lightning_nodes_in_country", &country.unwrap(), true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("lightning_nodes_isp_ranking") {
+            api("lightning_nodes_isp_ranking", "", true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("lightning_nodes_ranking") {
+            api("lightning_nodes_ranking", "", true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("lightning_nodes_ranking_age") {
+            api("lightning_nodes_ranking_age", "", true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("lightning_nodes_ranking_connectivity") {
+            api("lightning_nodes_ranking_connectivity", "", true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("lightning_nodes_ranking_liquidity") {
+            api("lightning_nodes_ranking_liquidity", "", true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("lightning_nodes_statistics") {
+            let pubkey = matches.opt_str("lightning_nodes_statistics");
+            api("lightning_nodes_statistics", &pubkey.unwrap(), true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("lightning_nodes_stats_per_isp") {
+            api("lightning_nodes_stats_per_isp", "", true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("lightning_search") {
+            let query = matches.opt_str("lightning_search");
+            api("lightning_search", &query.unwrap(), true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("lightning_statistics") {
+            let interval = matches.opt_str("lightning_statistics").unwrap_or_else(|| "latest".to_string());
+            api("lightning_statistics", &interval, true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("lightning_top_nodes_by_connectivity") {
+            api("lightning_top_nodes_by_connectivity", "", true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("lightning_top_nodes_by_liquidity") {
+            api("lightning_top_nodes_by_liquidity", "", true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("lightning_top_oldests_nodes") {
+            api("lightning_top_oldests_nodes", "", true);
+            std::process::exit(0);
+        }
+
+        // MINING (additional)
+        if matches.opt_present("mining_hashrate") {
+            let timeperiod = matches.opt_str("mining_hashrate").unwrap_or_else(|| "all".to_string());
+            api("mining_hashrate", &timeperiod, true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("mining_reward_stats") {
+            let count = matches.opt_str("mining_reward_stats");
+            api("mining_reward_stats", &count.unwrap(), true);
+            std::process::exit(0);
+        }
+        if matches.opt_present("mining_blocks_timestamp") {
+            let timestamp = matches.opt_str("mining_blocks_timestamp").unwrap_or_default();
+            api("mining_blocks_timestamp", &timestamp, true);
+            std::process::exit(0);
+        }
+
         if matches.opt_present("h")
             || (matches.free.is_empty()
                 && !matches.opt_present("u")
@@ -869,6 +1269,67 @@ impl Args {
             // V1 BLOCK_AUDIT_SUMMARY BLOCKHEIGHT
             block_audit_summary: matches.opt_str("block_audit_summary"),
             blockhash: matches.opt_str("blockhash"),
+
+            // BLOCKS (additional mining blocks endpoints)
+            block_feerates: matches.opt_str("block_feerates"),
+            block_predictions: matches.opt_str("block_predictions"),
+            block_rewards: matches.opt_str("block_rewards"),
+            block_sizes_and_weights: matches.opt_str("block_sizes_and_weights"),
+
+            // FEES
+            fees_mempool_blocks: matches.opt_str("fees_mempool_blocks"),
+            fees_recommended: matches.opt_str("fees_recommended"),
+
+            // MEMPOOL
+            mempool: matches.opt_str("mempool"),
+            mempool_txids: matches.opt_str("mempool_txids"),
+            mempool_full_rbf_transactions: matches.opt_str("mempool_full_rbf_transactions"),
+            mempool_rbf_transactions: matches.opt_str("mempool_rbf_transactions"),
+            mempool_recent: matches.opt_str("mempool_recent"),
+
+            // TRANSACTIONS
+            children_pay_for_parent: matches.opt_str("children_pay_for_parent"),
+            transaction: matches.opt_str("transaction"),
+            transaction_hex: matches.opt_str("transaction_hex"),
+            transaction_merkle_block_proof: matches.opt_str("transaction_merkle_block_proof"),
+            transaction_merkle_proof: matches.opt_str("transaction_merkle_proof"),
+            transaction_outspend: matches.opt_str("transaction_outspend"),
+            outspend_index: matches.opt_str("outspend_index"),
+            transaction_outspends: matches.opt_str("transaction_outspends"),
+            transaction_raw: matches.opt_str("transaction_raw"),
+            transaction_rbf_timeline: matches.opt_str("transaction_rbf_timeline"),
+            transaction_status: matches.opt_str("transaction_status"),
+            transaction_times: matches.opt_str("transaction_times"),
+
+            // LIGHTNING
+            lightning_channels: matches.opt_str("lightning_channels"),
+            lightning_channels_from_node_pubkey: matches.opt_str("lightning_channels_from_node_pubkey"),
+            lightning_channel_status: matches.opt_str("lightning_channel_status"),
+            lightning_channels_from_txid: matches.opt_str("lightning_channels_from_txid"),
+            lightning_channels_geo: matches.opt_str("lightning_channels_geo"),
+            lightning_channels_geodata: matches.opt_str("lightning_channels_geodata"),
+            lightning_node_stats: matches.opt_str("lightning_node_stats"),
+            lightning_node_stats_per_country: matches.opt_str("lightning_node_stats_per_country"),
+            lightning_nodes: matches.opt_str("lightning_nodes"),
+            lightning_nodes_channels: matches.opt_str("lightning_nodes_channels"),
+            lightning_nodes_in_country: matches.opt_str("lightning_nodes_in_country"),
+            lightning_nodes_isp_ranking: matches.opt_str("lightning_nodes_isp_ranking"),
+            lightning_nodes_ranking: matches.opt_str("lightning_nodes_ranking"),
+            lightning_nodes_ranking_age: matches.opt_str("lightning_nodes_ranking_age"),
+            lightning_nodes_ranking_connectivity: matches.opt_str("lightning_nodes_ranking_connectivity"),
+            lightning_nodes_ranking_liquidity: matches.opt_str("lightning_nodes_ranking_liquidity"),
+            lightning_nodes_statistics: matches.opt_str("lightning_nodes_statistics"),
+            lightning_nodes_stats_per_isp: matches.opt_str("lightning_nodes_stats_per_isp"),
+            lightning_search: matches.opt_str("lightning_search"),
+            lightning_statistics: matches.opt_str("lightning_statistics"),
+            lightning_top_nodes_by_connectivity: matches.opt_str("lightning_top_nodes_by_connectivity"),
+            lightning_top_nodes_by_liquidity: matches.opt_str("lightning_top_nodes_by_liquidity"),
+            lightning_top_oldests_nodes: matches.opt_str("lightning_top_oldests_nodes"),
+
+            // MINING (additional)
+            mining_hashrate: matches.opt_str("mining_hashrate"),
+            mining_reward_stats: matches.opt_str("mining_reward_stats"),
+            mining_blocks_timestamp: matches.opt_str("mining_blocks_timestamp"),
 
             //OPTOPT
             server: matches.opt_str("s"),
