@@ -67,7 +67,7 @@ libc = "0.2.158"
 log = "0.4.22"
 
 mockall = { version = "0.10.2" }
-multipart = { version = "0.18.0", default-features = false, features = [
+multipart = { package = "multipart_ng", version = "0.18.1", default-features = false, features = [
   "client",
 ] }
 pretty_assertions = "1.4.0"
